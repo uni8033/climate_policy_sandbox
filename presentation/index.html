@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarbonWise: AI + openLCA 场景化低碳产品决策 Agent</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --panel: rgba(255, 255, 255, 0.92);
+      --panel-2: #eef3ff;
+      --text: #172033;
+      --muted: #60708f;
+      --accent: #18b57d;
+      --accent-2: #4a8dff;
+      --accent-3: #7e74ff;
+      --warn: #f2b94b;
+      --danger: #e66e6e;
+      --shadow: 0 18px 48px rgba(31, 52, 98, 0.12);
+      --line: rgba(67, 92, 138, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+      color: var(--text);
+      font-family: "Segoe UI", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(74, 141, 255, 0.12), transparent 20%),
+        radial-gradient(circle at 88% 12%, rgba(24, 181, 125, 0.1), transparent 18%),
+        radial-gradient(circle at 78% 82%, rgba(126, 116, 255, 0.08), transparent 24%),
+        linear-gradient(180deg, #fbfdff 0%, #f2f6fb 100%);
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    body::before {
+      background-image:
+        linear-gradient(rgba(82, 104, 147, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(82, 104, 147, 0.04) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.24), transparent 82%);
+    }
+
+    body::after {
+      background: radial-gradient(circle at center, transparent 64%, rgba(194, 205, 226, 0.16) 100%);
+    }
+
+    .deck {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 52px 72px 78px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      opacity: 0;
+      transform: translateX(40px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.38s ease, transform 0.38s ease;
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: 28px;
+      right: 36px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74, 141, 255, 0.1), transparent 68%);
+      pointer-events: none;
+      filter: blur(4px);
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 14px;
+    }
+
+    .slide-kicker {
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      color: #159c6d;
+      text-transform: uppercase;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .slide-kicker::before {
+      content: "";
+      width: 32px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    h1, h2 {
+      margin: 0;
+      line-height: 1.15;
+    }
+
+    h1 {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-shadow: 0 8px 24px rgba(39, 66, 113, 0.08);
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 18px;
+      margin-top: 14px;
+      max-width: 980px;
+      line-height: 1.6;
+    }
+
+    .content {
+      display: grid;
+      gap: 22px;
+      align-content: start;
+    }
+
+    .two-col {
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 28px;
+    }
+
+    .three-col {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(249, 252, 255, 0.96));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 20px 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(74, 141, 255, 0.24), rgba(255,255,255,0));
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .card p,
+    .card li,
+    .cite,
+    .small {
+      line-height: 1.6;
+    }
+
+    ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+      font-size: 19px;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    .big-quote {
+      font-size: 31px;
+      line-height: 1.45;
+      font-weight: 700;
+      color: var(--text);
+      max-width: 980px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .metric {
+      padding: 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(238, 244, 255, 0.9), rgba(255, 255, 255, 0.96));
+      border: 1px solid rgba(74, 141, 255, 0.12);
+    }
+
+    .metric .value {
+      display: block;
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .bar-chart {
+      display: grid;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 110px 1fr 62px;
+      align-items: center;
+      gap: 14px;
+      font-size: 17px;
+    }
+
+    .bar-track {
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(86, 110, 152, 0.12);
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(86,110,152,0.05);
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-3), var(--accent-2), var(--accent));
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .step {
+      position: relative;
+      padding: 18px 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,249,255,0.98));
+      border: 1px solid rgba(67, 92, 138, 0.12);
+      min-height: 126px;
+    }
+
+    .step .num {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .step h4 {
+      margin: 8px 0 10px;
+      font-size: 20px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .timeline .phase {
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,250,255,0.98));
+      border: 1px solid rgba(67, 92, 138, 0.12);
+    }
+
+    .phase .week {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .phase h4 {
+      margin: 10px 0 10px;
+      font-size: 20px;
+    }
+
+    .phase ul {
+      font-size: 16px;
+      margin-left: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(24, 181, 125, 0.09), rgba(74, 141, 255, 0.09));
+      border: 1px solid rgba(74, 141, 255, 0.14);
+      color: #245b92;
+      font-size: 14px;
+      font-weight: 700;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      box-shadow: 0 8px 22px rgba(59, 84, 129, 0.08);
+    }
+
+    .cite {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .cite a,
+    .refs a {
+      color: #9fd2ff;
+      text-decoration: none;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .footer .page {
+      color: rgba(66, 87, 124, 0.7);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px 16px;
+      gap: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0), rgba(232,238,247,0.8));
+      position: relative;
+      z-index: 2;
+    }
+
+    .progress {
+      flex: 1;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(86, 110, 152, 0.12);
+      overflow: hidden;
+    }
+
+    .progress > span {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      transition: width 0.25s ease;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    button {
+      background: var(--panel-2);
+      color: var(--text);
+      border: 1px solid rgba(67, 92, 138, 0.12);
+      border-radius: 14px;
+      padding: 10px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 8px 24px rgba(41, 63, 104, 0.08);
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      background: #e7eefc;
+      box-shadow: 0 12px 28px rgba(41, 63, 104, 0.12);
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 230px;
+      text-align: right;
+    }
+
+    .refs {
+      display: grid;
+      gap: 10px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .refs .ref-item {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(67, 92, 138, 0.1);
+    }
+
+    .title-slide .content {
+      align-content: center;
+      gap: 28px;
+    }
+
+    .title-slide h1 {
+      font-size: 54px;
+      max-width: 980px;
+      line-height: 1.08;
+    }
+
+    .title-slide .subtitle {
+      font-size: 23px;
+      max-width: 980px;
+    }
+
+    .title-slide .card {
+      padding: 26px 28px;
+      background:
+        radial-gradient(circle at top right, rgba(74, 141, 255, 0.1), transparent 32%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.98));
+    }
+
+    .title-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .small-list {
+      font-size: 16px;
+    }
+
+    .warning-box {
+      border-left: 4px solid var(--warn);
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: rgba(242, 185, 75, 0.12);
+      color: #8c6211;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .hero-panel {
+      display: grid;
+      grid-template-columns: 1.3fr 0.8fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 14px;
+    }
+
+    .mini-stat {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,250,255,0.98));
+      border: 1px solid rgba(67, 92, 138, 0.1);
+      box-shadow: var(--shadow);
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-size: 28px;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.95);
+      border: 1px solid rgba(67, 92, 138, 0.1);
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    @media (max-width: 1200px) {
+      .slide {
+        padding: 40px 44px 72px;
+      }
+      .two-col,
+      .three-col,
+      .process,
+      .timeline,
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck">
+    <section class="slide title-slide active" data-title="封面">
+      <div class="slide-header">
+          <div class="slide-kicker">选题方案汇报</div>
+      </div>
+      <div class="content">
+        <div class="hero-panel">
+          <div class="card">
+            <h1>CarbonWise：AI + openLCA 的场景化低碳产品决策 Agent</h1>
+            <div class="subtitle">
+              用 <strong>openLCA</strong> 做生命周期评估，用 <strong>大模型</strong> 把专业结果翻译成普通用户可理解、可比较、可执行的低碳选择建议。
+            </div>
+            <div class="title-meta" style="margin-top:18px;">
+              <span class="badge">项目类型：智能 Agent / 实用工具</span>
+              <span class="badge">首发场景：校园外卖包装比较</span>
+              <span class="badge">关键词：LCA / AI / 气候行动 / 可持续消费</span>
+            </div>
+            <div class="big-quote" style="margin-top:22px;">我们想解决的不是“大家知不知道环保”，而是“当大家真的要做产品选择时，AI 能不能提供基于证据的低碳决策支持”。</div>
+          </div>
+          <div class="hero-side">
+            <div class="mini-stat">
+              <strong>1 个场景</strong>
+              从高频、低门槛、强展示性的外卖包装比较切入
+            </div>
+            <div class="mini-stat">
+              <strong>2 层能力</strong>
+              底层严肃评估 + 上层自然语言解释与交互
+            </div>
+            <div class="mini-stat">
+              <strong>3 类输出</strong>
+              方案比较、碳热点识别、情景模拟与建议
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div>汇报目标：呈现选题价值、科学问题、技术路径、创新点与实施计划</div>
+        <div class="page">01 / 11</div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="背景与机会">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">Why Now</div>
+          <h2>背景与机会：AI 正在进入气候决策“最后一公里”</h2>
+        </div>
+      </div>
+      <div class="content two-col">
+        <div class="card">
+          <h3>前沿调研给出的两个信号</h3>
+          <ul>
+            <li>AI 在气候领域的研究已快速扩展，但仍呈现<strong>适应导向明显、区域与场景分布不均</strong>的特点。</li>
+            <li>现实世界中，AI 已被用于洪水预警、极端天气预测、地理推理等任务，说明 AI 已不再局限于“写报告”，而是开始参与<strong>真实决策支持</strong>。</li>
+          </ul>
+          <div class="bar-chart">
+            <div class="bar-row">
+              <div>适应</div>
+              <div class="bar-track"><div class="bar-fill" style="width:64.4%"></div></div>
+              <div>64.4%</div>
+            </div>
+            <div class="bar-row">
+              <div>减缓</div>
+              <div class="bar-track"><div class="bar-fill" style="width:16%"></div></div>
+              <div>16.0%</div>
+            </div>
+            <div class="bar-row">
+              <div>二者兼具</div>
+              <div class="bar-track"><div class="bar-fill" style="width:19.4%"></div></div>
+              <div>19.4%</div>
+            </div>
+          </div>
+          <div class="cite">来源：Ayadi et al., 2025, <em>Frontiers in Climate</em>；系统综述共纳入 385 篇同行评议论文。</div>
+        </div>
+        <div class="card">
+          <h3>真实案例</h3>
+          <div class="metric-grid">
+            <div class="metric">
+              <span class="value">7天</span>
+              <span class="label">Google Research 公开描述的河流洪水预测提前量</span>
+            </div>
+            <div class="metric">
+              <span class="value">7亿+</span>
+              <span class="label">Flood Hub 覆盖人口</span>
+            </div>
+            <div class="metric">
+              <span class="value">100+</span>
+              <span class="label">Flood Hub 覆盖国家数量</span>
+            </div>
+            <div class="metric">
+              <span class="value">AI</span>
+              <span class="label">已进入气候韧性与预警的落地阶段</span>
+            </div>
+          </div>
+          <div class="cite">来源：Google Research, “From research to climate resilience”, 2025-06-24。</div>
+        </div>
+      </div>
+      <div class="footer">
+        <div>核心引出：如果 AI 能帮助政府做灾害决策，它也有可能帮助普通用户做产品与消费层面的低碳决策。</div>
+        <div class="page">02 / 11</div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="问题定义">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">Problem</div>
+          <h2>问题定义：低碳选择很多，但证据链与可理解性不足</h2>
+        </div>
+      </div>
+      <div class="content two-col">
+        <div class="card">
+          <h3>现实痛点</h3>
+          <ul>
+            <li>很多“环保判断”停留在直觉层，比如“纸一定比塑料更环保”。</li>
+            <li>真实环境影响取决于<strong>原材料、制造、运输、使用、废弃处理</strong>的全生命周期。</li>
+            <li>生命周期评估专业性强，普通用户、学生组织和校园采购者很难直接使用。</li>
+            <li>因此，决策难点不只是“缺数据”，更是<strong>缺一层把专业评估翻译成行动建议的接口</strong>。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>项目切口</h3>
+          <p>我们不做泛化的“环保聊天机器人”，而是聚焦一个足够真实、可演示、可落地的场景：</p>
+          <div class="big-quote" style="font-size:26px;">校园外卖包装比较</div>
+          <ul class="small-list">
+            <li>比较对象：塑料盒、纸盒、PLA 可降解餐盒</li>
+            <li>比较变量：运输距离、回收率、使用条件、功能单位</li>
+            <li>输出内容：推荐方案、碳热点、情景敏感性分析、追问式解释</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer">
+        <div>问题转译：从“环保口号”转向“可执行选择”。</div>
+        <div class="page">03 / 11</div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="科学问题">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">Research Question</div>
+          <h2>科学问题与研究假设</h2>
+        </div>
+      </div>
+      <div class="content">
+        <div class="card">
+          <div class="big-quote">AI 能否将复杂的生命周期评估结果转化为非专家也能理解和采纳的低碳决策建议？</div>
+        </div>
+        <div class="three-col">
+          <div class="card">
+            <h3>子问题 1</h3>
+            <p>在具体产品选择中，哪些生命周期环节是真正的碳排热点？用户的直觉判断与生命周期结果是否一致？</p>
+          </div>
+          <div class="card">
+            <h3>子问题 2</h3>
+            <p>当大模型接入结构化 LCA 结果后，是否能比一般性的环保建议提供更可信、更细化的解释？</p>
+          </div>
+          <div class="card">
+            <h3>子问题 3</h3>
+            <p>在多方案对比与 what-if 情景模拟中，AI Agent 能否帮助用户更快形成基于证据的选择？</p>
+          </div>
+        </div>
+        <div class="warning-box">
+          研究假设：相比纯文本型“绿色建议”，基于 openLCA 结果驱动的 Agent 更可能提供可追溯、可比较、可讨论的低碳决策支持。
+        </div>
+      </div>
+      <div class="footer">
+        <div>这里强调：项目既有工具属性，也有明确的跨学科研究问题。</div>
+        <div class="page">04 / 11</div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="方案逻辑">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">Method</div>
+          <h2>方案逻辑：openLCA 负责“算得严肃”，AI 负责“讲得明白”</h2>
+        </div>
+      </div>
+      <div class="content two-col">
+        <div class="card">
+          <h3>为什么选 openLCA</h3>
+          <ul>
+            <li>openLCA 官方将其定义为<strong>免费、专业、开源</strong>的生命周期评估软件。</li>
+            <li>官网明确说明该软件适用于<strong>研究与教育</strong>场景，说明其具备较强的学术与工具属性。</li>
+            <li>这使它非常适合作为本项目的“专业方法层”。</li>
+          </ul>
+          <div class="cite">来源：openLCA 官网，GreenDelta；官网写明 “free, professional LCA software” 与 “used in many university classes worldwide”。</div>
+        </div>
+        <div class="card">
+          <h3>为什么还要叠加 AI</h3>
+          <ul>
+            <li>大模型不是用来替代生命周期建模，而是用于<strong>场景理解、结果解释、方案比较、连续追问</strong>。</li>
+            <li>环境决策相关研究已提示：LLM 具有潜力，但必须强调<strong>人类监督与迭代优化</strong>。</li>
+            <li>因此我们采用“结构化评估 + 生成式解释”的混合架构，而不是让模型自由发挥。</li>
+          </ul>
+          <div class="cite">来源：Cilliers et al., 2025, <em>Impact Assessment and Project Appraisal</em>；研究在 20 个真实 EIA 案例上测试了 3 个 GPT 版本，并强调 human oversight 与 iterative refinement。</div>
+        </div>
+      </div>
+      <div class="footer">
+        <div>方法论定位：不是“让 AI 直接下结论”，而是“让 AI 变成 LCA 的用户接口层”。</div>
+        <div class="page">05 / 11</div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="系统架构">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">Architecture</div>
+          <h2>系统架构与工作流</h2>
+        </div>
+      </div>
+      <div class="content">
+        <div class="process">
+          <div class="step">
+            <div class="num">Step 1</div>
+            <h4>用户输入场景</h4>
+            <p>例如“社团活动采购 200 份外卖，比较塑料盒、纸盒、PLA 餐盒”。</p>
+          </div>
+          <div class="step">
+            <div class="num">Step 2</div>
+            <h4>参数解析</h4>
+            <p>识别功能单位、运输距离、回收假设、使用边界和对比对象。</p>
+          </div>
+          <div class="step">
+            <div class="num">Step 3</div>
+            <h4>调用 LCA 结果</h4>
+            <p>读取 openLCA 模型或预先导出的结构化生命周期结果。</p>
+          </div>
+          <div class="step">
+            <div class="num">Step 4</div>
+            <h4>AI 解释与比较</h4>
+            <p>输出碳热点、优劣比较、结论条件与风险提示。</p>
+          </div>
+          <div class="step">
+            <div class="num">Step 5</div>
+            <h4>持续追问</h4>
+            <p>支持 “如果运输更远呢”“如果回收率提高呢” 等 what-if 交互。</p>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <h3>最小可行产品 MVP</h3>
+            <ul>
+              <li>首发只做一个校园高频场景，控制边界与工作量</li>
+              <li>优先实现“多方案比较 + 可解释输出 + 情景模拟”闭环</li>
+              <li>前端可采用单页网页，方便本地演示与快速迭代</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>预期输出</h3>
+            <ul>
+              <li>推荐方案与排名</li>
+              <li>生命周期热点阶段</li>
+              <li>结论成立的关键条件</li>
+              <li>进一步降低影响的可执行建议</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div>可视化重点：一眼看到“为什么推荐这个方案”，而不仅是一个结论。</div>
+        <div class="page">06 / 11</div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="创新点与差异化">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">Innovation</div>
+          <h2>创新点与差异化</h2>
+        </div>
+      </div>
+      <div class="content three-col">
+        <div class="card">
+          <h3>差异化 1</h3>
+          <p>不是“通用环保问答”，而是<strong>场景化低碳选择</strong>，直接面向具体产品与具体比较任务。</p>
+        </div>
+        <div class="card">
+          <h3>差异化 2</h3>
+          <p>不是“只用大模型生成文案”，而是把 <strong>openLCA</strong> 作为底层专业依据。</p>
+        </div>
+        <div class="card">
+          <h3>差异化 3</h3>
+          <p>不是“只给结论”，而是同步展示<strong>碳热点、结论条件与反转情景</strong>。</p>
+        </div>
+        <div class="card">
+          <h3>差异化 4</h3>
+          <p>不是静态报告，而是支持追问的 Agent，可处理“如果运输更远”“如果回收率提高”等问题。</p>
+        </div>
+        <div class="card">
+          <h3>差异化 5</h3>
+          <p>不是宏观空谈气候变化，而是把气候行动落到<strong>微观产品决策</strong>这一真实入口。</p>
+        </div>
+        <div class="card">
+          <h3>差异化 6</h3>
+          <p>最终交付是一个<strong>可交互、可演示、可继续扩展</strong>的工具原型，而不是概念海报。</p>
+        </div>
+      </div>
+      <div class="footer">
+        <div>项目定位：把专业生命周期分析转化为普通用户可用的低碳决策接口。</div>
+        <div class="page">07 / 11</div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="实施计划">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">Execution</div>
+          <h2>实施路径：从需求细化到原型交付</h2>
+        </div>
+      </div>
+      <div class="content">
+        <div class="timeline">
+          <div class="phase">
+            <div class="week">Week 1</div>
+            <h4>需求与综述</h4>
+            <ul>
+              <li>锁定外卖包装场景</li>
+              <li>完成综述与竞品扫描</li>
+              <li>定义功能单位与系统边界</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <div class="week">Week 2</div>
+            <h4>LCA 建模</h4>
+            <ul>
+              <li>建立 3 个方案的简化 openLCA 模型</li>
+              <li>整理影响指标和参数表</li>
+              <li>确定结构化数据接口</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <div class="week">Week 3</div>
+            <h4>Agent 原型</h4>
+            <ul>
+              <li>搭建前端页面</li>
+              <li>实现输入-比较-解释闭环</li>
+              <li>加入追问与情景模拟</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <div class="week">Week 4</div>
+            <h4>测试与打磨</h4>
+            <ul>
+              <li>做小样本使用测试</li>
+              <li>优化 Prompt 与图表</li>
+              <li>准备现场 demo 与汇报材料</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <h3>技术栈建议</h3>
+          <p><strong>生命周期层</strong>：openLCA；<strong>后端</strong>：Python / FastAPI；<strong>前端</strong>：Streamlit 或原生 HTML；<strong>Agent 层</strong>：LLM + 规则模板 + 结构化结果检索。</p>
+        </div>
+      </div>
+      <div class="footer">
+        <div>执行原则：先收窄场景，再做闭环，不追求“一口吃成通用平台”。</div>
+        <div class="page">08 / 11</div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="评估与风险">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">Evaluation</div>
+          <h2>评估指标、风险与应对</h2>
+        </div>
+      </div>
+      <div class="content two-col">
+        <div class="card">
+          <h3>评估指标</h3>
+          <ul>
+            <li><strong>功能性</strong>：能否完成多方案比较、热点识别、建议生成、情景模拟</li>
+            <li><strong>可解释性</strong>：用户是否能理解“为什么推荐这个方案”</li>
+            <li><strong>一致性</strong>：AI 解释是否与结构化 LCA 结果一致</li>
+            <li><strong>展示性</strong>：能否在汇报中完成完整 demo 闭环</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>主要风险与应对</h3>
+          <ul>
+            <li><strong>风险 1</strong>：LCA 建模过重<br>应对：只做一个场景和三个方案</li>
+            <li><strong>风险 2</strong>：AI 输出空泛<br>应对：结果必须绑定结构化指标和规则模板</li>
+            <li><strong>风险 3</strong>：看起来像普通聊天机器人<br>应对：重点展示图表、对比和 what-if 模拟</li>
+            <li><strong>风险 4</strong>：结论易被质疑<br>应对：保留假设条件、边界说明和来源引用</li>
+          </ul>
+        </div>
+      </div>
+      <div class="warning-box">
+        设计原则：所有结论都必须能够回溯到明确的情景假设、LCA 结果或公开来源，而不是由模型“自由编造”。
+      </div>
+      <div class="footer">
+        <div>这页帮助老师相信：项目可控、可做完、也知道边界在哪里。</div>
+        <div class="page">09 / 11</div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="预期成果">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">Outcome</div>
+          <h2>预期成果与汇报展示逻辑</h2>
+        </div>
+      </div>
+      <div class="content two-col">
+        <div class="card">
+          <h3>最终交付</h3>
+          <ul>
+            <li>一个可本地演示的低碳产品决策 Agent 原型</li>
+            <li>一套清晰的 LCA 场景假设与参数说明</li>
+            <li>一份 AI + LCA 研究综述与案例分析</li>
+            <li>一套可用于现场展示的结果图表和 demo 脚本</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>台上展示顺序</h3>
+          <ul>
+            <li>先抛出反直觉问题：纸盒一定比塑料盒更环保吗？</li>
+            <li>再讲科学问题：为什么要引入生命周期视角</li>
+            <li>接着展示系统：openLCA 如何提供底层结果，AI 如何解释</li>
+            <li>最后现场 demo：输入外卖场景，输出推荐方案与理由</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="big-quote" style="font-size:28px;">一句话总结：我们要做的不是“更会聊天的环保助手”，而是“把专业生命周期分析转化为可执行低碳决策的智能体”。</div>
+      </div>
+      <div class="footer">
+        <div>汇报落点：兼具研究价值、产品原型可见性与后续扩展空间。</div>
+        <div class="page">10 / 11</div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="参考来源">
+      <div class="slide-header">
+        <div>
+          <div class="slide-kicker">References</div>
+          <h2>公开可查参考来源</h2>
+        </div>
+      </div>
+      <div class="content">
+        <div class="refs">
+          <div class="ref-item">Ayadi, R., Forouheshfar, Y., &amp; Moghadas, O. (2025). <em>Enhancing system resilience to climate change through artificial intelligence: a systematic literature review</em>. Frontiers in Climate. DOI: <a href="https://doi.org/10.3389/fclim.2025.1585331" target="_blank" rel="noreferrer">10.3389/fclim.2025.1585331</a></div>
+          <div class="ref-item">Google Research (2025-06-24). <em>From research to climate resilience</em>. <a href="https://research.google/blog/how-ai-is-helping-us-build-a-more-resilient-planet/" target="_blank" rel="noreferrer">https://research.google/blog/how-ai-is-helping-us-build-a-more-resilient-planet/</a></div>
+          <div class="ref-item">openLCA / GreenDelta. Official website. <a href="https://www.openlca.org/" target="_blank" rel="noreferrer">https://www.openlca.org/</a></div>
+          <div class="ref-item">Cilliers, D., Bond, A., Retief, F., Alberts, R., &amp; Roos, C. (2025). <em>Large Language Model-assisted EIA screening: a case study using GPT</em>. Impact Assessment and Project Appraisal. DOI: <a href="https://doi.org/10.1080/14615517.2025.2523628" target="_blank" rel="noreferrer">10.1080/14615517.2025.2523628</a></div>
+        </div>
+        <div class="card">
+          <h3>备注</h3>
+          <p>本演示稿仅使用可公开检索的真实来源；涉及未来项目实现的功能界面与实施计划，均为本项目的设计方案，不宣称其已在现实世界完成部署。</p>
+        </div>
+      </div>
+      <div class="footer">
+        <div>按键提示：← → / Space 切页，Home 返回首页，F 进入全屏。</div>
+        <div class="page">11 / 11</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="nav">
+    <div class="progress"><span id="progressBar"></span></div>
+    <div class="controls">
+      <button id="prevBtn" type="button">上一页</button>
+      <button id="nextBtn" type="button">下一页</button>
+    </div>
+    <div class="hint" id="hint">第 1 / 11 页</div>
+  </div>
+
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const progressBar = document.getElementById('progressBar');
+      const hint = document.getElementById('hint');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      let index = 0;
+
+      function render() {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+        const progress = ((index + 1) / slides.length) * 100;
+        progressBar.style.width = progress + '%';
+        hint.textContent = `第 ${index + 1} / ${slides.length} 页`;
+        document.title = `${slides[index].dataset.title} - CarbonWise`;
+      }
+
+      function go(nextIndex) {
+        if (nextIndex < 0 || nextIndex >= slides.length) return;
+        index = nextIndex;
+        render();
+      }
+
+      prevBtn.addEventListener('click', () => go(index - 1));
+      nextBtn.addEventListener('click', () => go(index + 1));
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') {
+          event.preventDefault();
+          go(index + 1);
+        } else if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
+          event.preventDefault();
+          go(index - 1);
+        } else if (event.key === 'Home') {
+          event.preventDefault();
+          go(0);
+        } else if (event.key === 'End') {
+          event.preventDefault();
+          go(slides.length - 1);
+        } else if (event.key.toLowerCase() === 'f') {
+          if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen?.();
+          } else {
+            document.exitFullscreen?.();
+          }
+        }
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

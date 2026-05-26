@@ -1,0 +1,28 @@
+.DS_Store
+Thumbs.db
+
+# Python cache and virtualenvs
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Local environment and secrets
+.env
+.env.*
+
+# Editor and OS temp files
+.idea/
+.vscode/
+
+# Runtime logs
+*.log
+prototype_v1/logs/
+
+# Local browser/runtime artifacts created during preview
+presentation/.firefox-home/
+presentation/.xdg-runtime/

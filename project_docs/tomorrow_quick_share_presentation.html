@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>明天课堂简报：项目 Pipeline 与 AI 使用</title>
+  <style>
+    :root {
+      --paper: #eef3f9;
+      --slide-bg: #fbfcfe;
+      --text: #313c4d;
+      --muted: #6a7486;
+      --blue: #1a4a8f;
+      --blue-deep: #0d2f60;
+      --blue-soft: #eaf1fa;
+      --gold: #c3984f;
+      --line: #d7e0ec;
+      --shadow: 0 16px 42px rgba(32, 54, 90, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(26, 74, 143, 0.08), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(195, 152, 79, 0.08), transparent 18%),
+        linear-gradient(180deg, #eef3f9 0%, #edf2f7 100%);
+    }
+
+    .viewport {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .stage-shell {
+      position: relative;
+      width: 1600px;
+      height: 900px;
+      flex: 0 0 auto;
+    }
+
+    .stage {
+      position: absolute;
+      inset: 0;
+      width: 1600px;
+      height: 900px;
+      transform-origin: top left;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-rows: 80px 1fr 58px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--slide-bg);
+      border: 1px solid rgba(26, 74, 143, 0.08);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateX(30px) scale(0.992);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 52px;
+      color: #fff;
+      background: linear-gradient(90deg, var(--blue) 0%, #285ca2 60%, #326fb7 100%);
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 80px;
+      width: 220px;
+      height: 6px;
+      background: var(--gold);
+    }
+
+    .header-title {
+      font-size: 31px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .header-meta {
+      font-size: 18px;
+      opacity: 0.92;
+    }
+
+    .content {
+      padding: 38px 54px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .title-slide {
+      grid-template-rows: 1fr 58px;
+    }
+
+    .title-body {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 22px;
+      padding: 92px 88px 40px;
+    }
+
+    .title-body::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 150px;
+      background: linear-gradient(90deg, var(--blue) 0%, #295fa5 70%, #3373bb 100%);
+    }
+
+    .title-accent {
+      position: absolute;
+      top: 150px;
+      left: 0;
+      width: 290px;
+      height: 8px;
+      background: var(--gold);
+    }
+
+    .title-card {
+      position: relative;
+      margin-top: 28px;
+      max-width: 1140px;
+      padding: 34px 40px;
+      border-radius: 18px;
+      border: 1px solid rgba(26, 74, 143, 0.1);
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,250,254,0.98));
+      box-shadow: var(--shadow);
+    }
+
+    .main-title {
+      margin: 0;
+      color: var(--blue-deep);
+      font-size: 50px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .sub-title {
+      margin: 14px 0 0;
+      color: var(--blue);
+      font-size: 26px;
+      line-height: 1.45;
+    }
+
+    .tags {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid rgba(26, 74, 143, 0.12);
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 24px;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 20px;
+    }
+
+    .quote,
+    .panel,
+    .grid-2 > div,
+    .grid-3 > div,
+    .pipeline-box {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(36, 70, 120, 0.06);
+    }
+
+    .quote,
+    .panel,
+    .grid-2 > div,
+    .grid-3 > div,
+    .pipeline-box {
+      padding: 18px 22px;
+    }
+
+    .quote {
+      border-left: 8px solid var(--blue);
+      background: linear-gradient(180deg, #ffffff 0%, #f7fafe 100%);
+    }
+
+    .quote strong,
+    .card-title {
+      color: var(--blue-deep);
+    }
+
+    .card-title {
+      margin: 0 0 10px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .content p,
+    .content li {
+      font-size: 24px;
+      line-height: 1.5;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.3em;
+    }
+
+    li + li {
+      margin-top: 0.35em;
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .pipeline-box {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .step {
+      padding: 14px 10px;
+      border-radius: 14px;
+      background: var(--blue-soft);
+      color: var(--blue-deep);
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .arrow {
+      color: var(--gold);
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .small-note {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 54px;
+      border-top: 1px solid var(--line);
+      background: #fcfdff;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .source {
+      max-width: 78%;
+      line-height: 1.45;
+    }
+
+    .page {
+      min-width: 88px;
+      text-align: right;
+      color: var(--blue);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .controls {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      display: flex;
+      gap: 10px;
+      z-index: 20;
+    }
+
+    .controls button {
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(26, 74, 143, 0.15);
+      border-radius: 50%;
+      background: rgba(255,255,255,0.94);
+      color: var(--blue);
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(30,56,95,0.12);
+    }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 5px;
+      background: rgba(26, 74, 143, 0.08);
+      z-index: 20;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--gold));
+      transition: width 0.25s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="viewport">
+    <div class="stage-shell" id="stageShell">
+      <div class="stage" id="stage">
+        <section class="slide title-slide active">
+          <div class="title-body">
+            <div class="title-accent"></div>
+            <div class="title-card">
+              <h1 class="main-title">项目 Pipeline 与 AI 的使用</h1>
+              <p class="sub-title">全球气候政策多利益相关方博弈沙盘 · 明天课堂简报精简版</p>
+              <div class="tags">
+                <span class="tag">系统运行流程</span>
+                <span class="tag">项目推进流程</span>
+                <span class="tag">AI 使用方式</span>
+                <span class="tag">当前进展</span>
+              </div>
+              <div class="meta-row">
+                <span>课堂简单分享</span>
+                <span>聚焦 pipeline 与 AI 使用</span>
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="source">本页为明天课堂简单分享的精简版封面。</div>
+            <div class="page">1 / 7</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">1. 我们到底在做什么</div>
+            <div class="header-meta">项目定位</div>
+          </div>
+          <div class="content">
+            <div class="quote">
+              <strong>一句话概括：</strong> 输入一条气候政策，让不同利益相关方作为 Agent 进行多轮博弈，最后输出这条政策的阻力来源、妥协条件和结构化报告。
+            </div>
+            <div class="grid-3">
+              <div>
+                <p class="card-title">项目问题</p>
+                <p>同一条气候政策，为什么不同利益相关方会作出不同回应？</p>
+              </div>
+              <div>
+                <p class="card-title">项目形态</p>
+                <p>一个可运行、可展示、可继续扩展的多智能体推演原型。</p>
+              </div>
+              <div>
+                <p class="card-title">当前目标</p>
+                <p>先做出最小可运行闭环，再逐步接入真实数据和云端大模型。</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="source">当前项目已从选题构想推进到最小可运行原型阶段。</div>
+            <div class="page">2 / 7</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">2. 系统运行 Pipeline</div>
+            <div class="header-meta">系统怎么工作</div>
+          </div>
+          <div class="content">
+            <div class="pipeline-box">
+              <div class="step">政策输入</div>
+              <div class="arrow">→</div>
+              <div class="step">属性解析</div>
+              <div class="arrow">→</div>
+              <div class="step">角色初始化</div>
+              <div class="arrow">→</div>
+              <div class="step">三轮博弈</div>
+            </div>
+            <div class="pipeline-box">
+              <div class="step">观察员总结</div>
+              <div class="arrow">→</div>
+              <div class="step">政策条件调整</div>
+              <div class="arrow">→</div>
+              <div class="step">结构化报告</div>
+              <div class="arrow">→</div>
+              <div class="step">结果展示</div>
+            </div>
+            <div class="grid-2">
+              <div class="panel">
+                <p class="card-title">输入端</p>
+                <ul>
+                  <li>输入一条具体气候政策</li>
+                  <li>解析成减排、碳关税、资金、技术、过渡期等属性</li>
+                </ul>
+              </div>
+              <div class="panel">
+                <p class="card-title">输出端</p>
+                <ul>
+                  <li>输出谁支持、谁反对、卡点在哪里</li>
+                  <li>给出妥协路径与简化评分</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="source">本页展示系统从政策输入到结果输出的完整运行流程。</div>
+            <div class="page">3 / 7</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">3. 项目推进 Pipeline</div>
+            <div class="header-meta">我们是怎么推进的</div>
+          </div>
+          <div class="content">
+            <div class="pipeline-box">
+              <div class="step">问题定义</div>
+              <div class="arrow">→</div>
+              <div class="step">角色设计</div>
+              <div class="arrow">→</div>
+              <div class="step">最小原型</div>
+              <div class="arrow">→</div>
+              <div class="step">样例推演</div>
+            </div>
+            <div class="pipeline-box">
+              <div class="step">网页展示</div>
+              <div class="arrow">→</div>
+              <div class="step">真实数据接入</div>
+              <div class="arrow">→</div>
+              <div class="step">云端 LLM 增强</div>
+              <div class="arrow">→</div>
+              <div class="step">多情景扩展</div>
+            </div>
+            <div class="quote">
+              <strong>当前推进情况：</strong> 项目已完成问题定义、角色设计和 1.0 原型开发，下一阶段将继续推进网页化展示、数据接入和模型增强。
+            </div>
+          </div>
+          <div class="footer">
+            <div class="source">本页展示项目从概念形成到后续扩展的阶段性推进路径。</div>
+            <div class="page">4 / 7</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">4. 关键参数与角色设定</div>
+            <div class="header-meta">当前原型怎么建模</div>
+          </div>
+          <div class="content">
+            <div class="grid-2">
+              <div class="panel">
+                <p class="card-title">关键参数怎么理解</p>
+                <ul>
+                  <li>退出强度、碳边境约束：表示政策施压有多强</li>
+                  <li>资金、技术转移：表示是否给出支持和补偿</li>
+                  <li>过渡期、CCS：表示是否保留现实转型弹性</li>
+                  <li>适应/损失补偿：表示是否回应高脆弱地区诉求</li>
+                </ul>
+              </div>
+              <div class="panel">
+                <p class="card-title">四类角色为什么这样设</p>
+                <ul>
+                  <li>发展中国家：关注发展权、资金和技术支持</li>
+                  <li>发达国家联盟：更支持强减排和国际规则约束</li>
+                  <li>传统能源/重工业：更关注成本、就业和过渡技术</li>
+                  <li>小岛国/环保组织：更关注脆弱性、正义和补偿</li>
+                </ul>
+              </div>
+            </div>
+            <div class="quote">
+              <strong>当前设置逻辑：</strong> 1.0 版把每个角色对这些参数的偏好写成权重。权重为正，说明该参数会提高支持度；权重为负，说明会加剧反对。当前依据主要来自现实气候谈判中的常见分歧结构和课程讨论语境，后续再逐步引入真实数据校准。
+            </div>
+            <div class="quote">
+              <strong>为什么先这样做：</strong> 先把谈判结构和角色偏好显式写出来，优点是可解释、便于课堂展示，也方便后续再接入真实数据和大模型。
+            </div>
+          </div>
+          <div class="footer">
+            <div class="source">本页解释当前参数、角色和权重设定背后的基本逻辑。</div>
+            <div class="page">5 / 7</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">5. AI 在哪里使用</div>
+            <div class="header-meta">AI 使用方式</div>
+          </div>
+          <div class="content">
+            <div class="quote">
+              <strong>总体说明：</strong> 本项目中的 AI 使用分为两部分，一部分用于项目推进，另一部分用于系统原型本身。
+            </div>
+            <div class="grid-2">
+              <div>
+                <p class="card-title">项目推进中的 AI 使用</p>
+                <ul>
+                  <li>用于前期选题发散、方案比较和研究问题收敛</li>
+                  <li>用于角色设定、互动规则和项目 pipeline 设计</li>
+                  <li>用于原型代码生成、调试辅助和文档整理</li>
+                  <li>用于样例结果梳理、讲稿撰写和汇报材料组织</li>
+                </ul>
+              </div>
+              <div>
+                <p class="card-title">系统原型中的 AI 使用</p>
+                <ul>
+                  <li>把政策文本转成可处理的角色讨论场景</li>
+                  <li>支持角色表态、自然语言表达和报告生成</li>
+                  <li>当前先用规则保证结构稳定，后续再接入云端大模型增强表达</li>
+                  <li>后续会扩展到多情景比较、追问和更完整的政策简报输出</li>
+                </ul>
+              </div>
+            </div>
+            <p class="small-note">当前的思路不是回避 AI，而是把 AI 真实地用于项目全流程，同时在系统内部保留必要的结构约束和可解释性。</p>
+          </div>
+          <div class="footer">
+            <div class="source">AI 既参与了项目形成过程，也参与了原型构建与表达层实现。</div>
+            <div class="page">6 / 7</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">6. 当前进展与下一步</div>
+            <div class="header-meta">项目进展</div>
+          </div>
+          <div class="content">
+            <div class="grid-2">
+              <div class="panel">
+                <p class="card-title">当前已经完成</p>
+                <ul>
+                  <li>完成项目规划与工作留痕</li>
+                  <li>完成 1.0 最小原型代码</li>
+                  <li>跑通样例政策三轮博弈</li>
+                  <li>能输出结构化政策可行性报告</li>
+                </ul>
+              </div>
+              <div class="panel">
+                <p class="card-title">下一步准备做</p>
+                <ul>
+                  <li>做更适合展示的网页 demo</li>
+                  <li>接入真实数据子集</li>
+                  <li>接入云端大模型增强表达层</li>
+                  <li>增加联盟变化、多情景比较和图表</li>
+                </ul>
+              </div>
+            </div>
+            <div class="quote">
+              <strong>结尾一句：</strong> 我们现在已经从“选题构想”推进到了“能跑的原型”，接下来会继续把它从方法原型做成更完整的课程项目。
+            </div>
+          </div>
+          <div class="footer">
+            <div class="source">本页收尾</div>
+            <div class="page">7 / 7</div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls" aria-label="翻页控制">
+    <button id="prevBtn" title="上一页">←</button>
+    <button id="nextBtn" title="下一页">→</button>
+  </div>
+
+  <div class="progress" aria-hidden="true">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const progressBar = document.getElementById('progressBar');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const stageShell = document.getElementById('stageShell');
+    const stage = document.getElementById('stage');
+    let current = 0;
+
+    function fitStage() {
+      const baseWidth = 1600;
+      const baseHeight = 900;
+      const viewportWidth = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+      const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      const safePaddingX = 40;
+      const safePaddingY = 40;
+      const scale = Math.min(
+        1,
+        (viewportWidth - safePaddingX * 2) / baseWidth,
+        (viewportHeight - safePaddingY * 2) / baseHeight
+      );
+      const appliedScale = Math.max(scale, 0.1);
+      stage.style.transform = `scale(${appliedScale})`;
+      stageShell.style.width = `${baseWidth * appliedScale}px`;
+      stageShell.style.height = `${baseHeight * appliedScale}px`;
+    }
+
+    function updatePageNumbers() {
+      slides.forEach((slide, index) => {
+        const pageNode = slide.querySelector('.page');
+        if (pageNode) {
+          pageNode.textContent = `${index + 1} / ${slides.length}`;
+        }
+      });
+    }
+
+    function render(index) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+      progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
+    }
+
+    function nextSlide() {
+      render(current + 1);
+    }
+
+    function prevSlide() {
+      render(current - 1);
+    }
+
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    document.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        nextSlide();
+      }
+      if (['ArrowLeft', 'PageUp'].includes(event.key)) {
+        event.preventDefault();
+        prevSlide();
+      }
+      if (event.key === 'Home') {
+        event.preventDefault();
+        render(0);
+      }
+      if (event.key === 'End') {
+        event.preventDefault();
+        render(slides.length - 1);
+      }
+    });
+
+    window.addEventListener('resize', fitStage);
+    updatePageNumbers();
+    fitStage();
+    render(0);
+  </script>
+</body>
+</html>

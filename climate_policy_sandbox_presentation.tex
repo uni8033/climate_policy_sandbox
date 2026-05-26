@@ -1,0 +1,471 @@
+\documentclass[aspectratio=169,10.5pt]{ctexbeamer}
+
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{ragged2e}
+
+\definecolor{mainblue}{RGB}{25,71,138}
+\definecolor{deepblue}{RGB}{12,44,92}
+\definecolor{lightblue}{RGB}{233,241,251}
+\definecolor{textgray}{RGB}{55,62,74}
+\definecolor{linegray}{RGB}{198,210,225}
+\definecolor{accentgold}{RGB}{195,152,79}
+\definecolor{softbg}{RGB}{248,250,253}
+\definecolor{purewhite}{RGB}{255,255,255}
+
+\setbeamercolor{background canvas}{bg=softbg}
+\setbeamercolor{normal text}{fg=textgray,bg=softbg}
+\setbeamercolor{frametitle}{fg=white,bg=mainblue}
+\setbeamercolor{title}{fg=deepblue}
+\setbeamercolor{subtitle}{fg=mainblue}
+\setbeamercolor{author}{fg=textgray}
+\setbeamercolor{date}{fg=textgray}
+\setbeamercolor{block title}{fg=deepblue,bg=lightblue}
+\setbeamercolor{block body}{fg=textgray,bg=purewhite}
+\setbeamercolor{alertblock title}{fg=deepblue,bg=lightblue}
+\setbeamercolor{alertblock body}{fg=textgray,bg=purewhite}
+\setbeamercolor{item}{fg=mainblue}
+\setbeamercolor{section in toc}{fg=deepblue}
+\setbeamercolor{titlebox}{fg=textgray,bg=purewhite}
+\setbeamercolor{footline rule}{bg=linegray}
+\setbeamercolor{footline box}{fg=textgray,bg=purewhite}
+
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamerfont{block body}{size=\small}
+\setbeamersize{text margin left=0.7cm,text margin right=0.7cm}
+
+\setbeamertemplate{frametitle}{
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=3.8ex,dp=1.25ex,leftskip=0.8cm,rightskip=0.3cm]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[wd=2.8cm,ht=0.18cm,dp=0ex]{footline rule}
+  \end{beamercolorbox}
+}
+
+\setbeamertemplate{footline}{
+  \leavevmode
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.35pt,dp=0pt]{footline rule}
+  \end{beamercolorbox}
+  \hbox{
+    \begin{beamercolorbox}[wd=.78\paperwidth,ht=2.9ex,dp=1.1ex,leftskip=.6cm]{footline box}
+      \color{textgray}\scriptsize 全球气候政策多利益相关方博弈沙盘
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[wd=.22\paperwidth,ht=2.9ex,dp=1.1ex,rightskip=.6cm,right]{footline box}
+      \color{textgray}\scriptsize \insertframenumber / \inserttotalframenumber
+    \end{beamercolorbox}
+  }
+  \vskip0pt
+}
+
+\setlength{\leftmargini}{1.2em}
+\setlength{\leftmarginii}{1em}
+\renewcommand{\arraystretch}{1.18}
+
+\title{全球气候政策多利益相关方博弈沙盘}
+\subtitle{基于大语言模型角色扮演与多智能体交互的课堂项目方案}
+\author{课程结课大作业选题汇报}
+\date{\today}
+
+\newcommand{\source}[1]{\vfill{\tiny\color{textgray}来源：#1}}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[mainblue] (current page.north west) rectangle ([yshift=-2.15cm]current page.north east);
+    \fill[accentgold] ([yshift=-2.15cm]current page.north west) rectangle ([xshift=4.15cm,yshift=-2.33cm]current page.north west);
+  \end{tikzpicture}
+  \vspace{2.25cm}
+  \begin{beamercolorbox}[wd=.83\paperwidth,sep=1em,rounded=true,shadow=false,leftskip=0.9cm,rightskip=0.9cm]{titlebox}
+    {\usebeamerfont{title}\color{deepblue}\LARGE\bfseries 全球气候政策多利益相关方博弈沙盘\par}
+    \vspace{0.35cm}
+    {\large\color{mainblue}基于大语言模型角色扮演与多智能体交互的课堂项目方案\par}
+    \vspace{0.55cm}
+    {\small\color{mainblue}\fboxsep=6pt\colorbox{lightblue}{\strut 气候治理}\hspace{0.4em}
+    \colorbox{lightblue}{\strut 多智能体协商}\hspace{0.4em}
+    \colorbox{lightblue}{\strut 政策推演}\hspace{0.4em}
+    \colorbox{lightblue}{\strut 课堂决策支持}\par}
+    \vspace{0.6cm}
+    {\normalsize 课程结课大作业选题汇报 \hspace{1.2em} 项目方案展示\par}
+  \end{beamercolorbox}
+\end{frame}
+
+\begin{frame}{1. 选题缘起：为什么是这个方向}
+  \begin{columns}[T]
+    \column{0.58\linewidth}
+    \begin{itemize}
+      \item 本课程前几阶段持续强调 ``AI 工具提升生产力''：综述生成、课堂辩论、AI Coding、工具链协同。
+      \item 因此，结课项目不只要回答一个气候问题，也要体现 \textbf{AI 如何帮助我们更快建模、更快推演、更快表达}。
+      \item 我们希望把课堂里的 ``AI 辅助辩论'' 升级成一个 \textbf{可复用、可展示、可迭代} 的气候政策博弈沙盘。
+    \end{itemize}
+    \column{0.38\linewidth}
+    \begin{alertblock}{我们的判断}
+      这个方向最符合课程基因：
+      \begin{itemize}
+        \item 有气候治理问题意识
+        \item 有方法设计与系统实现空间
+        \item 有明确的课堂展示与开发路径
+      \end{itemize}
+    \end{alertblock}
+  \end{columns}
+  \begin{block}{项目目标}
+    不是替代真实谈判，而是用一个低成本、可交互、可解释的原型，快速暴露政策阻力与可能的妥协路径。
+  \end{block}
+  \source{本页主要说明项目动机与课程契合度，属于本组方案设计，不涉及外部事实性数据。}
+\end{frame}
+
+\begin{frame}{2. 现实背景：为什么气候政策天然适合做多方博弈}
+  \begin{block}{三个公开可查的现实约束}
+    \begin{itemize}
+      \item 《巴黎协定》第 2 条同时涉及温控目标、适应能力与资金流转型，并明确体现公平以及 ``共同但有区别的责任''。
+      \item IPCC 2023 综合报告指出：人类活动已导致全球地表温度较 1850--1900 年高出 1.1\textdegree C；现有 NDC 轨迹使本世纪超过 1.5\textdegree C 的可能性较大。
+      \item COP28 的全球盘点成果首次写入 ``transition away from fossil fuels''，说明现实政策推进始终伴随复杂利益冲突与谈判妥协。
+    \end{itemize}
+  \end{block}
+  \begin{alertblock}{结论}
+    气候政策不是单一技术选择，而是一个同时牵涉国家发展、能源安全、国际公平、资金支持与产业转型的多方博弈问题。
+  \end{alertblock}
+  \source{UN, \emph{Paris Agreement}, Art.2 (2015); IPCC, \emph{Climate Change 2023: Synthesis Report} (2023); UNFCCC, \emph{COP28 Agreement Signals ``Beginning of the End'' of the Fossil Fuel Era} (2023).}
+\end{frame}
+
+\begin{frame}{3. Research Question：一句话回答我们到底想解决什么}
+  \begin{alertblock}{一句话回答}
+    如何构建一个结合政策文本、国家发展指标与气候脆弱性信息的多智能体推演沙盘，用于模拟一项气候政策在不同利益相关方之间的博弈过程，并识别其阻力来源与可行妥协路径？
+  \end{alertblock}
+  \begin{columns}[T]
+    \column{0.31\linewidth}
+    \begin{block}{问题具体}
+      聚焦 \textbf{单条政策提案}，而不是开放式聊天。
+    \end{block}
+    \column{0.31\linewidth}
+    \begin{block}{科学意义}
+      关注气候治理中 \textbf{政策设计如何受多方利益约束}。
+    \end{block}
+    \column{0.31\linewidth}
+    \begin{block}{预期输出}
+      识别 \textbf{阻力来源、联盟变化与妥协条件}。
+    \end{block}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{4. Why Important：为什么这个问题重要}
+  \begin{itemize}
+    \item \textbf{现实上重要}：气候政策推进不是单纯寻找技术最优解，而是同时面对公平、融资、能源安全与产业转型等多重约束。
+    \item \textbf{科学上重要}：它连接了气候治理、Agent-Based Modeling 与大语言模型角色扮演，是一个具有方法论价值的交叉问题。
+    \item \textbf{教学上重要}：课堂辩论通常只能展示一次立场碰撞，而这个工具希望把辩论升级成 \textbf{可重复推演、可比较结果} 的系统。
+  \end{itemize}
+  \begin{alertblock}{我们希望补上的空缺}
+    在真实谈判过于复杂、传统模型门槛较高的情况下，做一个 \textbf{低成本但有规则约束} 的课堂推演原型。
+  \end{alertblock}
+  \source{UN, \emph{Paris Agreement}, Art.2 (2015); IPCC, \emph{Climate Change 2023: Synthesis Report} (2023); Castro et al., \emph{A review of agent-based modeling of climate-energy policy} (2020).}
+\end{frame}
+
+\begin{frame}{5. Data：数据来源、时间范围与尺度设计}
+  \begin{columns}[T]
+    \column{0.49\linewidth}
+    \begin{block}{数据层一：政策文本}
+      \begin{itemize}
+        \item \textbf{代表什么}：国家公开承诺了什么政策方向与目标
+        \item \textbf{来源}：UNFCCC NDC Registry
+        \item \textbf{时间范围}：2015--至今
+        \item \textbf{空间范围}：全球缔约方/国家
+        \item \textbf{分辨率}：国家--政策文本版本
+        \item \textbf{是否已获取}：已确认可访问，待批量整理
+        \item \textbf{在系统中的作用}：约束 Agent 的政策表态，使其发言更接近真实承诺框架
+      \end{itemize}
+    \end{block}
+    \column{0.49\linewidth}
+    \begin{block}{数据层二：国家指标}
+      \begin{itemize}
+        \item \textbf{代表什么}：国家的排放、发展与能源等现实条件
+        \item \textbf{来源}：World Bank 指标数据库
+        \item \textbf{时间范围}：以 1995--2024 为主
+        \item \textbf{空间范围}：全球国家/经济体
+        \item \textbf{分辨率}：年度国家尺度
+        \item \textbf{是否已获取}：已确认可下载，待筛选变量
+        \item \textbf{在系统中的作用}：解释某类角色为什么支持或反对某项政策
+      \end{itemize}
+    \end{block}
+  \end{columns}
+  \begin{block}{数据层三：脆弱性与适应能力}
+    \textbf{代表什么}：国家面对气候风险时的脆弱程度与应对能力；\textbf{来源}：ND-GAIN Country Index；\textbf{时间范围}：1995--至今；\textbf{空间范围}：全球国家；\textbf{分辨率}：年度国家尺度；\textbf{是否已获取}：已确认下载入口，待与前两类数据对齐；\textbf{在系统中的作用}：帮助判断哪些角色更强调损失、适应与资金支持。
+  \end{block}
+  \begin{alertblock}{一句话理解}
+    这三层数据分别对应 \textbf{承诺是什么}、\textbf{现实条件如何}、\textbf{气候风险有多高}。
+  \end{alertblock}
+  \source{UNFCCC, \emph{NDC Registry}; World Bank, indicator \emph{EN.GHG.CO2.PC.CE.AR5}; ND-GAIN, \emph{Country Index}.}
+\end{frame}
+
+\begin{frame}{6. Data Progress：当前进展与潜在数据风险}
+  \begin{columns}[T]
+    \column{0.48\linewidth}
+    \begin{block}{当前进展}
+      \begin{itemize}
+        \item 已确认三类核心数据均来自公开可查来源
+        \item 已初步确定最小分析单位为 \textbf{国家--年份 + 政策文本版本}
+        \item 第一版原型聚焦 \textbf{国家尺度}，暂不做城市或栅格尺度
+      \end{itemize}
+    \end{block}
+    \column{0.48\linewidth}
+    \begin{block}{需要尽早发现的风险}
+      \begin{itemize}
+        \item \textbf{可获得性}：部分文本为 PDF 且多语言，批量清洗成本较高
+        \item \textbf{尺度匹配}：NDC 常按政策周期更新，而指标数据多为年度
+        \item \textbf{质量问题}：不同国家指标覆盖年份与缺失情况不完全一致
+      \end{itemize}
+    \end{block}
+  \end{columns}
+  \begin{alertblock}{当前判断}
+    数据并非拿不到，主要挑战是 \textbf{文本数据与数值数据的尺度对齐}。因此，我们把第一版系统限定在国家尺度，优先验证方法是否跑通。
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{7. 与已有研究的关系：为什么不是凭空想象}
+  \begin{itemize}
+    \item 传统上，这类问题可放在 \textbf{Agent-Based Modeling, ABM} 框架下研究。
+    \item Castro 等在 \emph{WIREs Climate Change} 的综述回顾了 \textbf{61 项}面向气候--能源政策的 ABM 研究，说明 ``用主体互动研究气候政策'' 本身是成熟研究方向。
+    \item Zhang 等提出的 \textbf{AI for Global Climate Cooperation / RICE-N} 进一步表明：AI 与多智能体方法已经被用于模拟气候谈判、协议与长期合作。
+  \end{itemize}
+  \begin{alertblock}{我们的定位}
+    我们不试图替代成熟模型，而是利用 LLM 降低原型开发门槛，把复杂谈判逻辑做成一个适合课堂场景的 \textbf{轻量化可视化推演工具}。
+  \end{alertblock}
+  \source{Castro et al., \emph{A review of agent-based modeling of climate-energy policy}, WIREs Clim. Change 11:e647 (2020); Zhang et al., \emph{AI for Global Climate Cooperation... in RICE-N} (arXiv:2208.07004, 2022).}
+\end{frame}
+
+\begin{frame}{8. 系统总体架构：从政策输入到可行性报告}
+  \begin{block}{整体流程}
+    政策输入层 $\rightarrow$ 角色初始化层 $\rightarrow$ 多轮博弈引擎 $\rightarrow$ 观察员总结层 $\rightarrow$ 报告与可视化输出层
+  \end{block}
+  \begin{columns}[T]
+    \column{0.48\linewidth}
+    \begin{itemize}
+      \item \textbf{政策输入层}：输入一条气候政策提案和可选背景条件。
+      \item \textbf{角色初始化层}：为各 Agent 注入立场、底线、筹码和约束。
+      \item \textbf{博弈引擎}：控制轮次、记录让步、判断冲突升级或缓和。
+    \end{itemize}
+    \column{0.48\linewidth}
+    \begin{itemize}
+      \item \textbf{观察员总结层}：提炼核心争点、共识点与失败原因。
+      \item \textbf{输出层}：给出对话流、评分、修改建议与简报摘要。
+      \item \textbf{前端层}：通过 Web 页面进行输入、展示和交互。
+    \end{itemize}
+  \end{columns}
+  \begin{alertblock}{一句话概括}
+    输入一条政策，输出一幅 ``多方如何回应这条政策'' 的结构化动态画像。
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{9. 角色设计：把利益冲突显式写进 Agent}
+  \begin{tabular}{p{0.22\linewidth} p{0.72\linewidth}}
+    \toprule
+    角色 & 核心立场\\
+    \midrule
+    发展中国家代表 & 强调发展权、能源安全、减贫优先，主张共同但有区别的责任。\\
+    发达国家联盟代表 & 支持更快减排与更强约束，倾向推动技术标准、碳边境措施。\\
+    传统能源/重工业代表 & 强调就业、资产搁浅与转型成本，更偏好渐进转型和过渡技术。\\
+    小岛国/环保 NGO 代表 & 强调气候脆弱性、损失与损害、气候正义，要求更强减排与资金支持。\\
+    AI 秘书长/观察员 & 不参与站队，只负责记录争点、识别共识、生成总结报告。\\
+    \bottomrule
+  \end{tabular}
+  \begin{block}{后续可扩展角色}
+    国际金融机构、技术供应方、跨国企业、国内监管者、媒体/公众代理。
+  \end{block}
+  \source{角色中的 ``发展权'' ``公平'' ``气候融资'' 等关键词来自《巴黎协定》与 COP 体系中的真实议题；具体 Prompt 设计为本组方案。}
+\end{frame}
+
+\begin{frame}{10. 互动规则：让博弈像博弈，而不是轮流发言}
+  \begin{columns}[T]
+    \column{0.5\linewidth}
+    \begin{block}{Agent 内部状态}
+      \begin{itemize}
+        \item 政策偏好
+        \item 不可退让底线
+        \item 可交换筹码
+        \item 当前谈判温度
+      \end{itemize}
+    \end{block}
+    \column{0.46\linewidth}
+    \begin{block}{交互流程}
+      \begin{itemize}
+        \item 立场陈述
+        \item 反驳与让步交换
+        \item 最终表态
+        \item 观察员归纳
+      \end{itemize}
+    \end{block}
+  \end{columns}
+  \begin{itemize}
+    \item 如果政策触碰底线，Agent 会进入强烈反对；若获得技术转移、过渡期或资金承诺，其立场可松动。
+    \item 观察员不判断 ``谁对谁错''，只判断 \textbf{冲突来自哪里}、\textbf{哪些条件最能改变局势}。
+  \end{itemize}
+  \begin{alertblock}{设计意义}
+    它把抽象的国际政治经济学语言，翻译成可执行的规则与可观察的状态变化。
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{11. 深入机制设计：它不只是多轮对话}
+  \begin{columns}[T]
+    \column{0.49\linewidth}
+    \begin{block}{机制一：证据约束}
+      \begin{itemize}
+        \item 为每类角色绑定议题清单与公开政策依据
+        \item 发言优先围绕减排、公平、融资、技术等真实议题展开
+        \item 观察员标记 ``立场依据'' 与 ``争议来源''
+      \end{itemize}
+    \end{block}
+    \column{0.49\linewidth}
+    \begin{block}{机制二：谈判状态机}
+      \begin{itemize}
+        \item 记录每轮发言后的立场变化、联盟靠拢与否决风险
+        \item 若触碰底线则进入强烈反对，若补偿到位则进入条件性支持
+        \item 支持 ``修订政策文本后再次博弈'' 的迭代流程
+      \end{itemize}
+    \end{block}
+  \end{columns}
+  \begin{block}{机制三：多情景推演}
+    同一条政策可放入不同外部条件下重新推演，例如能源价格上行、极端气候灾害加剧、国际气候资金增加，从而比较同一政策在不同环境中的阻力变化。
+  \end{block}
+  \begin{alertblock}{亮点}
+    从 ``角色聊天'' 升级到 ``有证据约束、有谈判状态机、有情景切换、有政策迭代'' 的半结构化政策推演系统。
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{12. 演示样例：一条政策如何被沙盘推演}
+  \begin{block}{示例输入}
+    ``2030 年前停止新建无减排措施煤电，并对高碳产品征收更强碳边境调节措施。''
+  \end{block}
+  \begin{columns}[T]
+    \column{0.48\linewidth}
+    \begin{itemize}
+      \item 发展中国家代表可能质疑：是否影响能源安全与工业化进程？是否有资金与技术支持？
+      \item 发达国家联盟可能支持方向，但希望加入更明确时间表与核查机制。
+    \end{itemize}
+    \column{0.48\linewidth}
+    \begin{itemize}
+      \item 传统能源与重工业代表可能要求保留 CCS、过渡期和就业缓冲。
+      \item 小岛国/环保 NGO 代表可能认为力度仍然不足，并追问损失与损害资金安排。
+    \end{itemize}
+  \end{columns}
+  \begin{alertblock}{预期价值}
+    一条政策不仅得到 ``赞成/反对''，还会得到 ``为什么''、``卡在哪里'' 以及 ``怎样改更可能通过''。
+  \end{alertblock}
+  \source{本页政策文本为课堂演示示例，不是对现实谈判结果的事实陈述。}
+\end{frame}
+
+\begin{frame}{13. 输出形式与评估方式}
+  \begin{columns}[T]
+    \column{0.5\linewidth}
+    \begin{block}{最终输出}
+      \begin{itemize}
+        \item 对话流：展示多轮发言与立场变化
+        \item 冲突地图：归纳争议集中在哪些议题
+        \item 联盟变化：展示潜在支持方、摇摆方与否决方
+        \item 三项评分：激进程度、落地阻力、公平性
+        \item 修改建议：生成更易获得共识的修订版本
+      \end{itemize}
+    \end{block}
+    \column{0.46\linewidth}
+    \begin{block}{评估方式}
+      \begin{itemize}
+        \item 结构上：输出是否稳定、可解释
+        \item 内容上：论证是否符合角色设定
+        \item 工程上：是否能在几分钟内生成清晰报告
+        \item 教学上：是否能有效辅助课堂讨论
+      \end{itemize}
+    \end{block}
+  \end{columns}
+  \begin{alertblock}{核心价值}
+    这个系统不是简单展示聊天记录，而是把讨论沉淀成一个 \textbf{可分析、可比较、可复盘} 的课堂工具。
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{14. 技术路线：为什么这个原型这学期做得出来}
+  \begin{itemize}
+    \item \textbf{数据层}：NDC 政策文本 + 国家年度指标 + ND-GAIN 脆弱性/适应能力指标。
+    \item \textbf{框架层}：采用多智能体对话组织方式，参考 AutoGen 的 ``multiple agents can converse with each other'' 思路。
+    \item \textbf{应用层}：前端优先选 Streamlit，它支持快速创建交互式 Python Web App，适合课堂原型展示。
+    \item \textbf{实现层}：角色模板 + 议题约束 + 状态变量 + 轮次控制 + 结构化输出。
+    \item \textbf{增强层}：外部条件注入、政策文本修订、情景重跑与结果对比。
+    \item \textbf{演示层}：聊天室视图 + 摘要卡片 + 联盟变化 + 评分卡片 + 报告导出。
+  \end{itemize}
+  \begin{block}{最小可用版本}
+    1 个输入框 + 4 个核心角色 + 1 个观察员 + 1 份自动报告。
+  \end{block}
+  \begin{block}{增强版本}
+    增加政策库、证据约束、联盟变化、引用标注、图表可视化与多情景对比。
+  \end{block}
+  \source{Wu et al., \emph{AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation} (arXiv:2308.08155, 2023); Streamlit Docs, \emph{Get started with Streamlit}.}
+\end{frame}
+
+\begin{frame}{15. 开发计划：从课堂原型到完整工具}
+  \begin{columns}[T]
+    \column{0.32\linewidth}
+    \begin{block}{阶段一}
+      最小可用原型
+      \begin{itemize}
+        \item 固定 4 个角色
+        \item 单条政策输入
+        \item 自动总结报告
+      \end{itemize}
+    \end{block}
+    \column{0.32\linewidth}
+    \begin{block}{阶段二}
+      交互增强
+      \begin{itemize}
+        \item 多轮状态更新
+        \item 联盟变化与冲突地图
+        \item 页面可视化优化
+      \end{itemize}
+    \end{block}
+    \column{0.32\linewidth}
+    \begin{block}{阶段三}
+      真实性增强
+      \begin{itemize}
+        \item 引入政策文件检索
+        \item 增加依据标注
+        \item 支持多情景与政策版本比较
+      \end{itemize}
+    \end{block}
+  \end{columns}
+  \begin{alertblock}{可交付预期}
+    先把 ``能跑通'' 和 ``能说明问题'' 做出来，再逐步把 ``更真实''、``更复杂'' 和 ``可比较'' 做上去。
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{16. 项目边界与真实性承诺}
+  \begin{itemize}
+    \item 这个系统是 \textbf{教学与探索型决策支持工具}，不是现实政策预测机器。
+    \item 它擅长暴露利益冲突、辅助课堂讨论，不擅长替代真实国家立场、精确量化排放后果。
+    \item 为避免 ``AI 编故事''，所有外部事实应来自公开可查来源；角色观点应与其设定及现实议题框架一致。
+    \item 如果进入后续开发阶段，可加入政策文件检索、发言出处标注与人工复核机制，提升可追溯性。
+  \end{itemize}
+  \begin{alertblock}{本组结论}
+    这是一个既贴合课程风格、又能连接气候治理真实问题、并且具备明确工程落地路径的结课项目选题。
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{参考来源}
+  \scriptsize
+  \begin{enumerate}
+    \item United Nations. \emph{Paris Agreement}. 2015. \url{https://sdgs.un.org/frameworks/parisagreement?id=26929}
+    \item IPCC. \emph{Climate Change 2023: Synthesis Report}. 2023. \url{https://report.ipcc.ch/ar6syr/headline.html}
+    \item UNFCCC. \emph{COP28 Agreement Signals ``Beginning of the End'' of the Fossil Fuel Era}. 13 Dec 2023. \url{https://unfccc.int/news/cop28-agreement-signals-beginning-of-the-end-of-the-fossil-fuel-era}
+    \item Castro, J., Drews, S., Exadaktylos, F., et al. \emph{A review of agent-based modeling of climate-energy policy}. WIREs Climate Change, 11(4):e647, 2020. DOI: 10.1002/wcc.647.
+    \item Zhang, T., Williams, A., Phade, S., et al. \emph{AI for Global Climate Cooperation: Modeling Global Climate Negotiations, Agreements, and Long-Term Cooperation in RICE-N}. arXiv:2208.07004, 2022. DOI: 10.48550/arXiv.2208.07004.
+    \item Wu, Q., Bansal, G., Zhang, J., et al. \emph{AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation}. arXiv:2308.08155, 2023. DOI: 10.48550/arXiv.2308.08155.
+    \item Streamlit Docs. \emph{Get started with Streamlit}. \url{https://docs.streamlit.io/get-started}
+    \item UNFCCC. \emph{NDC Registry}. \url{https://www4.unfccc.int/sites/NDCStaging/Pages/All.aspx}
+    \item World Bank. \emph{Carbon dioxide (CO2) emissions excluding LULUCF per capita (t CO2e/capita)}. Indicator: EN.GHG.CO2.PC.CE.AR5. \url{https://data.worldbank.org/indicator/EN.GHG.CO2.PC.CE.AR5}
+    \item ND-GAIN. \emph{Country Index}. \url{https://gain.nd.edu/our-work/country-index/}
+  \end{enumerate}
+\end{frame}
+
+\end{document}

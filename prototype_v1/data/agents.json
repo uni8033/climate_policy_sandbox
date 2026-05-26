@@ -1,0 +1,62 @@
+[
+  {
+    "id": "developing_country",
+    "name": "发展中国家代表",
+    "description": "强调共同但有区别的责任，关注发展权、能源安全、脱贫与融资支持。",
+    "base_bias": -0.2,
+    "weights": {
+      "fossil_phaseout": -1.3,
+      "carbon_tariff": -1.5,
+      "climate_finance": 1.7,
+      "tech_transfer": 1.4,
+      "transition_flexibility": 1.5,
+      "ccs_support": 0.6,
+      "adaptation_fund": 1.0
+    }
+  },
+  {
+    "id": "developed_alliance",
+    "name": "发达国家联盟代表",
+    "description": "强调更快减排、透明核查与国际规则，倾向使用更强约束机制推动转型。",
+    "base_bias": 0.6,
+    "weights": {
+      "fossil_phaseout": 1.8,
+      "carbon_tariff": 1.3,
+      "climate_finance": 0.5,
+      "tech_transfer": 0.7,
+      "transition_flexibility": -0.4,
+      "ccs_support": 0.2,
+      "adaptation_fund": 0.4
+    }
+  },
+  {
+    "id": "fossil_industry",
+    "name": "传统能源/重工业代表",
+    "description": "关注转型成本、就业冲击和资产搁浅风险，偏好渐进式退出与过渡技术。",
+    "base_bias": -0.4,
+    "weights": {
+      "fossil_phaseout": -1.8,
+      "carbon_tariff": -1.2,
+      "climate_finance": 0.2,
+      "tech_transfer": 0.4,
+      "transition_flexibility": 1.3,
+      "ccs_support": 1.8,
+      "adaptation_fund": -0.1
+    }
+  },
+  {
+    "id": "island_ngo",
+    "name": "小岛国/环保 NGO 代表",
+    "description": "强调气候脆弱性、损失与损害和气候正义，主张更强减排与资金补偿。",
+    "base_bias": 0.4,
+    "weights": {
+      "fossil_phaseout": 1.9,
+      "carbon_tariff": 0.7,
+      "climate_finance": 1.3,
+      "tech_transfer": 0.7,
+      "transition_flexibility": -0.7,
+      "ccs_support": -0.6,
+      "adaptation_fund": 1.8
+    }
+  }
+]

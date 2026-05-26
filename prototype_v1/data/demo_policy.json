@@ -1,0 +1,13 @@
+{
+  "title": "样例政策：2030年前停止新建无减排措施煤电，并提高碳边境约束",
+  "policy_text": "2030年前停止新建无减排措施煤电，并对高碳产品提高碳边境约束。",
+  "attributes": {
+    "fossil_phaseout": 3,
+    "carbon_tariff": 3,
+    "climate_finance": 0,
+    "tech_transfer": 0,
+    "transition_flexibility": 0,
+    "ccs_support": 0,
+    "adaptation_fund": 0
+  }
+}

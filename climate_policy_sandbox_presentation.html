@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全球气候政策多利益相关方博弈沙盘</title>
+  <style>
+    :root {
+      --paper: #f4f7fb;
+      --slide-bg: #fbfcfe;
+      --text: #343d4c;
+      --muted: #6a7586;
+      --blue: #19478a;
+      --blue-deep: #0c2c5c;
+      --blue-soft: #eaf1fa;
+      --gold: #c3984f;
+      --line: #d5dfec;
+      --shadow: 0 18px 50px rgba(32, 54, 90, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(25, 71, 138, 0.08), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(195, 152, 79, 0.10), transparent 20%),
+        linear-gradient(180deg, #eef3f9 0%, #edf2f8 100%);
+      color: var(--text);
+    }
+
+    .viewport {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 24px;
+    }
+
+    .stage-shell {
+      position: relative;
+      flex: 0 0 auto;
+      width: 1600px;
+      height: 900px;
+    }
+
+    .stage {
+      position: absolute;
+      inset: 0;
+      width: 1600px;
+      height: 900px;
+      transform-origin: top left;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      background: var(--slide-bg);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(25, 71, 138, 0.08);
+      display: grid;
+      grid-template-rows: 84px 1fr 62px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(30px) scale(0.992);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 54px;
+      background: linear-gradient(90deg, var(--blue) 0%, #24589f 55%, #2e69b2 100%);
+      color: #fff;
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      top: 84px;
+      left: 0;
+      width: 240px;
+      height: 6px;
+      background: var(--gold);
+    }
+
+    .header-title {
+      font-size: 33px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .header-meta {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 42px 56px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .content p,
+    .content li,
+    .content td,
+    .content th {
+      font-size: 24px;
+      line-height: 1.55;
+    }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 1.35em;
+    }
+
+    li + li {
+      margin-top: 0.42em;
+    }
+
+    .title-slide {
+      grid-template-rows: 1fr 62px;
+    }
+
+    .title-body {
+      position: relative;
+      padding: 88px 84px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .title-body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 148px;
+      background: linear-gradient(90deg, var(--blue) 0%, #265b9f 70%, #2f6cb1 100%);
+    }
+
+    .title-accent {
+      position: absolute;
+      top: 148px;
+      left: 0;
+      width: 280px;
+      height: 8px;
+      background: var(--gold);
+    }
+
+    .title-card {
+      position: relative;
+      margin-top: 36px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 250, 254, 0.98));
+      border: 1px solid rgba(25, 71, 138, 0.10);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 34px 38px;
+      max-width: 1120px;
+    }
+
+    .main-title {
+      margin: 0;
+      color: var(--blue-deep);
+      font-size: 50px;
+      line-height: 1.22;
+      font-weight: 800;
+    }
+
+    .sub-title {
+      margin: 16px 0 0;
+      color: var(--blue);
+      font-size: 27px;
+      line-height: 1.45;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid rgba(25, 71, 138, 0.12);
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 21px;
+      margin-top: 6px;
+    }
+
+    .panel,
+    .quote,
+    .table-wrap,
+    .card,
+    .grid-2 > div,
+    .grid-3 > div {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(36, 70, 120, 0.06);
+    }
+
+    .panel,
+    .quote,
+    .table-wrap,
+    .card,
+    .grid-2 > div,
+    .grid-3 > div {
+      padding: 20px 24px;
+    }
+
+    .quote {
+      border-left: 8px solid var(--blue);
+      background: linear-gradient(180deg, #ffffff 0%, #f7fafe 100%);
+    }
+
+    .quote strong {
+      color: var(--blue);
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .grid-3 {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .card-title {
+      margin: 0 0 10px;
+      color: var(--blue-deep);
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .content .compact-list li {
+      font-size: 21px;
+      line-height: 1.42;
+      margin-top: 0.28em;
+    }
+
+    .content .meta-note {
+      margin: 10px 0 0;
+      padding-top: 10px;
+      border-top: 1px dashed var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .content .meta-note strong {
+      color: var(--blue);
+      font-size: 14px;
+    }
+
+    .table-wrap table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table-wrap th,
+    .table-wrap td {
+      text-align: left;
+      vertical-align: top;
+      padding: 14px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .table-wrap tr:last-child td {
+      border-bottom: none;
+    }
+
+    .table-wrap th {
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 22px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 56px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 15px;
+      background: #fcfdff;
+    }
+
+    .source {
+      max-width: 78%;
+      line-height: 1.45;
+    }
+
+    .page {
+      min-width: 90px;
+      text-align: right;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .controls {
+      position: fixed;
+      right: 26px;
+      bottom: 26px;
+      display: flex;
+      gap: 10px;
+      z-index: 30;
+    }
+
+    .controls button {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(25, 71, 138, 0.15);
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--blue);
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(30, 56, 95, 0.12);
+    }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 5px;
+      background: rgba(25, 71, 138, 0.08);
+      z-index: 30;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--blue), var(--gold));
+      transition: width 0.25s ease;
+    }
+
+    .reference-list {
+      margin: 0;
+      padding-left: 1.25em;
+      columns: 2;
+      column-gap: 28px;
+    }
+
+    .reference-list li {
+      break-inside: avoid;
+      font-size: 17px;
+      line-height: 1.4;
+      margin-bottom: 0.5em;
+    }
+
+    .controls button.secondary {
+      width: auto;
+      min-width: 116px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .print-tip {
+      position: fixed;
+      left: 24px;
+      bottom: 18px;
+      z-index: 30;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(25, 71, 138, 0.12);
+      box-shadow: 0 8px 20px rgba(30, 56, 95, 0.1);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .export-host {
+      position: fixed;
+      left: -20000px;
+      top: 0;
+      width: 1600px;
+      height: 900px;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+      z-index: -1;
+    }
+
+    .exporting {
+      cursor: progress;
+    }
+
+    .exporting .controls button,
+    .exporting .print-tip {
+      opacity: 0.75;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="viewport">
+    <div class="stage-shell" id="stageShell">
+      <div class="stage" id="stage">
+      <section class="slide title-slide active">
+        <div class="title-body">
+          <div class="title-accent"></div>
+          <div class="title-card">
+            <h1 class="main-title">全球气候政策多利益相关方博弈沙盘</h1>
+            <p class="sub-title">基于大语言模型角色扮演与多智能体交互的课堂项目方案</p>
+            <div class="tags">
+              <span class="tag">气候治理</span>
+              <span class="tag">多智能体协商</span>
+              <span class="tag">政策推演</span>
+              <span class="tag">课堂决策支持</span>
+            </div>
+            <div class="meta-row">
+              <span>课程结课大作业选题汇报</span>
+              <span>项目方案展示</span>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="source">全球气候政策多利益相关方博弈沙盘</div>
+          <div class="page">1 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">1. 选题缘起：为什么是这个方向</div>
+          <div class="header-meta">项目缘起</div>
+        </div>
+        <div class="content">
+          <div class="grid-2">
+            <div>
+              <ul>
+                <li>本课程前几阶段持续强调 AI 工具提升生产力：综述生成、课堂辩论、AI coding、工具链协同。</li>
+                <li>因此，结课项目不只要回答一个气候问题，也要体现 AI 如何帮助我们更快建模、更快推演、更快表达。</li>
+                <li>我们希望把课堂里的“AI 辅助辩论”升级成一个可复用、可展示、可迭代的气候政策博弈沙盘。</li>
+              </ul>
+            </div>
+            <div>
+              <div class="quote">
+                <strong>我们的判断：</strong> 这个方向同时满足课程风格、气候议题相关性和系统实现空间。
+              </div>
+              <div class="panel" style="margin-top: 18px;">
+                <p class="card-title">项目目标</p>
+                <p>不是替代真实谈判，而是用低成本、可交互、可解释的原型，快速暴露政策阻力与妥协路径。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="source">本页为项目动机与课程契合度说明，不涉及外部事实性数据。</div>
+          <div class="page">2 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">2. 现实背景：为什么气候政策天然适合做多方博弈</div>
+          <div class="header-meta">现实背景</div>
+        </div>
+        <div class="content">
+          <div class="quote"><strong>三个现实约束：</strong> 气候治理同时涉及温控目标、公平原则、资金安排、能源转型与国家发展权，很难由单一主体单边决定。</div>
+          <div class="grid-2">
+            <div class="panel">
+              <ul>
+                <li>《巴黎协定》第 2 条同时要求温控、适应与资金流转型，并强调公平以及“共同但有区别的责任”。</li>
+                <li>IPCC 2023 综合报告指出，人类活动已导致全球地表温度较 1850—1900 年高出 1.1°C。</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <ul>
+                <li>IPCC 还指出，现有 NDC 轨迹使本世纪超过 1.5°C 的可能性较大。</li>
+                <li>COP28 全球盘点成果首次写入 “transition away from fossil fuels”，显示现实谈判中的利益冲突仍然尖锐。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="panel">结论：气候政策不是单一技术选择，而是同时牵涉国家发展、能源安全、国际公平、资金支持与产业转型的多方博弈问题。</div>
+        </div>
+        <div class="footer">
+          <div class="source">来源：UN《Paris Agreement》Art.2；IPCC《Climate Change 2023: Synthesis Report》；UNFCCC《COP28 Agreement Signals “Beginning of the End” of the Fossil Fuel Era》。</div>
+          <div class="page">3 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">3. Research Question：一句话回答我们到底想解决什么</div>
+          <div class="header-meta">科学问题</div>
+        </div>
+        <div class="content">
+          <div class="quote">如何构建一个结合政策文本、国家发展指标与气候脆弱性信息的多智能体推演沙盘，用于模拟一项气候政策在不同利益相关方之间的博弈过程，并识别其阻力来源与可行妥协路径？</div>
+          <div class="grid-3">
+            <div class="card">
+              <p class="card-title">问题具体</p>
+              <p>聚焦单条政策提案，而不是开放式聊天。</p>
+            </div>
+            <div class="card">
+              <p class="card-title">科学意义</p>
+              <p>关注政策设计如何受多方利益约束。</p>
+            </div>
+            <div class="card">
+              <p class="card-title">预期输出</p>
+              <p>识别阻力来源、联盟变化与妥协条件。</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="source">本页为一句话研究问题定义。</div>
+          <div class="page">4 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">4. Why Important：为什么这个问题重要</div>
+          <div class="header-meta">问题重要性</div>
+        </div>
+        <div class="content">
+          <div class="panel">
+            <ul>
+              <li><strong>现实上重要：</strong> 气候政策推进不是单纯寻找技术最优解，而是同时面对公平、融资、能源安全与产业转型等多重约束。</li>
+              <li><strong>科学上重要：</strong> 它连接了气候治理、Agent-Based Modeling 与大语言模型角色扮演，是一个具有方法论价值的交叉问题。</li>
+              <li><strong>教学上重要：</strong> 我们希望把课堂辩论升级成可重复推演、可比较结果的系统，而不是一次性发言展示。</li>
+            </ul>
+          </div>
+          <div class="quote"><strong>我们想补上的空缺：</strong> 在真实谈判过于复杂、传统模型门槛较高的情况下，做一个低成本但有规则约束的课堂推演原型。</div>
+        </div>
+        <div class="footer">
+          <div class="source">来源：UN《Paris Agreement》Art.2；IPCC《Climate Change 2023: Synthesis Report》；Castro et al., 2020。</div>
+          <div class="page">5 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">5. Data：数据来源、时间范围与尺度设计</div>
+          <div class="header-meta">数据方案</div>
+        </div>
+        <div class="content">
+          <div class="grid-2">
+            <div class="panel">
+              <p class="card-title">数据层一：政策文本</p>
+              <ul class="compact-list">
+                <li><strong>来源：</strong> UNFCCC NDC Registry</li>
+                <li><strong>时间 / 空间范围：</strong> 2015 至今；全球缔约方 / 国家</li>
+                <li><strong>分辨率：</strong> 国家 - 政策文本版本</li>
+                <li><strong>是否已获取：</strong> 已确认可访问，待批量整理</li>
+              </ul>
+              <p class="meta-note"><strong>代表什么：</strong> 国家公开承诺了什么政策方向与目标。<br><strong>在系统中的作用：</strong> 约束 Agent 的政策表态，使其发言更接近真实承诺框架。</p>
+            </div>
+            <div class="panel">
+              <p class="card-title">数据层二：国家指标</p>
+              <ul class="compact-list">
+                <li><strong>来源：</strong> World Bank 指标数据库</li>
+                <li><strong>时间 / 空间范围：</strong> 以 1995 - 2024 为主；全球国家 / 经济体</li>
+                <li><strong>分辨率：</strong> 年度国家尺度</li>
+                <li><strong>是否已获取：</strong> 已确认可下载，待筛选变量</li>
+              </ul>
+              <p class="meta-note"><strong>代表什么：</strong> 国家排放、发展与能源等现实条件。<br><strong>在系统中的作用：</strong> 解释某类角色为什么支持或反对某项政策。</p>
+            </div>
+          </div>
+          <div class="panel">
+            <p class="card-title">数据层三：脆弱性与适应能力</p>
+            <ul class="compact-list">
+              <li><strong>来源：</strong> ND-GAIN Country Index</li>
+              <li><strong>时间 / 空间范围：</strong> 1995 至今；全球国家</li>
+              <li><strong>分辨率：</strong> 年度国家尺度</li>
+              <li><strong>是否已获取：</strong> 已确认下载入口，待与前两类数据对齐</li>
+            </ul>
+            <p class="meta-note"><strong>代表什么：</strong> 国家面对气候风险时的脆弱程度与应对能力。<br><strong>在系统中的作用：</strong> 帮助判断哪些角色更强调损失、适应与资金支持。</p>
+          </div>
+          <div class="quote meta-note" style="margin-top: 0;"><strong>一句话理解：</strong> 这三层数据分别对应“承诺是什么”“现实条件如何”“气候风险有多高”。</div>
+        </div>
+        <div class="footer">
+          <div class="source">来源：UNFCCC NDC Registry；World Bank 指标 EN.GHG.CO2.PC.CE.AR5；ND-GAIN Country Index。</div>
+          <div class="page">6 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">6. Data Progress：当前进展与潜在数据风险</div>
+          <div class="header-meta">进展与风险</div>
+        </div>
+        <div class="content">
+          <div class="grid-2">
+            <div class="panel">
+              <p class="card-title">当前进展</p>
+              <ul>
+                <li>已确认三类核心数据均来自公开可查来源</li>
+                <li>已初步确定最小分析单位为“国家 - 年份 + 政策文本版本”</li>
+                <li>第一版原型聚焦国家尺度，暂不做城市或栅格尺度</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <p class="card-title">需要尽早发现的风险</p>
+              <ul>
+                <li><strong>可获得性：</strong> 部分文本为 PDF 且多语言，批量清洗成本较高</li>
+                <li><strong>尺度匹配：</strong> NDC 常按政策周期更新，而指标数据多为年度</li>
+                <li><strong>质量问题：</strong> 不同国家覆盖年份与缺失情况并不一致</li>
+              </ul>
+            </div>
+          </div>
+          <div class="quote"><strong>当前判断：</strong> 数据并非拿不到，主要挑战是文本数据与数值数据的尺度对齐。因此第一版系统限定在国家尺度，优先验证方法是否跑通。</div>
+        </div>
+        <div class="footer">
+          <div class="source">本页对应老师提出的“尽早发现数据不可获得、尺度不匹配、质量不足”要求。</div>
+          <div class="page">7 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">7. 与已有研究的关系：为什么不是凭空想象</div>
+          <div class="header-meta">研究基础</div>
+        </div>
+        <div class="content">
+          <div class="panel">
+            <ul>
+              <li>传统上，这类问题可放在 <strong>Agent-Based Modeling, ABM</strong> 框架下研究。</li>
+              <li>Castro 等在 <em>WIREs Climate Change</em> 的综述回顾了 <strong>61 项</strong> 气候—能源政策 ABM 研究。</li>
+              <li><strong>RICE-N / AI for Global Climate Cooperation</strong> 说明，AI 与多智能体方法已经被用于模拟气候谈判、协议与长期合作。</li>
+            </ul>
+          </div>
+          <div class="quote"><strong>我们的定位：</strong> 不替代成熟模型，而是利用 LLM 降低原型开发门槛，把复杂谈判逻辑做成适合课堂展示的轻量化可视化推演工具。</div>
+        </div>
+        <div class="footer">
+          <div class="source">来源：Castro et al., <em>A review of agent-based modeling of climate-energy policy</em>, 2020；Zhang et al., arXiv:2208.07004, 2022。</div>
+          <div class="page">8 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">8. 系统总体架构：从政策输入到可行性报告</div>
+          <div class="header-meta">系统架构</div>
+        </div>
+        <div class="content">
+          <div class="quote"><strong>整体流程：</strong> 政策输入层 → 角色初始化层 → 多轮博弈引擎 → 观察员总结层 → 报告与可视化输出层</div>
+          <div class="grid-2">
+            <div class="panel">
+              <ul>
+                <li><strong>政策输入层：</strong> 输入一条气候政策提案和可选背景条件。</li>
+                <li><strong>角色初始化层：</strong> 为各 Agent 注入立场、底线、筹码和约束。</li>
+                <li><strong>博弈引擎：</strong> 控制轮次、记录让步、判断冲突升级或缓和。</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <ul>
+                <li><strong>观察员总结层：</strong> 提炼核心争点、共识点与失败原因。</li>
+                <li><strong>输出层：</strong> 给出对话流、评分、修改建议与简报摘要。</li>
+                <li><strong>前端层：</strong> 通过 Web 页面进行输入、展示和交互。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="source">本页为本组系统架构设计。</div>
+          <div class="page">9 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">9. 角色设计：把利益冲突显式写进 Agent</div>
+          <div class="header-meta">角色设计</div>
+        </div>
+        <div class="content">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 25%;">角色</th>
+                  <th>核心立场</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>发展中国家代表</td>
+                  <td>强调发展权、能源安全、减贫优先，主张共同但有区别的责任。</td>
+                </tr>
+                <tr>
+                  <td>发达国家联盟代表</td>
+                  <td>支持更快减排与更强约束，倾向推动技术标准、碳边境措施。</td>
+                </tr>
+                <tr>
+                  <td>传统能源 / 重工业代表</td>
+                  <td>强调就业、资产搁浅与转型成本，更偏好渐进转型和过渡技术。</td>
+                </tr>
+                <tr>
+                  <td>小岛国 / 环保 NGO 代表</td>
+                  <td>强调气候脆弱性、损失与损害、气候正义，要求更强减排与资金支持。</td>
+                </tr>
+                <tr>
+                  <td>AI 秘书长 / 观察员</td>
+                  <td>不参与站队，只负责记录争点、识别共识、生成总结报告。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel">后续可扩展角色：国际金融机构、技术供应方、跨国企业、国内监管者、媒体 / 公众代理。</div>
+        </div>
+        <div class="footer">
+          <div class="source">角色关键词来自真实气候治理议题；具体 Prompt 设计为本组方案。</div>
+          <div class="page">10 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">10. 互动规则：让博弈像博弈，而不是轮流发言</div>
+          <div class="header-meta">互动规则</div>
+        </div>
+        <div class="content">
+          <div class="grid-2">
+            <div class="card">
+              <p class="card-title">Agent 内部状态</p>
+              <ul>
+                <li>政策偏好</li>
+                <li>不可退让底线</li>
+                <li>可交换筹码</li>
+                <li>当前谈判温度</li>
+              </ul>
+            </div>
+            <div class="card">
+              <p class="card-title">交互流程</p>
+              <ul>
+                <li>立场陈述</li>
+                <li>反驳与让步交换</li>
+                <li>最终表态</li>
+                <li>观察员归纳</li>
+              </ul>
+            </div>
+          </div>
+          <div class="panel">
+            <ul>
+              <li>如果政策触碰底线，Agent 会进入强烈反对；若获得技术转移、过渡期或资金承诺，其立场可松动。</li>
+              <li>观察员不判断“谁对谁错”，只判断冲突来自哪里、哪些条件最能改变局势。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="source">本页为本组规则设计。</div>
+          <div class="page">11 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">11. 深入机制设计：它不只是多轮对话</div>
+          <div class="header-meta">机制设计</div>
+        </div>
+        <div class="content">
+          <div class="grid-2">
+            <div class="panel">
+              <p class="card-title">机制一：证据约束</p>
+              <ul>
+                <li>为每类角色绑定议题清单与公开政策依据</li>
+                <li>发言优先围绕减排、公平、融资、技术等真实议题展开</li>
+                <li>观察员标记“立场依据”与“争议来源”</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <p class="card-title">机制二：谈判状态机</p>
+              <ul>
+                <li>记录每轮发言后的立场变化、联盟靠拢与否决风险</li>
+                <li>若触碰底线则进入强烈反对，若补偿到位则进入条件性支持</li>
+                <li>支持“修订政策文本后再次博弈”的迭代流程</li>
+              </ul>
+            </div>
+          </div>
+          <div class="panel">
+            <p class="card-title">机制三：多情景推演</p>
+            <p>同一条政策可放入不同外部条件下重新推演，例如能源价格上行、极端气候灾害加剧、国际气候资金增加，从而比较同一政策在不同环境中的阻力变化。</p>
+          </div>
+          <div class="quote"><strong>亮点：</strong> 从“角色聊天”升级到“有证据约束、有谈判状态机、有情景切换、有政策迭代”的半结构化政策推演系统。</div>
+        </div>
+        <div class="footer">
+          <div class="source">本页为项目深入机制设计。</div>
+          <div class="page">12 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">12. 演示样例：一条政策如何被沙盘推演</div>
+          <div class="header-meta">演示样例</div>
+        </div>
+        <div class="content">
+          <div class="quote"><strong>示例输入：</strong> “2030 年前停止新建无减排措施煤电，并对高碳产品征收更强碳边境调节措施。”</div>
+          <div class="grid-2">
+            <div class="panel">
+              <ul>
+                <li>发展中国家代表：是否影响能源安全与工业化进程？是否有资金与技术支持？</li>
+                <li>发达国家联盟：支持方向，但希望加入更明确时间表与核查机制。</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <ul>
+                <li>传统能源与重工业：要求保留 CCS、过渡期和就业缓冲。</li>
+                <li>小岛国 / 环保 NGO：可能认为力度仍然不足，并追问损失与损害资金安排。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="panel">预期价值：一条政策不仅得到“赞成 / 反对”，还会得到“为什么”“卡在哪里”以及“怎样改更可能通过”。</div>
+        </div>
+        <div class="footer">
+          <div class="source">本页政策文本为课堂演示示例，不是现实谈判结果陈述。</div>
+          <div class="page">13 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">13. 输出形式与评估方式</div>
+          <div class="header-meta">输出与评估</div>
+        </div>
+        <div class="content">
+          <div class="grid-2">
+            <div class="panel">
+              <p class="card-title">最终输出</p>
+              <ul>
+                <li>对话流：展示多轮发言与立场变化</li>
+                <li>冲突地图：归纳争议集中在哪些议题</li>
+                <li>联盟变化：展示潜在支持方、摇摆方与否决方</li>
+                <li>三项评分：激进程度、落地阻力、公平性</li>
+                <li>修改建议：生成更易获得共识的修订版本</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <p class="card-title">评估方式</p>
+              <ul>
+                <li>结构上：输出是否稳定、可解释</li>
+                <li>内容上：论证是否符合角色设定</li>
+                <li>工程上：是否能在几分钟内生成清晰报告</li>
+                <li>教学上：是否能有效辅助课堂讨论</li>
+              </ul>
+            </div>
+          </div>
+          <div class="quote"><strong>核心价值：</strong> 这个系统不是简单展示聊天记录，而是把讨论沉淀成一个可分析、可比较、可复盘的课堂工具。</div>
+        </div>
+        <div class="footer">
+          <div class="source">本页为输出与评估设计。</div>
+          <div class="page">14 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">14. 技术路线：为什么这个原型这学期做得出来</div>
+          <div class="header-meta">技术路线</div>
+        </div>
+        <div class="content">
+          <div class="panel">
+            <ul>
+              <li><strong>数据层：</strong> NDC 政策文本 + 国家年度指标 + ND-GAIN 脆弱性 / 适应能力指标。</li>
+              <li><strong>框架层：</strong> 采用多智能体对话组织方式，参考 AutoGen 的多 Agent 协作思路。</li>
+              <li><strong>应用层：</strong> 前端优先选 Streamlit，适合快速搭建交互式 Python Web App。</li>
+              <li><strong>实现层：</strong> 角色模板 + 议题约束 + 状态变量 + 轮次控制 + 结构化输出。</li>
+              <li><strong>增强层：</strong> 外部条件注入、政策文本修订、情景重跑与结果对比。</li>
+              <li><strong>演示层：</strong> 聊天室视图 + 摘要卡片 + 联盟变化 + 评分卡片 + 报告导出。</li>
+            </ul>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <p class="card-title">最小可用版本</p>
+              <p>1 个输入框 + 4 个核心角色 + 1 个观察员 + 1 份自动报告。</p>
+            </div>
+            <div class="card">
+              <p class="card-title">增强版本</p>
+              <p>增加政策库、证据约束、联盟变化、引用标注、图表可视化与多情景对比。</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="source">来源：Wu et al., <em>AutoGen</em>, arXiv:2308.08155；Streamlit Docs, <em>Get started with Streamlit</em>。</div>
+          <div class="page">15 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">15. 开发计划：从课堂原型到完整工具</div>
+          <div class="header-meta">开发计划</div>
+        </div>
+        <div class="content">
+          <div class="grid-3">
+            <div>
+              <p class="card-title">阶段一</p>
+              <ul>
+                <li>固定 4 个角色</li>
+                <li>单条政策输入</li>
+                <li>自动总结报告</li>
+              </ul>
+            </div>
+            <div>
+              <p class="card-title">阶段二</p>
+              <ul>
+                <li>多轮状态更新</li>
+                <li>联盟变化与冲突地图</li>
+                <li>页面可视化优化</li>
+              </ul>
+            </div>
+            <div>
+              <p class="card-title">阶段三</p>
+              <ul>
+                <li>引入政策文件检索</li>
+                <li>增加依据标注</li>
+                <li>支持多情景与政策版本比较</li>
+              </ul>
+            </div>
+          </div>
+          <div class="quote"><strong>可交付预期：</strong> 先把“能跑通”和“能说明问题”做出来，再逐步把“更真实”“更复杂”和“可比较”做上去。</div>
+        </div>
+        <div class="footer">
+          <div class="source">本页为项目开发计划。</div>
+          <div class="page">16 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">16. 项目边界与真实性承诺</div>
+          <div class="header-meta">项目边界</div>
+        </div>
+        <div class="content">
+          <div class="panel">
+            <ul>
+              <li>这个系统是<strong>教学与探索型决策支持工具</strong>，不是现实政策预测机器。</li>
+              <li>它擅长暴露利益冲突、辅助课堂讨论，不擅长替代真实国家立场、精确量化排放后果。</li>
+              <li>为避免“AI 编故事”，所有外部事实应来自公开可查来源；角色观点应与其设定及现实议题框架一致。</li>
+              <li>后续可加入政策文件检索、发言出处标注与人工复核机制，进一步提升可追溯性。</li>
+            </ul>
+          </div>
+          <div class="quote"><strong>本组结论：</strong> 这是一个既贴合课程风格、又能连接气候治理真实问题、并且具备明确工程落地路径的结课项目选题。</div>
+        </div>
+        <div class="footer">
+          <div class="source">本页为项目边界声明。</div>
+          <div class="page">17 / 17</div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="header">
+          <div class="header-title">17. 参考来源</div>
+          <div class="header-meta">参考文献</div>
+        </div>
+        <div class="content">
+          <div class="panel">
+            <ol class="reference-list">
+              <li>United Nations. <em>Paris Agreement</em>. 2015. https://sdgs.un.org/frameworks/parisagreement?id=26929</li>
+              <li>IPCC. <em>Climate Change 2023: Synthesis Report</em>. 2023. https://report.ipcc.ch/ar6syr/headline.html</li>
+              <li>UNFCCC. <em>COP28 Agreement Signals “Beginning of the End” of the Fossil Fuel Era</em>. 13 Dec 2023. https://unfccc.int/news/cop28-agreement-signals-beginning-of-the-end-of-the-fossil-fuel-era</li>
+              <li>Castro, J., Drews, S., Exadaktylos, F., et al. <em>A review of agent-based modeling of climate-energy policy</em>. WIREs Climate Change, 11(4):e647, 2020. DOI: 10.1002/wcc.647.</li>
+              <li>Zhang, T., Williams, A., Phade, S., et al. <em>AI for Global Climate Cooperation: Modeling Global Climate Negotiations, Agreements, and Long-Term Cooperation in RICE-N</em>. arXiv:2208.07004, 2022. DOI: 10.48550/arXiv.2208.07004.</li>
+              <li>Wu, Q., Bansal, G., Zhang, J., et al. <em>AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation</em>. arXiv:2308.08155, 2023. DOI: 10.48550/arXiv.2308.08155.</li>
+              <li>Streamlit Docs. <em>Get started with Streamlit</em>. https://docs.streamlit.io/get-started</li>
+              <li>UNFCCC. <em>NDC Registry</em>. https://www4.unfccc.int/sites/NDCStaging/Pages/All.aspx</li>
+              <li>World Bank. <em>Carbon dioxide (CO2) emissions excluding LULUCF per capita (t CO2e/capita)</em>. Indicator: EN.GHG.CO2.PC.CE.AR5. https://data.worldbank.org/indicator/EN.GHG.CO2.PC.CE.AR5</li>
+              <li>ND-GAIN. <em>Country Index</em>. https://gain.nd.edu/our-work/country-index/</li>
+            </ol>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="source">本页汇总本次汇报中涉及的公开来源，便于后续核查与扩展。</div>
+          <div class="page">18 / 18</div>
+        </div>
+      </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls" aria-label="翻页控制">
+    <button id="printBtn" class="secondary" title="导出 PDF">导出 PDF</button>
+    <button id="prevBtn" title="上一页">←</button>
+    <button id="nextBtn" title="下一页">→</button>
+  </div>
+
+  <div class="print-tip">导出时按当前页面样式逐页渲染，尽量保持与 HTML 展示一致</div>
+
+  <div class="progress" aria-hidden="true">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div id="exportHost" class="export-host" aria-hidden="true"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const progressBar = document.getElementById('progressBar');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const printBtn = document.getElementById('printBtn');
+    const stageShell = document.getElementById('stageShell');
+    const stage = document.getElementById('stage');
+    const exportHost = document.getElementById('exportHost');
+    let current = 0;
+
+    function updatePageNumbers() {
+      slides.forEach((slide, index) => {
+        const pageNode = slide.querySelector('.page');
+        if (pageNode) {
+          pageNode.textContent = `${index + 1} / ${slides.length}`;
+        }
+      });
+    }
+
+    function fitStage() {
+      const baseWidth = 1600;
+      const baseHeight = 900;
+      const viewportWidth = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+      const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      const safePaddingX = 48;
+      const safePaddingY = 48;
+      const scale = Math.min(
+        1,
+        (viewportWidth - safePaddingX * 2) / baseWidth,
+        (viewportHeight - safePaddingY * 2) / baseHeight
+      );
+      const appliedScale = Math.max(scale, 0.1);
+      stage.style.transform = `scale(${appliedScale})`;
+      stageShell.style.width = `${baseWidth * appliedScale}px`;
+      stageShell.style.height = `${baseHeight * appliedScale}px`;
+    }
+
+    function render(index) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+      progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
+    }
+
+    function nextSlide() {
+      render(current + 1);
+    }
+
+    function prevSlide() {
+      render(current - 1);
+    }
+
+    function waitForFonts() {
+      if (document.fonts && document.fonts.ready) {
+        return document.fonts.ready.catch(() => undefined);
+      }
+      return Promise.resolve();
+    }
+
+    function buildExportSlide(sourceSlide) {
+      const clone = sourceSlide.cloneNode(true);
+      clone.classList.add('active');
+      clone.style.position = 'relative';
+      clone.style.inset = 'auto';
+      clone.style.opacity = '1';
+      clone.style.transform = 'none';
+      clone.style.transition = 'none';
+      clone.style.pointerEvents = 'auto';
+      clone.style.width = '1600px';
+      clone.style.height = '900px';
+      clone.style.margin = '0';
+      clone.style.borderRadius = '18px';
+      clone.style.boxShadow = 'var(--shadow)';
+      clone.querySelectorAll('*').forEach((node) => {
+        node.style.animation = 'none';
+        node.style.transition = 'none';
+      });
+      return clone;
+    }
+
+    async function exportPdf() {
+      if (!window.html2canvas || !window.jspdf || !window.jspdf.jsPDF) {
+        window.alert('当前浏览器未成功加载 PDF 导出依赖，请联网后重试。');
+        return;
+      }
+
+      const originalLabel = printBtn.textContent;
+      printBtn.disabled = true;
+      printBtn.textContent = '导出中...';
+      document.body.classList.add('exporting');
+      exportHost.innerHTML = '';
+
+      try {
+        await waitForFonts();
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({
+          orientation: 'landscape',
+          unit: 'px',
+          format: [1600, 900],
+          compress: true,
+          hotfixes: ['px_scaling']
+        });
+
+        for (let i = 0; i < slides.length; i += 1) {
+          const exportSlide = buildExportSlide(slides[i]);
+          exportHost.appendChild(exportSlide);
+          await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+          const canvas = await window.html2canvas(exportSlide, {
+            backgroundColor: null,
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            width: 1600,
+            height: 900,
+            windowWidth: 1600,
+            windowHeight: 900
+          });
+
+          const imageData = canvas.toDataURL('image/png');
+          if (i > 0) {
+            pdf.addPage([1600, 900], 'landscape');
+          }
+          pdf.addImage(imageData, 'PNG', 0, 0, 1600, 900, undefined, 'FAST');
+          exportHost.innerHTML = '';
+        }
+
+        pdf.save('global_climate_policy_sandbox_presentation.pdf');
+      } catch (error) {
+        console.error(error);
+        window.alert('导出 PDF 失败，请稍后重试；若仍失败，可先使用浏览器打印作为备用方案。');
+      } finally {
+        exportHost.innerHTML = '';
+        document.body.classList.remove('exporting');
+        printBtn.disabled = false;
+        printBtn.textContent = originalLabel;
+      }
+    }
+
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    printBtn.addEventListener('click', exportPdf);
+
+    document.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        nextSlide();
+      }
+      if (['ArrowLeft', 'PageUp'].includes(event.key)) {
+        event.preventDefault();
+        prevSlide();
+      }
+      if (event.key === 'Home') {
+        event.preventDefault();
+        render(0);
+      }
+      if (event.key === 'End') {
+        event.preventDefault();
+        render(slides.length - 1);
+      }
+      if (event.key.toLowerCase() === 'p') {
+        event.preventDefault();
+        exportPdf();
+      }
+    });
+
+    window.addEventListener('resize', fitStage);
+    fitStage();
+    updatePageNumbers();
+    render(0);
+  </script>
+</body>
+</html>
