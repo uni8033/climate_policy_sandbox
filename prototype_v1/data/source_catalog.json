@@ -1,0 +1,62 @@
+[
+  {
+    "id": "unfccc_ndc_registry",
+    "name": "UNFCCC NDC Registry",
+    "category": "official_policy_registry",
+    "organization": "UNFCCC Secretariat",
+    "url": "https://unfccc.int/NDCREG",
+    "reliability_level": "A",
+    "reliability_label": "高",
+    "why_reliable": "巴黎协定下由秘书处维护的 NDC 官方公开注册系统，适合作为各国正式气候承诺的一次来源。",
+    "known_limitations": [
+      "原始文件多为 PDF，跨国比较前需要额外结构化抽取。",
+      "文本表达差异很大，不能直接当作统一口径的数值指标。"
+    ],
+    "recommended_use": "用于核对某一国家/地区真实提交过什么承诺文本，以及提交时间。"
+  },
+  {
+    "id": "world_bank_open_data",
+    "name": "World Bank Open Data API",
+    "category": "multilateral_indicator_database",
+    "organization": "World Bank",
+    "url": "https://api.worldbank.org/",
+    "reliability_level": "A-",
+    "reliability_label": "较高",
+    "why_reliable": "世界银行公开 API 提供标准化的国家级发展指标，跨国可比性较好，适合做经济与能源背景约束。",
+    "known_limitations": [
+      "不同指标的最新年份不完全一致。",
+      "部分指标存在时间滞后，且个别指标会被停更或口径调整。"
+    ],
+    "recommended_use": "用于 GDP、人均收入、可再生能源占比、燃料出口占比等国家背景指标。"
+  },
+  {
+    "id": "nd_gain_country_index",
+    "name": "ND-GAIN Country Index",
+    "category": "academic_composite_index",
+    "organization": "University of Notre Dame",
+    "url": "https://gain.nd.edu/our-work/country-index/download-data/",
+    "reliability_level": "B+",
+    "reliability_label": "中高",
+    "why_reliable": "由圣母大学维护的公开适应与脆弱性指数，方法透明，长期用于跨国气候风险和适应准备度比较。",
+    "known_limitations": [
+      "属于复合指数，不是单一原始观测值。",
+      "用于比较国家相对位置很合适，但不应直接等同于现实世界中的单一因果变量。"
+    ],
+    "recommended_use": "用于刻画国家的脆弱性、适应准备度和风险暴露差异。"
+  },
+  {
+    "id": "climate_watch_ndc_tracker",
+    "name": "Climate Watch NDC Tracker / Country Pages",
+    "category": "structured_secondary_platform",
+    "organization": "World Resources Institute",
+    "url": "https://www.climatewatchdata.org/ndcs-explore",
+    "reliability_level": "B",
+    "reliability_label": "中高",
+    "why_reliable": "WRI 的 Climate Watch 对 NDC、排放和政策做了结构化整理，适合跨国横向浏览和抽取政策摘要。",
+    "known_limitations": [
+      "属于二次整理平台，不能替代官方 NDC 原文。",
+      "结构化字段更新节奏和解析方式可能与官方文本存在时差。"
+    ],
+    "recommended_use": "用于辅助查看最新提交状态、结构化比较国家承诺，并与官方 NDC 原文交叉核对。"
+  }
+]

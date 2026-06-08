@@ -1,0 +1,533 @@
+[
+  {
+    "id": "deu",
+    "name": "德国",
+    "alpha3": "DEU",
+    "entity_type": "country",
+    "reference_role": "发达经济体样本",
+    "simulation_use": "用于代表高收入、较高适应准备度、较强制度执行能力的发达经济体谈判立场。",
+    "objective_snapshot": {
+      "gdp_per_capita_current_usd": {
+        "value": 56103.73,
+        "year": 2024,
+        "unit": "USD/person",
+        "source_id": "world_bank_open_data"
+      },
+      "renewable_energy_share_final_consumption": {
+        "value": 17.6,
+        "year": 2021,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "fuel_exports_share_merchandise_exports": {
+        "value": 2.07,
+        "year": 2024,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "nd_gain_score": {
+        "value": 69.0,
+        "year": 2023,
+        "unit": "index",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_vulnerability": {
+        "value": 0.301,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_readiness": {
+        "value": 0.682,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      }
+    },
+    "policy_traceability": {
+      "primary_source_id": "unfccc_ndc_registry",
+      "secondary_source_id": "climate_watch_ndc_tracker",
+      "note": "正式气候承诺应以官方 NDC 注册文件为准；结构化比较可辅助参考 Climate Watch。"
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "经济与能源指标来自世界银行，脆弱性与准备度来自 ND-GAIN，政策承诺入口已链接官方 NDC 注册系统。"
+    },
+    "lulucf_relevance": {
+      "level": "medium",
+      "note": "欧盟共同承诺覆盖 LULUCF，但德国在本模型中不是典型森林国家。"
+    }
+  },
+  {
+    "id": "usa",
+    "name": "美国",
+    "alpha3": "USA",
+    "entity_type": "country",
+    "reference_role": "发达大国样本",
+    "simulation_use": "用于代表高收入、高制度能力、但国内政治波动会影响国际承诺稳定性的发达大国。",
+    "objective_snapshot": {
+      "gdp_per_capita_current_usd": {
+        "value": 84534.04,
+        "year": 2024,
+        "unit": "USD/person",
+        "source_id": "world_bank_open_data"
+      },
+      "renewable_energy_share_final_consumption": {
+        "value": 10.9,
+        "year": 2021,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "fuel_exports_share_merchandise_exports": {
+        "value": 18.31,
+        "year": 2024,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "nd_gain_score": {
+        "value": 66.8,
+        "year": 2023,
+        "unit": "index",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_vulnerability": {
+        "value": 0.312,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_readiness": {
+        "value": 0.647,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      }
+    },
+    "policy_traceability": {
+      "primary_source_id": "unfccc_ndc_registry",
+      "secondary_source_id": "climate_watch_ndc_tracker",
+      "note": "最新已提交 NDC 可追溯，但 2025 年美国已退出巴黎协定，解读其国际承诺时必须标注该状态变化。"
+    },
+    "reliability_summary": {
+      "label": "中高",
+      "reason": "客观指标来源可靠，但其最新已提交 NDC 与当前国际法律状态之间存在显著政治不确定性。"
+    },
+    "lulucf_relevance": {
+      "level": "low",
+      "note": "当前样本更突出整体减排和政治不确定性，而不是森林治理。"
+    }
+  },
+  {
+    "id": "chn",
+    "name": "中国",
+    "alpha3": "CHN",
+    "entity_type": "country",
+    "reference_role": "大型新兴经济体样本",
+    "simulation_use": "用于代表兼具大规模产业结构、发展诉求和转型能力的大型新兴经济体。",
+    "objective_snapshot": {
+      "gdp_per_capita_current_usd": {
+        "value": 13303.15,
+        "year": 2024,
+        "unit": "USD/person",
+        "source_id": "world_bank_open_data"
+      },
+      "renewable_energy_share_final_consumption": {
+        "value": 15.2,
+        "year": 2021,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "fuel_exports_share_merchandise_exports": {
+        "value": 1.5,
+        "year": 2024,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "nd_gain_score": {
+        "value": 58.7,
+        "year": 2023,
+        "unit": "index",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_vulnerability": {
+        "value": 0.382,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_readiness": {
+        "value": 0.556,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      }
+    },
+    "policy_traceability": {
+      "primary_source_id": "unfccc_ndc_registry",
+      "secondary_source_id": "climate_watch_ndc_tracker",
+      "note": "应以 UNFCCC 注册的官方 NDC 文件作为承诺依据；Climate Watch 可用于查看时间线和结构化摘要。"
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "当前数值样本均来自公开权威数据库，但具体 NDC 条款仍应在下步从官方文本中结构化抽取。"
+    },
+    "lulucf_relevance": {
+      "level": "medium",
+      "note": "中国承诺中包含碳汇与生态建设线索，但不是本轮最核心维度。"
+    }
+  },
+  {
+    "id": "bra",
+    "name": "巴西",
+    "alpha3": "BRA",
+    "entity_type": "country",
+    "reference_role": "森林型新兴经济体样本",
+    "simulation_use": "用于代表兼具发展诉求、森林/土地利用议题和绝对减排承诺的新兴经济体。",
+    "objective_snapshot": {
+      "gdp_per_capita_current_usd": {
+        "value": 10310.55,
+        "year": 2024,
+        "unit": "USD/person",
+        "source_id": "world_bank_open_data"
+      },
+      "renewable_energy_share_final_consumption": {
+        "value": 46.5,
+        "year": 2021,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "fuel_exports_share_merchandise_exports": {
+        "value": 16.96,
+        "year": 2024,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "nd_gain_score": {
+        "value": 49.1,
+        "year": 2023,
+        "unit": "index",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_vulnerability": {
+        "value": 0.369,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_readiness": {
+        "value": 0.35,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      }
+    },
+    "policy_traceability": {
+      "primary_source_id": "unfccc_ndc_registry",
+      "secondary_source_id": "climate_watch_ndc_tracker",
+      "note": "绝对减排承诺可追溯到官方 NDC PDF；由于土地利用与森林部门在巴西尤为关键，后续应单独细化。"
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "国家指标与 NDC 摘要均可追溯，但若要进一步提高真实性，需要单独增强 LULUCF 相关约束。"
+    },
+    "lulucf_relevance": {
+      "level": "high",
+      "note": "巴西的现实谈判位置与亚马孙森林、土地利用和碳汇治理高度相关。"
+    }
+  },
+  {
+    "id": "ind",
+    "name": "印度",
+    "alpha3": "IND",
+    "entity_type": "country",
+    "reference_role": "高脆弱发展中大国样本",
+    "simulation_use": "用于代表发展优先、气候风险较高、同时具有大规模转型需求的发展中大国。",
+    "objective_snapshot": {
+      "gdp_per_capita_current_usd": {
+        "value": 2694.74,
+        "year": 2024,
+        "unit": "USD/person",
+        "source_id": "world_bank_open_data"
+      },
+      "renewable_energy_share_final_consumption": {
+        "value": 34.9,
+        "year": 2021,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "fuel_exports_share_merchandise_exports": {
+        "value": 17.09,
+        "year": 2024,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "nd_gain_score": {
+        "value": 45.5,
+        "year": 2023,
+        "unit": "index",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_vulnerability": {
+        "value": 0.485,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_readiness": {
+        "value": 0.394,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      }
+    },
+    "policy_traceability": {
+      "primary_source_id": "unfccc_ndc_registry",
+      "secondary_source_id": "climate_watch_ndc_tracker",
+      "note": "2026 年官方 NDC 注册已有新提交，后续应直接解析最新 PDF，而不是长期停留在二手摘要。"
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "国家背景数据较扎实，但政策目标的可量化建模仍需进一步读取官方 NDC 具体条款。"
+    },
+    "lulucf_relevance": {
+      "level": "high",
+      "note": "印度 NDC 明确包含通过森林和树木覆盖增加碳汇的目标。"
+    }
+  },
+  {
+    "id": "idn",
+    "name": "印度尼西亚",
+    "alpha3": "IDN",
+    "entity_type": "country",
+    "reference_role": "煤电转型与群岛国家样本",
+    "simulation_use": "用于代表兼具煤电转型压力、海岛脆弱性和森林/土地利用议题的中等收入发展中国家。",
+    "objective_snapshot": {
+      "gdp_per_capita_current_usd": {
+        "value": 4925.43,
+        "year": 2024,
+        "unit": "USD/person",
+        "source_id": "world_bank_open_data"
+      },
+      "renewable_energy_share_final_consumption": {
+        "value": 20.2,
+        "year": 2021,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "fuel_exports_share_merchandise_exports": {
+        "value": 20.85,
+        "year": 2024,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "nd_gain_score": {
+        "value": 48.4,
+        "year": 2023,
+        "unit": "index",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_vulnerability": {
+        "value": 0.43,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_readiness": {
+        "value": 0.398,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      }
+    },
+    "policy_traceability": {
+      "primary_source_id": "unfccc_ndc_registry",
+      "secondary_source_id": "climate_watch_ndc_tracker",
+      "note": "第二次 NDC 已给出 2030/2035 路径与多部门覆盖，适合转化为过渡期和多部门约束。"
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "背景数据与 NDC 摘要都较完整，适合作为“转型压力 + 脆弱性并存”的代表性样本。"
+    },
+    "lulucf_relevance": {
+      "level": "high",
+      "note": "印尼承诺同时涉及 FOLU/LULUCF 与能源转型，是本轮关键样本。"
+    }
+  },
+  {
+    "id": "sau",
+    "name": "沙特阿拉伯",
+    "alpha3": "SAU",
+    "entity_type": "country",
+    "reference_role": "化石能源出口国样本",
+    "simulation_use": "用于代表资源出口依赖较强、适应准备度不低、但对快速化石退出敏感的国家。",
+    "objective_snapshot": {
+      "gdp_per_capita_current_usd": {
+        "value": 35121.66,
+        "year": 2024,
+        "unit": "USD/person",
+        "source_id": "world_bank_open_data"
+      },
+      "renewable_energy_share_final_consumption": {
+        "value": 0.1,
+        "year": 2021,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "fuel_exports_share_merchandise_exports": {
+        "value": 79.4,
+        "year": 2024,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "nd_gain_score": {
+        "value": 58.2,
+        "year": 2023,
+        "unit": "index",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_vulnerability": {
+        "value": 0.408,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_readiness": {
+        "value": 0.573,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      }
+    },
+    "policy_traceability": {
+      "primary_source_id": "unfccc_ndc_registry",
+      "secondary_source_id": "climate_watch_ndc_tracker",
+      "note": "化石能源出口依赖可通过世界银行出口结构指标客观刻画，政策承诺仍需回到官方 NDC 文本核验。"
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "出口结构、收入水平和 ND-GAIN 数据能客观支撑其资源型经济体画像。"
+    },
+    "lulucf_relevance": {
+      "level": "medium",
+      "note": "沙特承诺中列入 LULUCF，但其主要谈判特征仍是资源出口与动态基线。"
+    }
+  },
+  {
+    "id": "fji",
+    "name": "斐济",
+    "alpha3": "FJI",
+    "entity_type": "country",
+    "reference_role": "小岛屿高脆弱国家样本",
+    "simulation_use": "用于代表人口规模较小、海平面上升与极端天气风险更突出的高脆弱国家。",
+    "objective_snapshot": {
+      "gdp_per_capita_current_usd": {
+        "value": 6425.74,
+        "year": 2024,
+        "unit": "USD/person",
+        "source_id": "world_bank_open_data"
+      },
+      "renewable_energy_share_final_consumption": {
+        "value": 28.4,
+        "year": 2022,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "fuel_exports_share_merchandise_exports": {
+        "value": null,
+        "year": null,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "nd_gain_score": {
+        "value": 51.2,
+        "year": 2023,
+        "unit": "index",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_vulnerability": {
+        "value": 0.453,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_readiness": {
+        "value": 0.477,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      }
+    },
+    "policy_traceability": {
+      "primary_source_id": "unfccc_ndc_registry",
+      "secondary_source_id": "climate_watch_ndc_tracker",
+      "note": "小岛屿国家的脆弱性应优先参考 ND-GAIN 及官方适应承诺，部分贸易类指标可能存在缺失。"
+    },
+    "reliability_summary": {
+      "label": "中高",
+      "reason": "核心脆弱性与准备度刻画较可靠，但小国个别贸易指标缺失，需要后续补充或更换指标。"
+    },
+    "lulucf_relevance": {
+      "level": "low",
+      "note": "斐济当前承诺更突出能源与脆弱性，而非森林治理。"
+    }
+  },
+  {
+    "id": "bgd",
+    "name": "孟加拉国",
+    "alpha3": "BGD",
+    "entity_type": "country",
+    "reference_role": "高脆弱低收入国家样本",
+    "simulation_use": "用于代表高脆弱、低收入、对国际融资和适应支持高度敏感的发展中国家。",
+    "objective_snapshot": {
+      "gdp_per_capita_current_usd": {
+        "value": 2593.42,
+        "year": 2024,
+        "unit": "USD/person",
+        "source_id": "world_bank_open_data"
+      },
+      "renewable_energy_share_final_consumption": {
+        "value": 25.0,
+        "year": 2021,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "fuel_exports_share_merchandise_exports": {
+        "value": 1.1,
+        "year": 2018,
+        "unit": "%",
+        "source_id": "world_bank_open_data"
+      },
+      "nd_gain_score": {
+        "value": 35.5,
+        "year": 2023,
+        "unit": "index",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_vulnerability": {
+        "value": 0.568,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      },
+      "nd_gain_readiness": {
+        "value": 0.279,
+        "year": 2023,
+        "unit": "0-1",
+        "source_id": "nd_gain_country_index"
+      }
+    },
+    "policy_traceability": {
+      "primary_source_id": "unfccc_ndc_registry",
+      "secondary_source_id": "climate_watch_ndc_tracker",
+      "note": "第三次 NDC 明确拆分无条件与条件性减排，适合作为融资约束型国家样本。"
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "脆弱性与条件性承诺均有明确公开依据，是构建高脆弱国家谈判约束的优良样本。"
+    },
+    "lulucf_relevance": {
+      "level": "low",
+      "note": "孟加拉国当前样本重点是融资条件性与脆弱性约束。"
+    }
+  }
+]

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>气候政策多利益相关方博弈沙盘｜课堂汇报</title>
+  <style>
+    :root {
+      --bg: #f4f7f4;
+      --card: rgba(255,255,255,0.92);
+      --ink: #17313a;
+      --muted: #5d6d75;
+      --main: #1c6558;
+      --accent: #c1892b;
+      --line: rgba(23,49,58,0.10);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(28,101,88,0.08), transparent 24%),
+        radial-gradient(circle at top right, rgba(193,137,43,0.10), transparent 20%),
+        linear-gradient(180deg, #f8fbf8 0%, #eef3ef 100%);
+      color: var(--ink);
+      overflow: hidden;
+    }
+    .deck { position: relative; width: 100vw; height: 100vh; }
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 40px 56px 54px;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .slide.active { display: flex; }
+    .title {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--main);
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.6;
+      margin-top: 8px;
+      max-width: 900px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(28,101,88,0.10);
+      color: var(--main);
+      font-size: 13px;
+      margin-right: 8px;
+    }
+    .layout-2 {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      flex: 1;
+      min-height: 0;
+    }
+    .layout-2.equal { grid-template-columns: 1fr 1fr; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 22px 24px;
+      box-shadow: 0 18px 42px rgba(17,35,43,0.06);
+    }
+    .card h2 {
+      margin: 0 0 12px 0;
+      color: var(--main);
+      font-size: 22px;
+    }
+    .card p, li {
+      font-size: 20px;
+      line-height: 1.65;
+      color: var(--ink);
+    }
+    ul { margin: 8px 0 0 1.2em; }
+    .quote {
+      border-left: 5px solid var(--accent);
+      padding-left: 18px;
+      color: var(--ink);
+      font-size: 22px;
+      line-height: 1.7;
+      margin-top: 8px;
+    }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .metric {
+      border-radius: 20px;
+      background: linear-gradient(180deg, #fff, #f7faf7);
+      border: 1px solid var(--line);
+      padding: 18px;
+    }
+    .metric .k { color: var(--muted); font-size: 14px; text-transform: uppercase; }
+    .metric .v { font-size: 34px; font-weight: 800; color: var(--main); margin-top: 10px; }
+    .figure {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: auto;
+    }
+    .hint { color: var(--accent); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <section class="slide active">
+      <div class="topbar"><div class="tag">课堂汇报</div><div>1 / 8</div></div>
+      <h1 class="title">气候政策多利益相关方博弈沙盘</h1>
+      <div class="subtitle">基于规则引擎与 AI 叙事增强的课堂原型</div>
+      <div class="layout-2 equal" style="margin-top: 10px;">
+        <div class="card">
+          <h2>我们做了什么</h2>
+          <ul>
+            <li>把一条气候政策文本转成结构化政策维度</li>
+            <li>让不同利益相关方在六阶段流程中协商</li>
+            <li>输出可行性、公平性、阻力和妥协路径</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>为什么值得做</h2>
+          <ul>
+            <li>问题有现实意义：气候治理天然是多方博弈</li>
+            <li>方法有课程契合度：AI 辅助研究与开发</li>
+            <li>结果可展示：有原型、有图表、有历史回放</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><span class="hint">开场建议：先强调“这不是聊天机器人，而是政策协商沙盘”</span><span>左右方向键翻页</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="tag">研究问题</div><div>2 / 8</div></div>
+      <h1 class="title">为什么这个问题重要</h1>
+      <div class="layout-2">
+        <div class="card">
+          <h2>核心问题</h2>
+          <div class="quote">给定一条气候政策提案，不同利益相关方会如何回应，主要阻力来自哪里，又能通过什么条件交换形成可接受妥协？</div>
+        </div>
+        <div class="card">
+          <h2>三层意义</h2>
+          <ul>
+            <li>现实：减排、公平、融资、能源安全、产业转型同时存在</li>
+            <li>方法：把一次性课堂辩论升级成可重复推演系统</li>
+            <li>教学：符合 AI 辅助研究与开发的课程导向</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><span>结论：项目处理的是“政策设计如何被多方利益约束”</span><span></span></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="tag">AI 工作流</div><div>3 / 8</div></div>
+      <h1 class="title">AI 是怎么帮助我们完成项目的</h1>
+      <div class="layout-2 equal">
+        <div class="card">
+          <h2>前期</h2>
+          <ul>
+            <li>收敛研究问题与系统边界</li>
+            <li>整理角色类型、诉求与现实约束</li>
+            <li>快速搭建 Python 原型和 Web 界面</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>后期</h2>
+          <ul>
+            <li>用规则引擎保证稳定性与可解释性</li>
+            <li>用大模型把结构化立场转成自然谈判表述</li>
+            <li>自动整理图表、报告与汇报材料</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><span class="hint">一句话：AI 帮我们更快建模、更快开发、更快表达</span><span></span></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="tag">系统方法</div><div>4 / 8</div></div>
+      <h1 class="title">系统怎么工作</h1>
+      <div class="card" style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+        <img class="figure" src="../figures/pipeline_overview.png" alt="流程图" style="max-height: 330px; object-fit: contain;" />
+        <ul>
+          <li>输入政策文本，提取为结构化维度</li>
+          <li>角色基于权重、诉求和约束生成立场</li>
+          <li>系统自动识别冲突、联盟、条件交换和修订结果</li>
+        </ul>
+      </div>
+      <div class="footer"><span>当前原版是规则驱动的多角色协商引擎</span><span></span></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="tag">实验结果</div><div>5 / 8</div></div>
+      <h1 class="title">不同运行样本的核心指标</h1>
+      <div class="card" style="flex:1; display:flex; flex-direction:column; gap:16px;">
+        <img class="figure" src="../figures/metrics_comparison.png" alt="指标对比图" style="max-height: 340px; object-fit: contain;" />
+        <ul>
+          <li>高冲突政策会拉高阻力强度</li>
+          <li>更平衡的政策在抽象角色模式下更容易形成较强共识</li>
+          <li>真实国家样本模式结果更保守，更接近现实摩擦</li>
+        </ul>
+      </div>
+      <div class="footer"><span>可行性 / 公平性 / 阻力强度是我们最核心的三个指标</span><span></span></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="tag">实验结果</div><div>6 / 8</div></div>
+      <h1 class="title">谁在支持，谁在反对</h1>
+      <div class="layout-2">
+        <div class="card"><img class="figure" src="../figures/agent_scores_demo.png" alt="角色得分图" /></div>
+        <div class="card">
+          <h2>解读</h2>
+          <ul>
+            <li>发达国家联盟、清洁技术联盟、小岛屿联盟总体支持</li>
+            <li>化石能源出口国和大型新兴经济体对强退出更敏感</li>
+            <li>系统可以指出具体阻力来源，而不是泛泛说“有分歧”</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><span>这里建议强调“角色差异是结构化配置出来的”</span><span></span></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="tag">实验结果</div><div>7 / 8</div></div>
+      <h1 class="title">系统如何给出妥协路径</h1>
+      <div class="layout-2">
+        <div class="card"><img class="figure" src="../figures/policy_adjustments.png" alt="政策修订图" /></div>
+        <div class="card">
+          <h2>关键观察</h2>
+          <ul>
+            <li>初始文本：高强度退出 + 高边境约束</li>
+            <li>修订方向：弱化退出、增加融资、技术转移、过渡安排与 CCS</li>
+            <li>这说明原型不只会“表态”，还能给出折中方案</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><span class="hint">这里是最适合回应老师提问的页面</span><span></span></div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar"><div class="tag">总结</div><div>8 / 8</div></div>
+      <h1 class="title">结论与答辩重点</h1>
+      <div class="metric-grid">
+        <div class="metric"><div class="k">结论 1</div><div class="v">公平</div><p>没有融资、技术和过渡安排，高强度政策很容易失去可行性。</p></div>
+        <div class="metric"><div class="k">结论 2</div><div class="v">结构</div><p>项目不是自由聊天，而是可解释的多角色协商结构。</p></div>
+        <div class="metric"><div class="k">结论 3</div><div class="v">AI</div><p>AI 贯穿研究收敛、编码实现、叙事增强和结果表达。</p></div>
+      </div>
+      <div class="card" style="margin-top: 18px;">
+        <h2>答辩时优先讲清楚</h2>
+        <ul>
+          <li>研究问题的意义</li>
+          <li>AI 辅助的完整工作流程</li>
+          <li>主要结论：什么样的政策更容易谈成、阻力来自谁</li>
+        </ul>
+      </div>
+      <div class="footer"><span>如果老师追问局限：当前版本更偏规则驱动原型，后续会升级为真正多 agent 系统</span><span></span></div>
+    </section>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    let index = 0;
+    function show(i) {
+      index = (i + slides.length) % slides.length;
+      slides.forEach((slide, idx) => slide.classList.toggle('active', idx === index));
+    }
+    document.addEventListener('keydown', (event) => {
+      if (["ArrowRight", "PageDown", " "].includes(event.key)) show(index + 1);
+      if (["ArrowLeft", "PageUp"].includes(event.key)) show(index - 1);
+      if (event.key === 'Home') show(0);
+    });
+  </script>
+</body>
+</html>

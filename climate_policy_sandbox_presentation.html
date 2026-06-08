@@ -707,7 +707,7 @@
 
       <section class="slide">
         <div class="header">
-          <div class="header-title">9. 角色设计：把利益冲突显式写进 Agent</div>
+          <div class="header-title">9. 角色体系升级：从抽象角色到真实国家样本</div>
           <div class="header-meta">角色设计</div>
         </div>
         <div class="content">
@@ -715,149 +715,148 @@
             <table>
               <thead>
                 <tr>
-                  <th style="width: 25%;">角色</th>
-                  <th>核心立场</th>
+                  <th style="width: 24%;">模式 / 主体</th>
+                  <th>当前系统中的作用</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>发展中国家代表</td>
-                  <td>强调发展权、能源安全、减贫优先，主张共同但有区别的责任。</td>
+                  <td>抽象角色模式</td>
+                  <td>保留发达国家联盟、大型新兴经济体、最不发达国家集团、小岛屿与高脆弱国家联盟、化石能源出口国集团等类型角色，适合快速展示谈判结构。</td>
                 </tr>
                 <tr>
-                  <td>发达国家联盟代表</td>
-                  <td>支持更快减排与更强约束，倾向推动技术标准、碳边境措施。</td>
+                  <td>真实国家样本模式</td>
+                  <td>当前已接入德国、美国、中国、巴西、印度、印度尼西亚、沙特阿拉伯、斐济、孟加拉国共 9 个样本国家，直接参与推演。</td>
                 </tr>
                 <tr>
-                  <td>传统能源 / 重工业代表</td>
-                  <td>强调就业、资产搁浅与转型成本，更偏好渐进转型和过渡技术。</td>
+                  <td>权重生成依据</td>
+                  <td>结合人均 GDP、可再生能源占比、燃料出口依赖、ND-GAIN 脆弱性 / 准备度、NDC 目标类型和条件性承诺说明来生成偏好。</td>
                 </tr>
                 <tr>
-                  <td>小岛国 / 环保 NGO 代表</td>
-                  <td>强调气候脆弱性、损失与损害、气候正义，要求更强减排与资金支持。</td>
-                </tr>
-                <tr>
-                  <td>AI 秘书长 / 观察员</td>
-                  <td>不参与站队，只负责记录争点、识别共识、生成总结报告。</td>
+                  <td>真实性增强点</td>
+                  <td>每个真实主体都绑定公开来源、年份、可靠性说明，并在需要时触发“至少需要什么”“最多容忍什么”的现实约束。</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div class="panel">后续可扩展角色：国际金融机构、技术供应方、跨国企业、国内监管者、媒体 / 公众代理。</div>
+          <div class="panel">这一步的意义，是把“角色聊天”升级为“带现实约束的主体推演”。后续仍可继续扩展到更多国家集团，但当前重点是先把 9 个样本讲透、讲清楚。</div>
         </div>
         <div class="footer">
-          <div class="source">角色关键词来自真实气候治理议题；具体 Prompt 设计为本组方案。</div>
+          <div class="source">来源：本组 `prototype_v1` 当前版本；World Bank Open Data；ND-GAIN Country Index；UNFCCC NDC Registry；Climate Watch。</div>
           <div class="page">10 / 17</div>
         </div>
       </section>
 
       <section class="slide">
         <div class="header">
-          <div class="header-title">10. 互动规则：让博弈像博弈，而不是轮流发言</div>
+          <div class="header-title">10. 互动规则升级：六阶段谈判 + 现实硬约束</div>
           <div class="header-meta">互动规则</div>
         </div>
         <div class="content">
           <div class="grid-2">
             <div class="card">
-              <p class="card-title">Agent 内部状态</p>
+              <p class="card-title">六阶段流程</p>
               <ul>
-                <li>政策偏好</li>
-                <li>不可退让底线</li>
-                <li>可交换筹码</li>
-                <li>当前谈判温度</li>
+                <li>立场陈述</li>
+                <li>冲突识别</li>
+                <li>联盟与分裂</li>
+                <li>条件交换</li>
+                <li>秘书处修订</li>
+                <li>最终表决</li>
               </ul>
             </div>
             <div class="card">
-              <p class="card-title">交互流程</p>
+              <p class="card-title">现实硬约束</p>
               <ul>
-                <li>立场陈述</li>
-                <li>反驳与让步交换</li>
-                <li>最终表态</li>
-                <li>观察员归纳</li>
+                <li><strong>min_requirements：</strong> 某国至少需要的融资、适应、技术或森林治理安排</li>
+                <li><strong>max_tolerances：</strong> 某国最多能接受多强的退出强度或碳边境约束</li>
+                <li>一旦政策越界，系统会显式记录约束触发，并下调其最终立场</li>
               </ul>
             </div>
           </div>
           <div class="panel">
             <ul>
-              <li>如果政策触碰底线，Agent 会进入强烈反对；若获得技术转移、过渡期或资金承诺，其立场可松动。</li>
-              <li>观察员不判断“谁对谁错”，只判断冲突来自哪里、哪些条件最能改变局势。</li>
+              <li>当前不是自由对话，而是“文本自动识别属性 → 主体评分 → 现实约束检查 → 条件交换 → 修订再表决”的半结构化推演。</li>
+              <li>这使得系统既保留了自然语言表达，又不完全依赖大模型自由发挥，因而更稳定、更可解释。</li>
             </ul>
           </div>
         </div>
         <div class="footer">
-          <div class="source">本页为本组规则设计。</div>
+          <div class="source">来源：本组 `prototype_v1/climate_policy_engine.py` 六阶段流程与约束机制。</div>
           <div class="page">11 / 17</div>
         </div>
       </section>
 
       <section class="slide">
         <div class="header">
-          <div class="header-title">11. 深入机制设计：它不只是多轮对话</div>
+          <div class="header-title">11. 研究模式：多情景实验与 LULUCF 维度</div>
           <div class="header-meta">机制设计</div>
         </div>
         <div class="content">
           <div class="grid-2">
             <div class="panel">
-              <p class="card-title">机制一：证据约束</p>
+              <p class="card-title">多情景实验</p>
               <ul>
-                <li>为每类角色绑定议题清单与公开政策依据</li>
-                <li>发言优先围绕减排、公平、融资、技术等真实议题展开</li>
-                <li>观察员标记“立场依据”与“争议来源”</li>
+                <li>当前已预设 6 组情景：基线、高雄心低补偿、高雄心配套补偿、过渡优先、公平融资优先、森林治理优先。</li>
+                <li>同一条政策文本可被批量重跑，并自动比较可行性、公平性、阻力强度和约束触发次数。</li>
+                <li>系统还会自动生成“哪个情景最好、哪个角色最敏感”等研究发现。</li>
               </ul>
             </div>
             <div class="panel">
-              <p class="card-title">机制二：谈判状态机</p>
+              <p class="card-title">LULUCF / 森林维度</p>
               <ul>
-                <li>记录每轮发言后的立场变化、联盟靠拢与否决风险</li>
-                <li>若触碰底线则进入强烈反对，若补偿到位则进入条件性支持</li>
-                <li>支持“修订政策文本后再次博弈”的迭代流程</li>
+                <li>新增第 8 个政策维度：森林 / LULUCF 支持。</li>
+                <li>它用于表达森林保护、碳汇、树木覆盖、土地利用治理等真实政策议题。</li>
+                <li>这一维度对巴西、印度、印度尼西亚等主体尤其关键，能明显提升推演真实性。</li>
               </ul>
             </div>
           </div>
           <div class="panel">
-            <p class="card-title">机制三：多情景推演</p>
-            <p>同一条政策可放入不同外部条件下重新推演，例如能源价格上行、极端气候灾害加剧、国际气候资金增加，从而比较同一政策在不同环境中的阻力变化。</p>
+            <p class="card-title">可视化增强</p>
+            <p>情景实验页已新增核心指标对比图、现实约束触发频率图和情景属性矩阵，使结果不再只是对话记录，而更像一组可以讨论的方法实验。</p>
           </div>
-          <div class="quote"><strong>亮点：</strong> 从“角色聊天”升级到“有证据约束、有谈判状态机、有情景切换、有政策迭代”的半结构化政策推演系统。</div>
+          <div class="quote"><strong>亮点：</strong> 当前原型已经从“角色聊天”升级到“真实来源约束 + 多情景实验 + 结果可视化”的研究型课堂原型。</div>
         </div>
         <div class="footer">
-          <div class="source">本页为项目深入机制设计。</div>
+          <div class="source">来源：本组 `prototype_v1` 情景实验模式、`research_mode_notes.md` 与 `real_world_data_notes.md`。</div>
           <div class="page">12 / 17</div>
         </div>
       </section>
 
       <section class="slide">
         <div class="header">
-          <div class="header-title">12. 演示样例：一条政策如何被沙盘推演</div>
+          <div class="header-title">12. 当前样例结果：系统已经能产出什么发现</div>
           <div class="header-meta">演示样例</div>
         </div>
         <div class="content">
-          <div class="quote"><strong>示例输入：</strong> “2030 年前停止新建无减排措施煤电，并对高碳产品征收更强碳边境调节措施。”</div>
+          <div class="quote"><strong>当前样例输入：</strong> “2035 年前在加强森林保护、碳汇和土地利用治理的同时，逐步停止新建无减排措施煤电，并为高脆弱国家提供适应融资与技术转移支持。”</div>
           <div class="grid-2">
             <div class="panel">
               <ul>
-                <li>发展中国家代表：是否影响能源安全与工业化进程？是否有资金与技术支持？</li>
-                <li>发达国家联盟：支持方向，但希望加入更明确时间表与核查机制。</li>
+                <li>在这条样例下，系统共跑出 6 个可比情景。</li>
+                <li><strong>公平融资优先</strong> 的可行性最高，为 <strong>77.8</strong>；公平性最高，为 <strong>80.0</strong>；阻力强度最低，为 <strong>22.2</strong>。</li>
+                <li><strong>森林治理优先</strong> 的可行性也达到 <strong>74.1</strong>，说明森林和碳汇安排能明显改善部分国家的接受度。</li>
               </ul>
             </div>
             <div class="panel">
               <ul>
-                <li>传统能源与重工业：要求保留 CCS、过渡期和就业缓冲。</li>
-                <li>小岛国 / 环保 NGO：可能认为力度仍然不足，并追问损失与损害资金安排。</li>
+                <li>在森林治理优先情景下，<strong>巴西、印度、印度尼西亚</strong> 都进入支持状态。</li>
+                <li>这说明系统已经不只是输出“谁支持谁反对”，而是能够比较：<strong>哪类政策组合更有可能形成脆弱共识</strong>。</li>
+                <li>当前结果仍然是原型层发现，不是现实预测，但已经具备可讨论的研究价值。</li>
               </ul>
             </div>
           </div>
-          <div class="panel">预期价值：一条政策不仅得到“赞成 / 反对”，还会得到“为什么”“卡在哪里”以及“怎样改更可能通过”。</div>
+          <div class="panel">可直接提炼出的结论是：高雄心本身并不足够，融资、适应支持和森林治理等配套条件，往往决定一条政策能否真正跨过多边谈判中的接受门槛。</div>
         </div>
         <div class="footer">
-          <div class="source">本页政策文本为课堂演示示例，不是现实谈判结果陈述。</div>
+          <div class="source">来源：本组 `prototype_v1` 在 2026-06-01 的当前样例运行结果；结果用于说明原型能力，不代表现实政策预测。</div>
           <div class="page">13 / 17</div>
         </div>
       </section>
 
       <section class="slide">
         <div class="header">
-          <div class="header-title">13. 输出形式与评估方式</div>
+          <div class="header-title">13. 输出形式与评估方式：从聊天记录到研究结果</div>
           <div class="header-meta">输出与评估</div>
         </div>
         <div class="content">
@@ -865,97 +864,93 @@
             <div class="panel">
               <p class="card-title">最终输出</p>
               <ul>
-                <li>对话流：展示多轮发言与立场变化</li>
-                <li>冲突地图：归纳争议集中在哪些议题</li>
-                <li>联盟变化：展示潜在支持方、摇摆方与否决方</li>
-                <li>三项评分：激进程度、落地阻力、公平性</li>
-                <li>修改建议：生成更易获得共识的修订版本</li>
+                <li>单次推演：输出立场变化、联盟映射、约束触发和修订后表决</li>
+                <li>情景实验：输出情景对比表、核心指标图、约束触发频率图、属性矩阵</li>
+                <li>自动研究发现：概括“哪个情景最好、哪个主体最敏感、哪类约束最常出现”</li>
               </ul>
             </div>
             <div class="panel">
               <p class="card-title">评估方式</p>
               <ul>
-                <li>结构上：输出是否稳定、可解释</li>
-                <li>内容上：论证是否符合角色设定</li>
-                <li>工程上：是否能在几分钟内生成清晰报告</li>
-                <li>教学上：是否能有效辅助课堂讨论</li>
+                <li><strong>结构上：</strong> 结果是否稳定、是否能解释每一步为什么变化</li>
+                <li><strong>真实性上：</strong> 主体画像、承诺来源、年份和可靠性是否可追溯</li>
+                <li><strong>研究上：</strong> 是否能形成可比较实验，而不只是单次展示</li>
+                <li><strong>教学上：</strong> 是否能帮助课堂快速识别冲突点与妥协条件</li>
               </ul>
             </div>
           </div>
-          <div class="quote"><strong>核心价值：</strong> 这个系统不是简单展示聊天记录，而是把讨论沉淀成一个可分析、可比较、可复盘的课堂工具。</div>
+          <div class="quote"><strong>核心价值：</strong> 当前系统已经开始把讨论沉淀成一个可分析、可比较、可复盘的研究型课堂工具，而不仅是聊天记录展示页。</div>
         </div>
         <div class="footer">
-          <div class="source">本页为输出与评估设计。</div>
+          <div class="source">来源：本组 `prototype_v1` 当前输出结构与研究模式设计。</div>
           <div class="page">14 / 17</div>
         </div>
       </section>
 
       <section class="slide">
         <div class="header">
-          <div class="header-title">14. 技术路线：为什么这个原型这学期做得出来</div>
+          <div class="header-title">14. 当前技术实现：为什么它已经不是纸面方案</div>
           <div class="header-meta">技术路线</div>
         </div>
         <div class="content">
           <div class="panel">
             <ul>
-              <li><strong>数据层：</strong> NDC 政策文本 + 国家年度指标 + ND-GAIN 脆弱性 / 适应能力指标。</li>
-              <li><strong>框架层：</strong> 采用多智能体对话组织方式，参考 AutoGen 的多 Agent 协作思路。</li>
-              <li><strong>应用层：</strong> 前端优先选 Streamlit，适合快速搭建交互式 Python Web App。</li>
-              <li><strong>实现层：</strong> 角色模板 + 议题约束 + 状态变量 + 轮次控制 + 结构化输出。</li>
-              <li><strong>增强层：</strong> 外部条件注入、政策文本修订、情景重跑与结果对比。</li>
-              <li><strong>演示层：</strong> 聊天室视图 + 摘要卡片 + 联盟变化 + 评分卡片 + 报告导出。</li>
+              <li><strong>数据层：</strong> 已接入 UNFCCC NDC Registry、World Bank、ND-GAIN、Climate Watch 的轻量真实样本链路。</li>
+              <li><strong>规则层：</strong> 当前由 Python 规则引擎负责属性识别、主体权重、约束检查、情景批量运行与最终评分。</li>
+              <li><strong>表达层：</strong> 支持模板模式与 OpenAI-compatible 接口，真实模型模式可接入 OpenCode Go。</li>
+              <li><strong>展示层：</strong> 已实现 Streamlit 网页 demo，支持真实国家模式、情景实验、数据来源与方法局限页。</li>
             </ul>
           </div>
           <div class="grid-2">
             <div class="card">
-              <p class="card-title">最小可用版本</p>
-              <p>1 个输入框 + 4 个核心角色 + 1 个观察员 + 1 份自动报告。</p>
+              <p class="card-title">当前已完成</p>
+              <p>可运行网页原型、六阶段推演、9 国样本、8 个政策维度、6 组情景实验、研究发现自动总结。</p>
             </div>
             <div class="card">
-              <p class="card-title">增强版本</p>
-              <p>增加政策库、证据约束、联盟变化、引用标注、图表可视化与多情景对比。</p>
+              <p class="card-title">仍待增强</p>
+              <p>更细的政策文本解析、联盟网络可视化、权重文献校准、与正式 PPT / 报告的进一步联动。</p>
             </div>
           </div>
         </div>
         <div class="footer">
-          <div class="source">来源：Wu et al., <em>AutoGen</em>, arXiv:2308.08155；Streamlit Docs, <em>Get started with Streamlit</em>。</div>
+          <div class="source">来源：本组 `prototype_v1` 当前实现；Wu et al., <em>AutoGen</em>, 2023；Streamlit Docs。</div>
           <div class="page">15 / 17</div>
         </div>
       </section>
 
       <section class="slide">
         <div class="header">
-          <div class="header-title">15. 开发计划：从课堂原型到完整工具</div>
+          <div class="header-title">15. 下一步：从高质量原型继续走向高分大作业</div>
           <div class="header-meta">开发计划</div>
         </div>
         <div class="content">
           <div class="grid-3">
             <div>
-              <p class="card-title">阶段一</p>
+              <p class="card-title">方向一</p>
               <ul>
-                <li>固定 4 个角色</li>
-                <li>单条政策输入</li>
-                <li>自动总结报告</li>
+                <li>继续细化 NDC 条款结构化解析</li>
+                <li>把真实承诺进一步转成更硬的谈判边界</li>
+                <li>补充文献支撑，减少经验型映射成分</li>
               </ul>
             </div>
             <div>
-              <p class="card-title">阶段二</p>
+              <p class="card-title">方向二</p>
               <ul>
-                <li>多轮状态更新</li>
-                <li>联盟变化与冲突地图</li>
-                <li>页面可视化优化</li>
+                <li>增加联盟变化图、约束触发热力图、情景雷达图</li>
+                <li>把结果做成更适合答辩展示的可视化页面</li>
+                <li>支持对不同政策版本进行并列比较</li>
               </ul>
             </div>
             <div>
-              <p class="card-title">阶段三</p>
+              <p class="card-title">方向三</p>
               <ul>
-                <li>引入政策文件检索</li>
-                <li>增加依据标注</li>
-                <li>支持多情景与政策版本比较</li>
+                <li>整理成正式 PPT、讲稿与结果图包</li>
+                <li>形成“研究问题 - 数据 - 方法 - 实验 - 局限”的完整汇报闭环</li>
+                <li>必要时提交 GitHub 供组员协作与复现</li>
               </ul>
             </div>
           </div>
-          <div class="quote"><strong>可交付预期：</strong> 先把“能跑通”和“能说明问题”做出来，再逐步把“更真实”“更复杂”和“可比较”做上去。</div>
+          <div class="quote"><strong>我们的判断：</strong> 现在项目已经跨过“想法”和“最小 demo”阶段，后续真正决定得分高低的，将是方法论表达、结果可视化和局限性讲得是否清楚。</div>
         </div>
         <div class="footer">
           <div class="source">本页为项目开发计划。</div>
@@ -965,22 +960,22 @@
 
       <section class="slide">
         <div class="header">
-          <div class="header-title">16. 项目边界与真实性承诺</div>
+          <div class="header-title">16. 项目边界、方法局限与真实性承诺</div>
           <div class="header-meta">项目边界</div>
         </div>
         <div class="content">
           <div class="panel">
             <ul>
-              <li>这个系统是<strong>教学与探索型决策支持工具</strong>，不是现实政策预测机器。</li>
-              <li>它擅长暴露利益冲突、辅助课堂讨论，不擅长替代真实国家立场、精确量化排放后果。</li>
-              <li>为避免“AI 编故事”，所有外部事实应来自公开可查来源；角色观点应与其设定及现实议题框架一致。</li>
-              <li>后续可加入政策文件检索、发言出处标注与人工复核机制，进一步提升可追溯性。</li>
+              <li>这个系统目前是<strong>带真实来源约束的研究型课堂原型</strong>，不是现实政策预测机器，也不是 IAM / CGE / 能源系统模型。</li>
+              <li>它擅长暴露利益冲突、识别接受边界、比较不同政策组合，不擅长精确量化真实减排后果或替代正式谈判判断。</li>
+              <li>为避免“AI 编故事”，当前所有外部事实都尽量回到公开来源，并在页面中显式标注年份、来源和可靠性。</li>
+              <li>后续若继续增强，重点不是盲目增加角色，而是提高约束来源的科学性、可视化质量和实验设计的完整性。</li>
             </ul>
           </div>
-          <div class="quote"><strong>本组结论：</strong> 这是一个既贴合课程风格、又能连接气候治理真实问题、并且具备明确工程落地路径的结课项目选题。</div>
+          <div class="quote"><strong>本组结论：</strong> 这个项目的价值不只在于“做了一个网页”，而在于它已经形成了“真实来源 + 可解释模型 + 多情景实验 + 局限说明”的完整大作业雏形。</div>
         </div>
         <div class="footer">
-          <div class="source">本页为项目边界声明。</div>
+          <div class="source">来源：本组 `research_mode_notes.md`、`real_world_data_notes.md` 与当前原型实现。</div>
           <div class="page">17 / 17</div>
         </div>
       </section>

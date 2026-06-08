@@ -1,0 +1,95 @@
+{
+  "id": "ablation_abstract_text_only_full",
+  "label": "抽象角色-文本识别+修订",
+  "agent_mode": "abstract",
+  "narrator": "openai-compatible:deepseek-v4-pro",
+  "variant": {
+    "disable_constraints": false,
+    "disable_revision": false,
+    "text_only": true
+  },
+  "initial_attributes": {
+    "fossil_phaseout": 2,
+    "carbon_tariff": 0,
+    "climate_finance": 1,
+    "tech_transfer": 1,
+    "transition_flexibility": 1,
+    "ccs_support": 0,
+    "adaptation_fund": 1,
+    "lulucf_support": 1
+  },
+  "revised_attributes": {
+    "fossil_phaseout": 1,
+    "carbon_tariff": 0,
+    "climate_finance": 1,
+    "tech_transfer": 1,
+    "transition_flexibility": 2,
+    "ccs_support": 1,
+    "adaptation_fund": 1,
+    "lulucf_support": 1
+  },
+  "adjustments": {
+    "fossil_phaseout": -1,
+    "carbon_tariff": 0,
+    "climate_finance": 0,
+    "tech_transfer": 0,
+    "transition_flexibility": 1,
+    "ccs_support": 1,
+    "adaptation_fund": 0,
+    "lulucf_support": 0
+  },
+  "tradeoffs": [
+    "用过渡期和技术路线缓冲高冲击退出要求"
+  ],
+  "consensus_label": "较强共识",
+  "final_scores": {
+    "feasibility": 90.5,
+    "fairness": 40.0,
+    "resistance": 9.5
+  },
+  "constraint_violation_count": 0,
+  "final_statuses": [
+    {
+      "role": "发达国家联盟",
+      "status": "有保留地支持",
+      "score": 3.2,
+      "raw_score": 3.2
+    },
+    {
+      "role": "大型新兴经济体",
+      "status": "支持",
+      "score": 6.4,
+      "raw_score": 6.4
+    },
+    {
+      "role": "最不发达国家集团",
+      "status": "支持",
+      "score": 8.6,
+      "raw_score": 8.6
+    },
+    {
+      "role": "小岛屿与高脆弱国家联盟",
+      "status": "支持",
+      "score": 5.3,
+      "raw_score": 5.3
+    },
+    {
+      "role": "化石能源出口国集团",
+      "status": "有保留地支持",
+      "score": 3.0,
+      "raw_score": 3.0
+    },
+    {
+      "role": "清洁技术与低碳产业联盟",
+      "status": "支持",
+      "score": 4.6,
+      "raw_score": 4.6
+    },
+    {
+      "role": "多边开发金融机构",
+      "status": "支持",
+      "score": 7.9,
+      "raw_score": 7.9
+    }
+  ]
+}

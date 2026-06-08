@@ -1,0 +1,327 @@
+[
+  {
+    "entity_id": "deu",
+    "entity_name": "德国",
+    "representation_note": "国际承诺主要以欧盟共同 NDC 为准；此处以 Climate Watch 对德国条目关联的欧盟 NDC 摘要作为结构化入口。",
+    "policy_profile": {
+      "document_name": "Updated First NDC / EU-linked entry for Germany",
+      "submission_date": "2023-10-19",
+      "target_year": 2040,
+      "target_type": "base_year_target",
+      "baseline_year": 1990,
+      "mitigation_summary": "到 2040 年实现经济全范围净排放相对 1990 年下降，并对应到 2035 年实现约 66.25% 至 72.5% 的温室气体净减排。",
+      "adaptation_included": true,
+      "sector_scope": [
+        "Energy",
+        "Aviation",
+        "Maritime",
+        "IPPU",
+        "Agriculture",
+        "Waste",
+        "LULUCF"
+      ],
+      "conditionality_note": "以欧盟整体承诺框架为主，不宜将其直接等同为德国单一国家独立承诺。",
+      "lulucf_relevance": "medium",
+      "lulucf_note": "欧盟共同承诺覆盖 LULUCF，但德国在本模型中不是典型森林国家。"
+    },
+    "sources": {
+      "primary": {
+        "source_id": "unfccc_ndc_registry",
+        "url": "https://unfccc.int/sites/default/files/NDC/2023-10/ES-2023-10-17%20EU%20submission%20NDC%20update.pdf"
+      },
+      "secondary": {
+        "source_id": "climate_watch_ndc_tracker",
+        "url": "https://www.climatewatchdata.org/ndcs/country/DEU"
+      }
+    },
+    "reliability_summary": {
+      "label": "中高",
+      "reason": "目标摘要可追溯到官方 PDF，但德国条目与欧盟共同 NDC 存在嵌套关系，因此解释时必须注明其欧盟共同承诺背景。 "
+    }
+  },
+  {
+    "entity_id": "usa",
+    "entity_name": "美国",
+    "representation_note": "采用 2024 年提交的第二次 NDC 作为最新已提交承诺入口，同时显式标注 2025 年退出巴黎协定这一状态变化。",
+    "policy_profile": {
+      "document_name": "Second NDC",
+      "submission_date": "2024-12-19",
+      "target_year": 2035,
+      "target_type": "base_year_target",
+      "baseline_year": 2005,
+      "mitigation_summary": "到 2035 年将净温室气体排放相对 2005 年降低 61% 至 66%，并沿着通往 2050 年净零的直线或更陡路径推进。",
+      "adaptation_included": true,
+      "sector_scope": [
+        "Economy-wide",
+        "All sectors under IPCC 2006 guidelines"
+      ],
+      "conditionality_note": "该 NDC 已提交但美国自 2025 年 1 月起不再拥有活跃 NDC；在模拟中只能视为“最新已提交承诺参考”，不能等同于当前稳定有效的国际承诺。",
+      "lulucf_relevance": "low",
+      "lulucf_note": "当前样本更突出整体减排和政治不确定性，而不是森林治理。"
+    },
+    "sources": {
+      "primary": {
+        "source_id": "unfccc_ndc_registry",
+        "url": "https://unfccc.int/sites/default/files/2024-12/United%20States%202035%20NDC.pdf"
+      },
+      "secondary": {
+        "source_id": "climate_watch_ndc_tracker",
+        "url": "https://www.climatewatchdata.org/ndcs/country/USA"
+      }
+    },
+    "reliability_summary": {
+      "label": "中高",
+      "reason": "文本与目标可追溯，但因其已不具备活跃 NDC 状态，模拟解读必须保留政治不确定性说明。"
+    }
+  },
+  {
+    "entity_id": "chn",
+    "entity_name": "中国",
+    "representation_note": "直接采用 Climate Watch 对中国 2025 年第三次 NDC 的结构化摘要，并保留官方 PDF 链接。",
+    "policy_profile": {
+      "document_name": "Third NDC",
+      "submission_date": "2025-11-03",
+      "target_year": 2035,
+      "target_type": "trajectory_target",
+      "baseline_year": null,
+      "mitigation_summary": "到 2035 年，全国经济全范围净温室气体排放较峰值水平下降 7% 至 10%，并争取取得更好结果。",
+      "adaptation_included": true,
+      "sector_scope": [
+        "Economy-wide",
+        "All greenhouse gases"
+      ],
+      "conditionality_note": "当前摘要来自 WRI 对中文原文的结构化整理；正式引用时应优先回到官方中文 PDF。",
+      "lulucf_relevance": "medium",
+      "lulucf_note": "中国承诺中包含碳汇与生态建设线索，但不是本轮最核心维度。"
+    },
+    "sources": {
+      "primary": {
+        "source_id": "unfccc_ndc_registry",
+        "url": "https://unfccc.int/sites/default/files/2025-11/2035%E5%B9%B4%E4%B8%AD%E5%9B%BD%E5%9B%BD%E5%AE%B6%E8%87%AA%E4%B8%BB%E8%B4%A1%E7%8C%AE%E6%8A%A5%E5%91%8A.pdf"
+      },
+      "secondary": {
+        "source_id": "climate_watch_ndc_tracker",
+        "url": "https://www.climatewatchdata.org/ndcs/country/CHN"
+      }
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "官方 PDF 可直接追溯，Climate Watch 仅用于辅助结构化和摘要浏览。"
+    }
+  },
+  {
+    "entity_id": "bra",
+    "entity_name": "巴西",
+    "representation_note": "直接采用 2024 年第二次 NDC 的结构化摘要，并保留官方 PDF。",
+    "policy_profile": {
+      "document_name": "Second NDC",
+      "submission_date": "2024-11-13",
+      "target_year": 2035,
+      "target_type": "base_year_target",
+      "baseline_year": 2005,
+      "mitigation_summary": "到 2035 年将净温室气体排放相对 2005 年降低 59% 至 67%，对应绝对排放水平约 1.05 至 0.85 GtCO2e。",
+      "adaptation_included": true,
+      "sector_scope": [
+        "Economy-wide",
+        "LULUCF",
+        "National inventory sectors for 2035"
+      ],
+      "conditionality_note": "当前摘要未像部分高脆弱国家那样明确写出融资条件性，但其目标落地高度依赖森林与土地利用治理。",
+      "lulucf_relevance": "high",
+      "lulucf_note": "巴西的现实谈判位置与亚马孙森林、土地利用和碳汇治理高度相关。"
+    },
+    "sources": {
+      "primary": {
+        "source_id": "unfccc_ndc_registry",
+        "url": "https://unfccc.int/sites/default/files/2024-11/Brazil_Second%20Nationally%20Determined%20Contribution%20%28NDC%29_November2024.pdf"
+      },
+      "secondary": {
+        "source_id": "climate_watch_ndc_tracker",
+        "url": "https://www.climatewatchdata.org/ndcs/country/BRA"
+      }
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "目标、年份和覆盖范围均有官方与结构化摘要双重支持。"
+    }
+  },
+  {
+    "entity_id": "ind",
+    "entity_name": "印度",
+    "representation_note": "直接采用 2026 年官方注册的第二次 NDC 及其 Climate Watch 结构化摘要。",
+    "policy_profile": {
+      "document_name": "Second NDC",
+      "submission_date": "2026-04-24",
+      "target_year": 2035,
+      "target_type": "intensity_target",
+      "baseline_year": 2005,
+      "mitigation_summary": "到 2035 年将 GDP 排放强度相对 2005 年降低 47%；到 2035 年实现约 60% 的累计电力装机容量来自非化石能源；到 2035 年通过森林和树木覆盖额外形成 35-40 亿吨 CO2 当量碳汇。",
+      "adaptation_included": true,
+      "sector_scope": [
+        "Not specified in summary"
+      ],
+      "conditionality_note": "非化石能源装机目标明确提到需要技术转移和低成本国际融资支持，属于现实谈判中很重要的条件性线索。",
+      "lulucf_relevance": "high",
+      "lulucf_note": "印度 NDC 明确包含通过森林和树木覆盖增加碳汇的目标。"
+    },
+    "sources": {
+      "primary": {
+        "source_id": "unfccc_ndc_registry",
+        "url": "https://unfccc.int/sites/default/files/2026-04/INDIA%20NDC%202031-35.pdf"
+      },
+      "secondary": {
+        "source_id": "climate_watch_ndc_tracker",
+        "url": "https://www.climatewatchdata.org/ndcs/country/IND"
+      }
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "官方 PDF 与结构化摘要都可追溯，且文本中已明确体现条件性融资/技术支持因素。"
+    }
+  },
+  {
+    "entity_id": "idn",
+    "entity_name": "印度尼西亚",
+    "representation_note": "直接采用 2025 年第二次 NDC 的结构化摘要，并保留官方 PDF。",
+    "policy_profile": {
+      "document_name": "Second NDC",
+      "submission_date": "2025-10-27",
+      "target_year": 2035,
+      "target_type": "fixed_level_trajectory_target",
+      "baseline_year": null,
+      "mitigation_summary": "在低碳兼容发展路径下，印尼预计 2030 年达峰并在 2035 年继续下降，相较 ENDC CM2 情景在 2030 年低 8% 至 17.5%。",
+      "adaptation_included": true,
+      "sector_scope": [
+        "Energy",
+        "IPPU",
+        "Waste",
+        "Agriculture",
+        "FOLU",
+        "LULUCF"
+      ],
+      "conditionality_note": "双路径与多部门覆盖意味着其更依赖过渡期安排和情景弹性，同时森林与土地利用治理也是关键组成。",
+      "lulucf_relevance": "high",
+      "lulucf_note": "印尼承诺同时涉及 FOLU/LULUCF 与能源转型，是本轮关键样本。"
+    },
+    "sources": {
+      "primary": {
+        "source_id": "unfccc_ndc_registry",
+        "url": "https://unfccc.int/sites/default/files/2025-10/Indonesia_Second%20NDC_2025.10.24.pdf"
+      },
+      "secondary": {
+        "source_id": "climate_watch_ndc_tracker",
+        "url": "https://www.climatewatchdata.org/ndcs/country/IDN"
+      }
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "存在明确 2030/2035 路径信息与多部门覆盖信息，适合生成过渡型约束。"
+    }
+  },
+  {
+    "entity_id": "sau",
+    "entity_name": "沙特阿拉伯",
+    "representation_note": "直接采用 2025 年第二次 NDC 的结构化摘要，并保留官方 PDF。",
+    "policy_profile": {
+      "document_name": "Second NDC",
+      "submission_date": "2025-12-31",
+      "target_year": 2040,
+      "target_type": "base_year_target",
+      "baseline_year": 2019,
+      "mitigation_summary": "以动态基线方式，在 2040 年前实现每年 3.35 亿吨 CO2 当量的减排、避免和移除。",
+      "adaptation_included": true,
+      "sector_scope": [
+        "Energy",
+        "IPPU",
+        "Agriculture",
+        "LULUCF",
+        "Waste"
+      ],
+      "conditionality_note": "动态基线和资源型经济背景意味着其承诺解读需要结合出口结构与能源依赖度，不能只看表面减排数字。",
+      "lulucf_relevance": "medium",
+      "lulucf_note": "沙特承诺中列入 LULUCF，但其主要谈判特征仍是资源出口与动态基线。"
+    },
+    "sources": {
+      "primary": {
+        "source_id": "unfccc_ndc_registry",
+        "url": "https://unfccc.int/sites/default/files/2026-01/2nd%20KSA%20NDC%20Document%20Final%20Document%20%2828122025%29_DNA.pdf"
+      },
+      "secondary": {
+        "source_id": "climate_watch_ndc_tracker",
+        "url": "https://www.climatewatchdata.org/ndcs/country/SAU"
+      }
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "目标、年份和行业覆盖均有结构化摘要支撑，但动态基线的可比性相对弱于绝对目标。"
+    }
+  },
+  {
+    "entity_id": "fji",
+    "entity_name": "斐济",
+    "representation_note": "直接采用 2025 年第三次 NDC 的结构化摘要，并保留官方 PDF。",
+    "policy_profile": {
+      "document_name": "Third NDC",
+      "submission_date": "2025-11-06",
+      "target_year": 2035,
+      "target_type": "baseline_scenario_target",
+      "baseline_year": null,
+      "mitigation_summary": "到 2035 年将能源部门 BAU CO2 当量排放降低 36%，其中 12% 为无条件减排，其余部分依赖更多支持。",
+      "adaptation_included": true,
+      "sector_scope": [
+        "Energy"
+      ],
+      "conditionality_note": "无条件与条件性减排比例被明确区分，非常适合用来模拟小岛屿国家在融资与支持谈判中的真实立场。",
+      "lulucf_relevance": "low",
+      "lulucf_note": "斐济当前承诺更突出能源与脆弱性，而非森林治理。"
+    },
+    "sources": {
+      "primary": {
+        "source_id": "unfccc_ndc_registry",
+        "url": "https://unfccc.int/sites/default/files/2025-11/Fiji%20NDC3.0_Final.pdf"
+      },
+      "secondary": {
+        "source_id": "climate_watch_ndc_tracker",
+        "url": "https://www.climatewatchdata.org/ndcs/country/FJI"
+      }
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "该条目明确区分无条件与有条件部分，适合在推演中转化为现实谈判约束。"
+    }
+  },
+  {
+    "entity_id": "bgd",
+    "entity_name": "孟加拉国",
+    "representation_note": "直接采用 2025 年第三次 NDC 的结构化摘要，并保留官方 PDF。",
+    "policy_profile": {
+      "document_name": "Third NDC",
+      "submission_date": "2025-09-29",
+      "target_year": 2035,
+      "target_type": "baseline_scenario_target",
+      "baseline_year": null,
+      "mitigation_summary": "2026 至 2035 年累计减排约 84.97 MtCO2eq；2035 年无条件减排为 BAU 之下 6.39%，条件性部分再额外减排 13.92%，前提是获得充足、可预测、额外且新的国际气候融资。",
+      "adaptation_included": true,
+      "sector_scope": [
+        "Economy-wide"
+      ],
+      "conditionality_note": "该 NDC 对国际气候融资依赖写得非常明确，因此融资与适应支持应视为其谈判硬约束，而非普通偏好。",
+      "lulucf_relevance": "low",
+      "lulucf_note": "孟加拉国当前样本重点是融资条件性与脆弱性约束。"
+    },
+    "sources": {
+      "primary": {
+        "source_id": "unfccc_ndc_registry",
+        "url": "https://unfccc.int/sites/default/files/2025-09/Bangladesh%20Third%20Nationally%20Determined%20Contribution%20%28NDC%203.0%29.pdf"
+      },
+      "secondary": {
+        "source_id": "climate_watch_ndc_tracker",
+        "url": "https://www.climatewatchdata.org/ndcs/country/BGD"
+      }
+    },
+    "reliability_summary": {
+      "label": "较高",
+      "reason": "条件性减排比例和融资需求都公开明确，非常适合转化为现实谈判约束。"
+    }
+  }
+]

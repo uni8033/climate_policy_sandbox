@@ -56,7 +56,7 @@ class OpenAICompatibleNarrator:
     def __init__(self) -> None:
         self.api_key = os.getenv("OPENAI_API_KEY", "")
         self.base_url = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
-        self.model = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
+        self.model = self._normalize_model_name(os.getenv("OPENAI_MODEL", "gpt-4.1-mini"))
         self.api_path = os.getenv("OPENAI_API_PATH", "chat/completions")
         self.timeout = int(os.getenv("OPENAI_TIMEOUT", "90"))
         if not self.api_key:
@@ -123,6 +123,16 @@ class OpenAICompatibleNarrator:
             ],
             "temperature": 0.5,
         }
+
+    def _normalize_model_name(self, model_name: str) -> str:
+        normalized = model_name.strip()
+        alias_map = {
+            "DeepSeek V4 Pro": "deepseek-v4-pro",
+            "deepseek v4 pro": "deepseek-v4-pro",
+            "DeepSeek-V4-Pro": "deepseek-v4-pro",
+            "DeepSeekV4Pro": "deepseek-v4-pro",
+        }
+        return alias_map.get(normalized, normalized)
 
     def _extract_text(self, body: dict) -> str:
         if "choices" in body and body["choices"]:

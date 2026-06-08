@@ -28,10 +28,10 @@ OPENCODE_GO_MODEL = "deepseek-v4-pro"
 DEFAULT_POLICY_TEXT = "2035年前在加强森林保护、碳汇和土地利用治理的同时，逐步停止新建无减排措施煤电，并为高脆弱国家提供适应融资与技术转移支持。"
 
 st.set_page_config(
-    page_title="气候政策博弈沙盘",
+    page_title="气候政策博弈沙盘 Final Showcase",
     page_icon="",
     layout="wide",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="expanded",
 )
 
 st.markdown(
@@ -326,10 +326,9 @@ if "policy_text_input_final" not in st.session_state:
     st.session_state["policy_text_input_final"] = history_records[0]["policy_text"] if history_records else DEFAULT_POLICY_TEXT
 
 
-def render_history_controls() -> None:
+def render_history_sidebar() -> None:
     records = load_run_history()
-    with st.expander("历史记录与结果回放", expanded=False):
-        st.caption("历史记录保存在当前项目的本地 results 目录，可随时载入政策文本或回放过去的结果页面。")
+    with st.sidebar.expander("历史记录", expanded=False):
         if not records:
             st.caption("当前还没有保存的推演记录。")
             return
@@ -349,36 +348,66 @@ def render_history_controls() -> None:
         st.caption(f"结果文件：{selected['snapshot_path']}")
 
 
-def render_demo_sidebar() -> None:
+def render_help_sidebar() -> None:
     with st.sidebar:
-        st.subheader("演示控制")
-        st.caption("侧栏仅保留简要控制，详细说明与历史回放已移到主界面，便于正式展示时保持页面简洁。")
-        with st.expander("侧栏摘要", expanded=False):
-            st.write("- 单次推演：展示一场谈判如何推进到最终表决。")
-            st.write("- 情景实验：比较同一政策在不同设计下的结果差异。")
-            st.write("- 历史记录：保存在本地 results 目录，不依赖线上平台。")
+        st.title("帮助 / 使用说明")
+        st.caption("这一区域用于现场解释 workflow、模式差异和关键指标。")
 
-
-def render_demo_guide() -> None:
-    with st.expander("演示说明", expanded=False):
-        guide_left, guide_right = st.columns(2, gap="large")
-        with guide_left:
-            st.markdown("**如何理解当前系统**")
+        with st.expander("快速理解", expanded=True):
             st.write("- 这不是气候预测模型，而是政策谈判沙盘。")
-            st.write("- 规则引擎决定立场、得分和约束触发。")
-            st.write("- 真实模型模式只负责把已算出的立场写成更自然的发言。")
-            st.markdown("**两种运行形态**")
-            st.write("- 单次推演：观察一场谈判的推进过程。")
-            st.write("- 情景实验：横向比较多种政策设计。")
-        with guide_right:
-            st.markdown("**核心指标**")
-            st.write("- 可行性：最终支持程度。")
-            st.write("- 公平性：融资、技术、适应和过渡支持的综合程度。")
-            st.write("- 阻力强度：推进时可能面临的总体阻力。")
-            st.markdown("**本地历史记录**")
-            st.write("- 每次运行会在本地保存一份结果快照。")
-            st.write("- 可以载入旧政策文本，也可以直接回放旧结果。")
-            st.write("- 单机演示不需要部署到线上；只有在多人共享或跨设备访问时才需要部署。")
+            st.write("- 规则引擎负责计算立场、分数和约束。")
+            st.write("- 真实模型模式只负责把已计算出的立场写成更自然的发言。")
+
+        with st.expander("单次推演 Workflow", expanded=True):
+            st.write("1. 输入一条政策文本。")
+            st.write("2. 系统先把文本识别成 8 个政策维度，形成初始政策画像。")
+            st.write("3. 每个主体基于自身偏好权重、基础倾向和现实约束，给出第一轮立场陈述。")
+            st.write("4. 系统汇总各主体的主要冲突点，识别谁与谁更容易结盟、谁是摇摆方。")
+            st.write("5. 根据冲突与联盟关系，生成一组可能的交换条件和妥协方向。")
+            st.write("6. 秘书处根据这些交换条件修订政策属性，形成谈判后的版本。")
+            st.write("7. 各主体对修订版再次表决，得到最终立场分布、共识水平和综合评分。")
+            st.caption("一句话理解：单次推演是在看一场具体谈判是如何一步步推进到最终表决的。")
+
+        with st.expander("情景实验 Workflow", expanded=False):
+            st.write("1. 输入同一条政策文本。")
+            st.write("2. 系统先识别出文本的基础政策画像。")
+            st.write("3. 然后依次叠加 6 个预设情景，形成 6 个略有差异的政策版本。")
+            st.write("4. 每个情景都会完整跑一遍单次推演的六阶段流程。")
+            st.write("5. 系统最后把 6 次结果并排比较，输出可行性、公平性、阻力强度和约束触发情况。")
+            st.write("6. 再自动总结哪种情景更容易达成共识，哪种情景更公平，哪种情景阻力更小。")
+            st.caption("一句话理解：情景实验不是多轮聊天，而是同一政策在不同设计方案下的对照实验。")
+
+        with st.expander("模式区别", expanded=False):
+            st.write("`单次推演`：看一场谈判过程。")
+            st.write("`情景实验`：看多种政策设计的结果差异。")
+            st.write("`抽象角色模式`：用典型谈判阵营解释结构。")
+            st.write("`真实国家样本模式`：用 9 个真实国家样本展示真实性与约束。")
+            st.write("`模板模式`：更稳定、更快，适合演示。")
+            st.write("`真实模型模式`：发言更自然，但更慢，也更依赖 API。")
+
+        with st.expander("核心指标怎么读", expanded=False):
+            st.write("`可行性`：最终有多少主体支持这项政策，数值越高越容易推动。")
+            st.write("`公平性`：政策是否给了融资、技术、适应、过渡和森林治理等配套支持。")
+            st.write("`阻力强度`：政策推进会遇到多大阻力，越高表示越难谈成。")
+            st.write("`共识水平`：对最终表决氛围的概括，如较强共识、有限妥协等。")
+
+        with st.expander("六个默认情景", expanded=False):
+            st.write("`基线情景`：直接沿用文本识别结果。")
+            st.write("`高雄心低补偿`：减排更强，但配套支持不足。")
+            st.write("`高雄心配套补偿`：减排更强，同时补上融资和技术支持。")
+            st.write("`过渡优先`：更强调过渡期和 CCS，降低转型冲击。")
+            st.write("`公平融资优先`：弱化贸易约束，强化融资和适应支持。")
+            st.write("`森林治理优先`：突出森林、碳汇和土地利用治理。")
+
+        with st.expander("关键名词", expanded=False):
+            st.write("`NDC`：各国在《巴黎协定》框架下提交的气候承诺。")
+            st.write("`LULUCF`：土地利用、土地利用变化和林业，常与森林和碳汇有关。")
+            st.write("`CCS`：碳捕集与封存，这里把它视作过渡技术路线。")
+            st.write("`碳边境约束`：对高碳产品设置边境规则或额外成本。")
+            st.write("`现实约束`：某些国家在融资、适应、化石退出等议题上的谈判底线。")
+
+        st.caption("完整说明文档：`prototype_v1/demo_explainer_guide.md`")
+    render_history_sidebar()
 
 
 def normalize_model_name(model_name: str) -> str:
@@ -700,7 +729,7 @@ LIVE_STAGE_LABELS = {
 }
 
 
-render_demo_sidebar()
+render_help_sidebar()
 
 
 def expected_single_trace_steps(agent_count: int) -> int:
@@ -1087,6 +1116,9 @@ def render_batch_result(batch_result: dict) -> None:
                     st.write("已知局限：")
                     for item in source_item["known_limitations"]:
                         st.write(f"- {item}")
+            with st.expander("查看完整结果数据", expanded=False):
+                st.json(batch_result)
+
 
 def render_single_result(report: dict) -> None:
     payload = build_single_payload(report)
@@ -1254,6 +1286,9 @@ def render_single_result(report: dict) -> None:
                     st.write(f"- 目标类型：{profile['policy_profile']['target_type']}")
                     st.write(f"- 摘要：{profile['policy_profile']['mitigation_summary']}")
 
+        with st.expander("查看完整结果数据", expanded=False):
+            st.json(report)
+
 
 mode_col, setup_col = st.columns([0.72, 1.28], gap="large")
 
@@ -1306,10 +1341,7 @@ with attr_note_col:
     render_note("属性提取", "系统会根据政策文本自动识别各维度强度。")
     render_note("读图提示", "数值越高，表示该提案在对应议题上的表述越明确。")
 
-render_demo_guide()
-render_history_controls()
-
-with st.expander("模型设置（高级）", expanded=False):
+with st.expander("模型设置（可选）", expanded=False):
     mode = st.radio("运行模式", ["模板模式", "真实模型模式"], index=default_mode_index, horizontal=True)
     api_key = st.session_state["api_key_input_final"]
     base_url = st.session_state["base_url_input_final"]
@@ -1329,7 +1361,7 @@ with st.expander("模型设置（高级）", expanded=False):
         st.caption(f"当前生效配置：{base_url.rstrip('/')}/{api_path.lstrip('/')} | model={normalized_model_name}")
         if normalized_model_name != model_name.strip():
             st.caption(f"模型名已自动规范为：{normalized_model_name}")
-    render_note("模型说明", "正式演示建议优先使用模板模式；需要更自然发言时再启用真实模型模式。")
+    render_note("展示建议", "默认使用 OpenCode Go 预置；需要实时生成时可直接使用 DeepSeek V4 Pro。")
 
 with st.expander("方法与数据来源", expanded=False):
     note_left, note_right = st.columns(2, gap="large")
@@ -1339,7 +1371,7 @@ with st.expander("方法与数据来源", expanded=False):
     with note_right:
         render_note("主要来源", "UNFCCC NDC Registry、World Bank Open Data、ND-GAIN、Climate Watch。")
         render_note("可追溯性", "国家样本、指标年份、政策摘要与来源说明均可在界面内展开查看。")
-    st.caption("如需完整说明，可查看项目内的演示解读文档。")
+    st.caption("详细说明文档：prototype_v1/demo_explainer_guide.md")
 
 
 replay_path = st.session_state.get("replay_history_path")

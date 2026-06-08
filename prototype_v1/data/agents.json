@@ -1,62 +1,195 @@
 [
   {
-    "id": "developing_country",
-    "name": "发展中国家代表",
-    "description": "强调共同但有区别的责任，关注发展权、能源安全、脱贫与融资支持。",
-    "base_bias": -0.2,
-    "weights": {
-      "fossil_phaseout": -1.3,
-      "carbon_tariff": -1.5,
-      "climate_finance": 1.7,
-      "tech_transfer": 1.4,
-      "transition_flexibility": 1.5,
-      "ccs_support": 0.6,
-      "adaptation_fund": 1.0
-    }
-  },
-  {
     "id": "developed_alliance",
-    "name": "发达国家联盟代表",
-    "description": "强调更快减排、透明核查与国际规则，倾向使用更强约束机制推动转型。",
-    "base_bias": 0.6,
+    "name": "发达国家联盟",
+    "bloc": "高雄心减排方",
+    "description": "强调更快减排、透明核查和国际规则，希望用更高标准推动全球转型。",
+    "design_rationale": "对应高收入经济体在 NDC、净零承诺和全球盘点中的高雄心立场，同时在谈判中仍强调规则和可核查性。",
+    "evidence_basis": [
+      "NDC 更新中的净零与中期减排承诺",
+      "高收入国家更强的制度执行能力",
+      "国际谈判中对透明度和规则约束的偏好"
+    ],
+    "priority_asks": [
+      "fossil_phaseout",
+      "carbon_tariff",
+      "tech_transfer"
+    ],
+    "base_bias": 0.5,
     "weights": {
       "fossil_phaseout": 1.8,
-      "carbon_tariff": 1.3,
-      "climate_finance": 0.5,
+      "carbon_tariff": 1.2,
+      "climate_finance": 0.6,
       "tech_transfer": 0.7,
-      "transition_flexibility": -0.4,
-      "ccs_support": 0.2,
-      "adaptation_fund": 0.4
+      "transition_flexibility": -0.5,
+      "ccs_support": 0.1,
+      "adaptation_fund": 0.5
     }
   },
   {
-    "id": "fossil_industry",
-    "name": "传统能源/重工业代表",
-    "description": "关注转型成本、就业冲击和资产搁浅风险，偏好渐进式退出与过渡技术。",
-    "base_bias": -0.4,
+    "id": "large_emerging_economy",
+    "name": "大型新兴经济体",
+    "bloc": "发展与转型平衡方",
+    "description": "强调发展权、能源安全和产业升级，希望在减排与增长之间保留政策空间。",
+    "design_rationale": "对应大型新兴排放国在谈判中的典型立场：接受转型方向，但要求资金、技术和更长过渡期，反对外部单边约束。",
+    "evidence_basis": [
+      "NDC 中常见的条件性承诺安排",
+      "World Bank 中等收入经济体的工业化与能源安全压力",
+      "对碳边境措施和一刀切时间表的审慎态度"
+    ],
+    "priority_asks": [
+      "climate_finance",
+      "tech_transfer",
+      "transition_flexibility",
+      "carbon_tariff"
+    ],
+    "base_bias": -0.2,
     "weights": {
-      "fossil_phaseout": -1.8,
-      "carbon_tariff": -1.2,
-      "climate_finance": 0.2,
-      "tech_transfer": 0.4,
-      "transition_flexibility": 1.3,
-      "ccs_support": 1.8,
-      "adaptation_fund": -0.1
+      "fossil_phaseout": -1.1,
+      "carbon_tariff": -1.4,
+      "climate_finance": 1.4,
+      "tech_transfer": 1.5,
+      "transition_flexibility": 1.6,
+      "ccs_support": 0.8,
+      "adaptation_fund": 0.8
     }
   },
   {
-    "id": "island_ngo",
-    "name": "小岛国/环保 NGO 代表",
-    "description": "强调气候脆弱性、损失与损害和气候正义，主张更强减排与资金补偿。",
+    "id": "least_developed_countries",
+    "name": "最不发达国家集团",
+    "bloc": "能力不足但高脆弱方",
+    "description": "排放责任较低，但财政和技术能力有限，更关注资金可得性、适应支持和公平转型。",
+    "design_rationale": "对应排放贡献较低、财政能力较弱的发展中经济体，它们通常支持减排行动方向，但非常依赖外部资金和技术支持。",
+    "evidence_basis": [
+      "World Bank 低收入国家的融资与基础设施约束",
+      "ND-GAIN 中较弱的适应能力表现",
+      "谈判中对资金、技术和能力建设的持续诉求"
+    ],
+    "priority_asks": [
+      "climate_finance",
+      "adaptation_fund",
+      "tech_transfer",
+      "transition_flexibility"
+    ],
+    "base_bias": 0.1,
+    "weights": {
+      "fossil_phaseout": 0.4,
+      "carbon_tariff": -0.6,
+      "climate_finance": 2.0,
+      "tech_transfer": 1.5,
+      "transition_flexibility": 1.2,
+      "ccs_support": 0.2,
+      "adaptation_fund": 2.0
+    }
+  },
+  {
+    "id": "small_island_states",
+    "name": "小岛屿与高脆弱国家联盟",
+    "bloc": "高脆弱高雄心方",
+    "description": "强调气候风险的紧迫性、损失与损害和 1.5C 目标，主张更强减排和适应补偿。",
+    "design_rationale": "对应 AOSIS 一类的高脆弱国家，它们通常要求更高减排雄心，同时要求适应和损失损害机制更可执行。",
+    "evidence_basis": [
+      "ND-GAIN 中的高脆弱性与较低适应能力",
+      "全球盘点与 1.5C 讨论中的高雄心表述",
+      "损失与损害资金机制的现实谈判诉求"
+    ],
+    "priority_asks": [
+      "fossil_phaseout",
+      "adaptation_fund",
+      "climate_finance"
+    ],
+    "base_bias": 0.6,
+    "weights": {
+      "fossil_phaseout": 2.0,
+      "carbon_tariff": 0.8,
+      "climate_finance": 1.6,
+      "tech_transfer": 0.8,
+      "transition_flexibility": -0.7,
+      "ccs_support": -0.5,
+      "adaptation_fund": 2.2
+    }
+  },
+  {
+    "id": "fossil_fuel_exporters",
+    "name": "化石能源出口国集团",
+    "bloc": "资源与收入维护方",
+    "description": "关注出口收入、财政稳定和资产搁浅风险，偏好渐进退出、过渡技术和更弱的贸易约束。",
+    "design_rationale": "对应依赖油气煤出口的经济体，它们在谈判中通常反对激进退出时程，但会支持 CCS、过渡技术和更长缓冲期。",
+    "evidence_basis": [
+      "资源型经济体对化石能源收入和就业的依赖",
+      "对碳边境措施和快速退出路径的敏感性",
+      "对 CCS 和过渡性技术路线的持续支持"
+    ],
+    "priority_asks": [
+      "transition_flexibility",
+      "ccs_support",
+      "fossil_phaseout",
+      "carbon_tariff"
+    ],
+    "base_bias": -0.5,
+    "weights": {
+      "fossil_phaseout": -2.0,
+      "carbon_tariff": -1.3,
+      "climate_finance": 0.2,
+      "tech_transfer": 0.2,
+      "transition_flexibility": 1.7,
+      "ccs_support": 1.9,
+      "adaptation_fund": -0.2
+    }
+  },
+  {
+    "id": "clean_tech_industry",
+    "name": "清洁技术与低碳产业联盟",
+    "bloc": "产业升级推动方",
+    "description": "支持明确的转型信号和技术扩散，希望政策兼顾市场激励、技术合作和新产业投资。",
+    "design_rationale": "对应新能源、储能、电气化和低碳制造业利益相关方，其立场通常支持更强减排和技术投资，但也关注政策稳定性与规模化实施。",
+    "evidence_basis": [
+      "绿色产业投资对明确政策信号的依赖",
+      "技术转移和产业扩散对全球减排的重要性",
+      "低碳产业更倾向支持中高强度转型政策"
+    ],
+    "priority_asks": [
+      "tech_transfer",
+      "fossil_phaseout",
+      "carbon_tariff"
+    ],
+    "base_bias": 0.3,
+    "weights": {
+      "fossil_phaseout": 1.1,
+      "carbon_tariff": 0.8,
+      "climate_finance": 0.4,
+      "tech_transfer": 1.6,
+      "transition_flexibility": 0.1,
+      "ccs_support": 0.7,
+      "adaptation_fund": 0.3
+    }
+  },
+  {
+    "id": "multilateral_bank",
+    "name": "多边开发金融机构",
+    "bloc": "执行与融资协调方",
+    "description": "重视政策可实施性、融资撬动和项目落地，希望把雄心目标转成可融资的过渡方案。",
+    "design_rationale": "对应多边开发银行和国际金融机制的角色，它们通常不追求最强政治表态，而是推动资金、技术和实施安排的可操作性。",
+    "evidence_basis": [
+      "气候融资项目需要政策稳定、资金安排和技术路线",
+      "多边金融机构常作为谈判后实施阶段的关键执行者",
+      "现实中更关注可融资性、协同和风险分担机制"
+    ],
+    "priority_asks": [
+      "climate_finance",
+      "tech_transfer",
+      "transition_flexibility",
+      "adaptation_fund"
+    ],
     "base_bias": 0.4,
     "weights": {
-      "fossil_phaseout": 1.9,
-      "carbon_tariff": 0.7,
-      "climate_finance": 1.3,
-      "tech_transfer": 0.7,
-      "transition_flexibility": -0.7,
-      "ccs_support": -0.6,
-      "adaptation_fund": 1.8
+      "fossil_phaseout": 0.6,
+      "carbon_tariff": 0.1,
+      "climate_finance": 1.8,
+      "tech_transfer": 1.5,
+      "transition_flexibility": 0.8,
+      "ccs_support": 0.6,
+      "adaptation_fund": 1.4
     }
   }
 ]

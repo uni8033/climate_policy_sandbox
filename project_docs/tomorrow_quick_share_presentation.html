@@ -433,30 +433,30 @@
               <div class="arrow">→</div>
               <div class="step">角色初始化</div>
               <div class="arrow">→</div>
-              <div class="step">三轮博弈</div>
+              <div class="step">六阶段谈判</div>
             </div>
             <div class="pipeline-box">
-              <div class="step">观察员总结</div>
+              <div class="step">现实约束检查</div>
               <div class="arrow">→</div>
-              <div class="step">政策条件调整</div>
+              <div class="step">情景实验</div>
               <div class="arrow">→</div>
               <div class="step">结构化报告</div>
               <div class="arrow">→</div>
-              <div class="step">结果展示</div>
+              <div class="step">结果可视化</div>
             </div>
             <div class="grid-2">
               <div class="panel">
                 <p class="card-title">输入端</p>
                 <ul>
                   <li>输入一条具体气候政策</li>
-                  <li>解析成减排、碳关税、资金、技术、过渡期等属性</li>
+                  <li>解析成减排、碳关税、资金、技术、过渡期、森林治理等属性</li>
                 </ul>
               </div>
               <div class="panel">
                 <p class="card-title">输出端</p>
                 <ul>
-                  <li>输出谁支持、谁反对、卡点在哪里</li>
-                  <li>给出妥协路径与简化评分</li>
+                  <li>输出谁支持、谁反对、哪些现实约束被触发</li>
+                  <li>给出妥协路径、情景对比和简化评分</li>
                 </ul>
               </div>
             </div>
@@ -492,7 +492,7 @@
               <div class="step">多情景扩展</div>
             </div>
             <div class="quote">
-              <strong>当前推进情况：</strong> 项目已完成问题定义、角色设计和 1.0 原型开发，下一阶段将继续推进网页化展示、数据接入和模型增强。
+              <strong>当前推进情况：</strong> 项目已从 1.0 最小原型推进到研究模式，当前已完成网页化展示、9 个真实国家样本、情景实验和初步可视化。
             </div>
           </div>
           <div class="footer">
@@ -514,24 +514,24 @@
                   <li>退出强度、碳边境约束：表示政策施压有多强</li>
                   <li>资金、技术转移：表示是否给出支持和补偿</li>
                   <li>过渡期、CCS：表示是否保留现实转型弹性</li>
-                  <li>适应/损失补偿：表示是否回应高脆弱地区诉求</li>
+                  <li>适应/损失补偿、森林/LULUCF：表示是否回应脆弱性与土地利用治理诉求</li>
                 </ul>
               </div>
               <div class="panel">
-                <p class="card-title">四类角色为什么这样设</p>
+                <p class="card-title">当前角色为什么更真实</p>
                 <ul>
-                  <li>发展中国家：关注发展权、资金和技术支持</li>
-                  <li>发达国家联盟：更支持强减排和国际规则约束</li>
-                  <li>传统能源/重工业：更关注成本、就业和过渡技术</li>
-                  <li>小岛国/环保组织：更关注脆弱性、正义和补偿</li>
+                  <li>保留抽象角色模式，便于讲谈判结构</li>
+                  <li>增加真实国家样本模式，当前已有 9 个国家</li>
+                  <li>权重和约束开始绑定 World Bank、ND-GAIN 和 NDC 摘要</li>
+                  <li>系统不只看偏好，还会看“至少需要什么、最多接受什么”</li>
                 </ul>
               </div>
             </div>
             <div class="quote">
-              <strong>当前设置逻辑：</strong> 1.0 版把每个角色对这些参数的偏好写成权重。权重为正，说明该参数会提高支持度；权重为负，说明会加剧反对。当前依据主要来自现实气候谈判中的常见分歧结构和课程讨论语境，后续再逐步引入真实数据校准。
+              <strong>当前设置逻辑：</strong> 现在已经不是单纯手写权重，而是开始根据公开指标和承诺摘要生成国家偏好，并用现实硬约束限制过于随意的表态。
             </div>
             <div class="quote">
-              <strong>为什么先这样做：</strong> 先把谈判结构和角色偏好显式写出来，优点是可解释、便于课堂展示，也方便后续再接入真实数据和大模型。
+              <strong>为什么这一步重要：</strong> 这样做之后，项目就从“角色聊天 demo”变成了一个带真实性约束的研究型原型。
             </div>
           </div>
           <div class="footer">
@@ -588,23 +588,23 @@
                 <p class="card-title">当前已经完成</p>
                 <ul>
                   <li>完成项目规划与工作留痕</li>
-                  <li>完成 1.0 最小原型代码</li>
-                  <li>跑通样例政策三轮博弈</li>
-                  <li>能输出结构化政策可行性报告</li>
+                  <li>完成 2.x 网页原型与真实国家样本接入</li>
+                  <li>跑通六阶段谈判与 6 组情景实验</li>
+                  <li>能输出结构化报告和研究发现</li>
                 </ul>
               </div>
               <div class="panel">
                 <p class="card-title">下一步准备做</p>
                 <ul>
-                  <li>做更适合展示的网页 demo</li>
-                  <li>接入真实数据子集</li>
-                  <li>接入云端大模型增强表达层</li>
-                  <li>增加联盟变化、多情景比较和图表</li>
+                  <li>继续细化 NDC 条款解析</li>
+                  <li>补联盟变化图和约束热力图</li>
+                  <li>把研究结果回填到正式 PPT 和答辩材料</li>
+                  <li>继续增强真实模型表达层</li>
                 </ul>
               </div>
             </div>
             <div class="quote">
-              <strong>结尾一句：</strong> 我们现在已经从“选题构想”推进到了“能跑的原型”，接下来会继续把它从方法原型做成更完整的课程项目。
+              <strong>结尾一句：</strong> 我们现在已经从“选题构想”推进到了“研究型原型”，接下来会继续把它做成更完整、可展示、可复现的课程项目。
             </div>
           </div>
           <div class="footer">

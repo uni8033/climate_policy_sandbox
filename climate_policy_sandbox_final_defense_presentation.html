@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>气候政策多利益相关方博弈沙盘 - 最终答辩版</title>
+  <style>
+    :root {
+      --paper: #eef3f7;
+      --slide-bg: #fbfdff;
+      --text: #1e2b36;
+      --muted: #5e6d79;
+      --blue: #1e4f8c;
+      --blue-deep: #133660;
+      --blue-soft: #eaf1fa;
+      --green: #1f7a6e;
+      --gold: #c39645;
+      --line: #d9e2ec;
+      --shadow: 0 18px 44px rgba(23, 48, 86, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(30, 79, 140, 0.08), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(195, 150, 69, 0.10), transparent 20%),
+        linear-gradient(180deg, #edf2f7 0%, #edf2f8 100%);
+      color: var(--text);
+    }
+
+    .viewport {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 24px;
+    }
+
+    .stage-shell {
+      position: relative;
+      flex: 0 0 auto;
+      width: 1600px;
+      height: 900px;
+    }
+
+    .stage {
+      position: absolute;
+      inset: 0;
+      width: 1600px;
+      height: 900px;
+      transform-origin: top left;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      background: var(--slide-bg);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(30, 79, 140, 0.08);
+      display: grid;
+      grid-template-rows: 84px 1fr 62px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(30px) scale(0.992);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 54px;
+      background: linear-gradient(90deg, var(--blue-deep) 0%, var(--blue) 60%, #2c6ab0 100%);
+      color: #fff;
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      top: 84px;
+      left: 0;
+      width: 260px;
+      height: 6px;
+      background: var(--gold);
+    }
+
+    .header-title {
+      font-size: 31px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .header-meta {
+      font-size: 18px;
+      opacity: 0.92;
+    }
+
+    .content {
+      padding: 38px 54px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .content p, .content li, .content td, .content th, .content code {
+      font-size: 23px;
+      line-height: 1.52;
+    }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 1.25em;
+    }
+
+    li + li { margin-top: 0.38em; }
+
+    .title-slide {
+      grid-template-rows: 1fr 62px;
+    }
+
+    .title-body {
+      position: relative;
+      padding: 96px 88px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .title-body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 154px;
+      background: linear-gradient(90deg, var(--blue-deep) 0%, var(--blue) 68%, #2c6ab0 100%);
+    }
+
+    .title-accent {
+      position: absolute;
+      top: 154px;
+      left: 0;
+      width: 300px;
+      height: 8px;
+      background: var(--gold);
+    }
+
+    .title-card {
+      position: relative;
+      margin-top: 32px;
+      max-width: 1140px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,250,254,0.98));
+      border: 1px solid rgba(30,79,140,0.10);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 34px 40px;
+    }
+
+    .main-title {
+      margin: 0;
+      color: var(--blue-deep);
+      font-size: 48px;
+      line-height: 1.22;
+      font-weight: 800;
+    }
+
+    .sub-title {
+      margin: 16px 0 0;
+      color: var(--blue);
+      font-size: 28px;
+      line-height: 1.45;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid rgba(30,79,140,0.12);
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 21px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .panel, .quote, .card, .table-wrap, .grid-2 > div, .grid-3 > div {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(36, 70, 120, 0.06);
+      padding: 18px 22px;
+    }
+
+    .quote {
+      border-left: 8px solid var(--blue);
+      background: linear-gradient(180deg, #ffffff 0%, #f7fafe 100%);
+    }
+
+    .quote strong { color: var(--blue); }
+
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+    .card-title {
+      margin: 0 0 8px;
+      color: var(--blue-deep);
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .compact-list li {
+      font-size: 21px;
+      line-height: 1.42;
+      margin-top: 0.28em;
+    }
+
+    .mini {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    .table-wrap table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table-wrap th, .table-wrap td {
+      text-align: left;
+      vertical-align: top;
+      padding: 13px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .table-wrap tr:last-child td { border-bottom: none; }
+
+    .table-wrap th {
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 22px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 56px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 15px;
+      background: #fcfdff;
+    }
+
+    .source {
+      max-width: 78%;
+      line-height: 1.45;
+    }
+
+    .page {
+      min-width: 90px;
+      text-align: right;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .controls {
+      position: fixed;
+      right: 26px;
+      bottom: 26px;
+      display: flex;
+      gap: 10px;
+      z-index: 30;
+    }
+
+    .controls button {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(30,79,140,0.15);
+      background: rgba(255,255,255,0.95);
+      color: var(--blue);
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(30,56,95,0.12);
+    }
+
+    .controls button.secondary {
+      width: auto;
+      min-width: 116px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 5px;
+      background: rgba(30,79,140,0.08);
+      z-index: 30;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--blue), var(--gold));
+      transition: width 0.25s ease;
+    }
+
+    .reference-list {
+      margin: 0;
+      padding-left: 1.2em;
+      columns: 2;
+      column-gap: 28px;
+    }
+
+    .reference-list li {
+      break-inside: avoid;
+      font-size: 17px;
+      line-height: 1.4;
+      margin-bottom: 0.5em;
+    }
+
+    .print-tip {
+      position: fixed;
+      left: 24px;
+      bottom: 18px;
+      z-index: 30;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(30,79,140,0.12);
+      box-shadow: 0 8px 20px rgba(30,56,95,0.1);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .export-host {
+      position: fixed;
+      left: -20000px;
+      top: 0;
+      width: 1600px;
+      height: 900px;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+      z-index: -1;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .timeline-step {
+      background: linear-gradient(180deg, #ffffff 0%, #f7fbfe 100%);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+
+    .timeline-step strong {
+      display: block;
+      color: var(--blue-deep);
+      font-size: 19px;
+      margin-bottom: 6px;
+    }
+
+    .formula {
+      font-family: "Consolas", "Menlo", monospace;
+      background: #f4f8fc;
+      border: 1px solid #dbe6f2;
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: #1a3d64;
+      font-size: 20px;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <div class="viewport">
+    <div class="stage-shell" id="stageShell">
+      <div class="stage" id="stage">
+
+        <section class="slide title-slide active">
+          <div class="title-body">
+            <div class="title-accent"></div>
+            <div class="title-card">
+              <h1 class="main-title">气候政策多利益相关方博弈沙盘</h1>
+              <p class="sub-title">基于规则引擎、真实国家样本与 LLM 叙事层的研究型课堂原型</p>
+              <div class="tags">
+                <span class="tag">Climate Governance</span>
+                <span class="tag">Multi-Agent Simulation</span>
+                <span class="tag">Policy Negotiation</span>
+                <span class="tag">Human-AI Co-creation</span>
+              </div>
+              <div class="meta-row">
+                <span>课程结课大作业最终展示</span>
+                <span>标准 16:9 PowerPoint 比例</span>
+                <span>研究问题 + 技术实现 + 实验结果</span>
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="source">气候政策多利益相关方博弈沙盘 Final Defense</div>
+            <div class="page">1 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">1. 研究问题与项目定位</div>
+            <div class="header-meta">Research Question</div>
+          </div>
+          <div class="content">
+            <div class="quote"><strong>核心问题：</strong> 如何构建一个结合政策文本、国家发展指标、气候脆弱性信息与多主体协商规则的推演沙盘，用于模拟气候政策在不同利益相关方之间的博弈过程，并识别阻力来源与可行妥协路径？</div>
+            <div class="grid-3">
+              <div>
+                <p class="card-title">项目对象</p>
+                <p>聚焦单条气候政策提案，而不是开放式闲聊。</p>
+              </div>
+              <div>
+                <p class="card-title">研究目标</p>
+                <p>解释谁支持、谁反对、为什么变化、怎样形成脆弱共识。</p>
+              </div>
+              <div>
+                <p class="card-title">项目定位</p>
+                <p>带真实来源约束的研究型课堂原型，不是现实政策预测机器。</p>
+              </div>
+            </div>
+            <div class="panel">
+              <ul>
+                <li><strong>现实意义：</strong> 气候政策同时受到减排、公平、融资、能源安全与产业转型约束。</li>
+                <li><strong>方法意义：</strong> 将 ABM 思路、规则推演与 LLM 叙事表达结合为可运行系统。</li>
+                <li><strong>课程意义：</strong> 把课堂辩论升级为可重复实验、可比较结果、可视化展示的工具。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="source">来源：UN Paris Agreement Art.2；IPCC 2023 Synthesis Report；Castro et al., 2020。</div>
+            <div class="page">2 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">2. 数据基础与真实性设计</div>
+            <div class="header-meta">Data & Traceability</div>
+          </div>
+          <div class="content">
+            <div class="grid-3">
+              <div>
+                <p class="card-title">政策文本层</p>
+                <ul class="compact-list">
+                  <li>来源：UNFCCC NDC Registry</li>
+                  <li>对象：国家公开气候承诺</li>
+                  <li>作用：约束主体立场表达</li>
+                </ul>
+              </div>
+              <div>
+                <p class="card-title">国家指标层</p>
+                <ul class="compact-list">
+                  <li>来源：World Bank Open Data</li>
+                  <li>对象：收入、能源、出口结构</li>
+                  <li>作用：生成主体偏好权重</li>
+                </ul>
+              </div>
+              <div>
+                <p class="card-title">脆弱性层</p>
+                <ul class="compact-list">
+                  <li>来源：ND-GAIN</li>
+                  <li>对象：脆弱性与准备度</li>
+                  <li>作用：触发适应与资金诉求</li>
+                </ul>
+              </div>
+            </div>
+            <div class="grid-2">
+              <div>
+                <p class="card-title">当前真实国家样本</p>
+                <p>德国、美国、中国、巴西、印度、印度尼西亚、沙特阿拉伯、斐济、孟加拉国，共 9 个样本。</p>
+                <p class="mini">每个主体都绑定指标年份、政策摘要、来源目录与可靠性说明。</p>
+              </div>
+              <div>
+                <p class="card-title">统一分析单位</p>
+                <p>“国家 - 年份 + 政策文本版本”</p>
+                <p class="mini">第一版刻意限定在国家尺度，避免文本周期与数值数据尺度完全错位。</p>
+              </div>
+            </div>
+            <div class="quote"><strong>真实性原则：</strong> 系统中的“主体画像”和“政策约束”尽量回到公开来源，不使用无法追溯的虚构设定。</div>
+          </div>
+          <div class="footer">
+            <div class="source">来源：UNFCCC NDC Registry；World Bank Open Data；ND-GAIN Country Index；Climate Watch；`prototype_v1/data/source_catalog.json`。</div>
+            <div class="page">3 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">3. 系统总体架构</div>
+            <div class="header-meta">System Architecture</div>
+          </div>
+          <div class="content">
+            <div class="quote"><strong>总体架构：</strong> 政策输入层 → 属性识别层 → 主体建模层 → 六阶段博弈引擎 → 叙事与可视化输出层</div>
+            <div class="grid-2">
+              <div>
+                <p class="card-title">前端与交互层</p>
+                <ul>
+                  <li>Streamlit 展示界面</li>
+                  <li>单次推演 / 情景实验双模式</li>
+                  <li>结果图表、来源目录、主体画像页</li>
+                </ul>
+              </div>
+              <div>
+                <p class="card-title">后端与推演层</p>
+                <ul>
+                  <li>Python 规则引擎 `climate_policy_engine.py`</li>
+                  <li>属性归一化、权重生成、约束检查、情景批量运行</li>
+                  <li>可选接入 OpenAI-compatible 大模型作为叙事层</li>
+                </ul>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:22%;">模块</th>
+                    <th>职责</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Policy Parser</td><td>将政策文本识别为 8 个结构化议题维度。</td></tr>
+                  <tr><td>Agent Builder</td><td>依据真实数据生成主体偏好、底线与现实约束。</td></tr>
+                  <tr><td>Negotiation Engine</td><td>控制阶段顺序、立场更新、联盟变化与修订流程。</td></tr>
+                  <tr><td>Narration Layer</td><td>输出可读陈述文本，支持模板模式与真实模型模式。</td></tr>
+                  <tr><td>Visualization Layer</td><td>展示可行性、公平性、阻力强度、热力矩阵等结果。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="source">来源：`prototype_v1/climate_policy_engine.py`、`streamlit_app_final_demo.py`、`llm_adapter.py`。</div>
+            <div class="page">4 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">4. 核心算法 I：政策属性识别</div>
+            <div class="header-meta">Feature Extraction</div>
+          </div>
+          <div class="content">
+            <div class="grid-2">
+              <div>
+                <p class="card-title">8 个政策维度</p>
+                <ul class="compact-list">
+                  <li>化石能源退出强度</li>
+                  <li>碳边境约束强度</li>
+                  <li>气候资金支持</li>
+                  <li>技术转移支持</li>
+                  <li>过渡期灵活性</li>
+                  <li>CCS 过渡技术支持</li>
+                  <li>适应 / 损失补偿支持</li>
+                  <li>森林 / LULUCF 支持</li>
+                </ul>
+              </div>
+              <div>
+                <p class="card-title">识别逻辑</p>
+                <ul class="compact-list">
+                  <li>基于关键词、否定表达和结构化规则进行识别</li>
+                  <li>输出每一维 `0-3` 的强度值</li>
+                  <li>避免完全依赖 LLM 自由判断，提高稳定性</li>
+                </ul>
+              </div>
+            </div>
+            <div class="formula">policy_text -> normalize_attributes() -> {feature_1: 0..3, ..., feature_8: 0..3}</div>
+            <div class="panel">
+              <ul>
+                <li><strong>为什么这样做：</strong> 将自然语言政策提案映射为结构化变量，后续才能进行评分、约束判断和情景批量实验。</li>
+                <li><strong>方法特点：</strong> 当前是可解释的规则识别，不是黑箱文本分类模型。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="source">来源：`prototype_v1/climate_policy_engine.py` 中 `FEATURE_ORDER`、`FEATURE_LABELS` 与属性归一化逻辑。</div>
+            <div class="page">5 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">5. 核心算法 II：主体权重与约束生成</div>
+            <div class="header-meta">Agent Modeling</div>
+          </div>
+          <div class="content">
+            <div class="quote"><strong>关键思想：</strong> 主体不是“写死的性格设定”，而是由公开指标、NDC 摘要和条件性承诺共同生成偏好与底线。</div>
+            <div class="grid-2">
+              <div>
+                <p class="card-title">权重生成变量</p>
+                <ul>
+                  <li>人均 GDP</li>
+                  <li>可再生能源占比</li>
+                  <li>燃料出口依赖</li>
+                  <li>ND-GAIN 脆弱性 / 准备度</li>
+                  <li>NDC 目标类型</li>
+                  <li>条件性融资 / 技术表述</li>
+                </ul>
+              </div>
+              <div>
+                <p class="card-title">现实约束类型</p>
+                <ul>
+                  <li><strong>min_requirements：</strong> 至少需要的资金、适应或技术安排</li>
+                  <li><strong>max_tolerances：</strong> 最多能接受的退出强度或碳边境约束</li>
+                  <li>约束触发后，主体立场显式下调</li>
+                </ul>
+              </div>
+            </div>
+            <div class="formula">score(agent, policy) = base_bias + Σ(weight_i × feature_i) - constraint_penalty</div>
+            <div class="panel">
+              <ul>
+                <li><strong>结果：</strong> 同一条政策面对不同主体，会出现结构化、可解释的支持与反对差异。</li>
+                <li><strong>优势：</strong> 比纯角色扮演更稳，比完全手写脚本更灵活。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="source">来源：`prototype_v1/climate_policy_engine.py` 中 `_derive_country_weights()`、`_build_country_constraint_profile()` 等逻辑。</div>
+            <div class="page">6 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">6. 核心算法 III：六阶段谈判引擎</div>
+            <div class="header-meta">Negotiation Engine</div>
+          </div>
+          <div class="content">
+            <div class="timeline">
+              <div class="timeline-step"><strong>1</strong>立场陈述</div>
+              <div class="timeline-step"><strong>2</strong>冲突识别</div>
+              <div class="timeline-step"><strong>3</strong>联盟与分裂</div>
+              <div class="timeline-step"><strong>4</strong>条件交换</div>
+              <div class="timeline-step"><strong>5</strong>秘书处修订</div>
+              <div class="timeline-step"><strong>6</strong>最终表决</div>
+            </div>
+            <div class="grid-2">
+              <div>
+                <p class="card-title">引擎做什么</p>
+                <ul>
+                  <li>控制阶段顺序与多轮更新</li>
+                  <li>统计主体立场变化与联盟版图</li>
+                  <li>根据约束命中调整得分和文本输出</li>
+                </ul>
+              </div>
+              <div>
+                <p class="card-title">为什么不是自由聊天</p>
+                <ul>
+                  <li>每一步有固定目标和状态转移</li>
+                  <li>修订阶段允许有条件妥协，而非随意漂移</li>
+                  <li>最终表决收束为可比较结果而非开放对话</li>
+                </ul>
+              </div>
+            </div>
+            <div class="quote"><strong>方法意义：</strong> 这使系统同时具备“自然语言可读性”和“过程可解释性”。</div>
+          </div>
+          <div class="footer">
+            <div class="source">来源：`PIPELINE_STAGES` 六阶段流程设计与当前单次推演输出结构。</div>
+            <div class="page">7 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">7. 架构特点：规则引擎 + LLM 叙事层</div>
+            <div class="header-meta">Hybrid Architecture</div>
+          </div>
+          <div class="content">
+            <div class="grid-2">
+              <div>
+                <p class="card-title">规则层负责</p>
+                <ul>
+                  <li>数据加载与标准化</li>
+                  <li>属性识别与主体评分</li>
+                  <li>现实约束检查</li>
+                  <li>情景批量运行与指标汇总</li>
+                </ul>
+              </div>
+              <div>
+                <p class="card-title">LLM 层负责</p>
+                <ul>
+                  <li>生成更自然的陈述文本</li>
+                  <li>总结谈判叙事与研究观察</li>
+                  <li>支持模板模式与真实模型模式切换</li>
+                  <li>兼容 OpenAI-compatible 接口</li>
+                </ul>
+              </div>
+            </div>
+            <div class="panel">
+              <ul>
+                <li><strong>设计原因：</strong> 直接让 LLM 决定结果，容易出现漂移和不可复现；完全不用 LLM，又会损失表达效果。</li>
+                <li><strong>因此：</strong> 结构化判断交给规则引擎，表述生成交给 LLM，形成混合架构。</li>
+              </ul>
+            </div>
+            <div class="quote"><strong>一句话总结：</strong> 结果由规则收敛，表达由模型增强。</div>
+          </div>
+          <div class="footer">
+            <div class="source">来源：`prototype_v1/llm_adapter.py`、`prototype_v1/climate_policy_engine.py`、当前 Streamlit 原型配置。</div>
+            <div class="page">8 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">8. 实验设计：情景实验与对比指标</div>
+            <div class="header-meta">Experiment Design</div>
+          </div>
+          <div class="content">
+            <div class="grid-2">
+              <div>
+                <p class="card-title">6 组预设情景</p>
+                <ul>
+                  <li>基线情景</li>
+                  <li>高雄心低补偿</li>
+                  <li>高雄心配套补偿</li>
+                  <li>过渡优先</li>
+                  <li>公平融资优先</li>
+                  <li>森林治理优先</li>
+                </ul>
+              </div>
+              <div>
+                <p class="card-title">核心评价指标</p>
+                <ul>
+                  <li>可行性 Feasibility</li>
+                  <li>公平性 Fairness</li>
+                  <li>阻力强度 Resistance</li>
+                  <li>现实约束触发次数</li>
+                </ul>
+              </div>
+            </div>
+            <div class="panel">
+              <ul>
+                <li>同一条政策文本可在多种情景下批量重跑，比较政策组合变化对谈判接受度的影响。</li>
+                <li>系统自动输出比较表、热力矩阵、最佳情景、最低阻力情景和研究发现摘要。</li>
+              </ul>
+            </div>
+            <div class="quote"><strong>从方法上看：</strong> 这一步让项目从单次演示升级为可复盘、可比较的实验设计。</div>
+          </div>
+          <div class="footer">
+            <div class="source">来源：`DEFAULT_SCENARIO_LIBRARY` 与当前情景实验页可视化输出。</div>
+            <div class="page">9 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">9. 样例结果：当前系统已经能输出什么</div>
+            <div class="header-meta">Example Output</div>
+          </div>
+          <div class="content">
+            <div class="quote"><strong>样例输入：</strong> “2035 年前在加强森林保护、碳汇和土地利用治理的同时，逐步停止新建无减排措施煤电，并为高脆弱国家提供适应融资与技术转移支持。”</div>
+            <div class="grid-2">
+              <div>
+                <p class="card-title">当前发现</p>
+                <ul>
+                  <li>公平融资优先情景：可行性 <strong>77.8</strong></li>
+                  <li>公平融资优先情景：公平性 <strong>80.0</strong></li>
+                  <li>公平融资优先情景：阻力强度 <strong>22.2</strong></li>
+                  <li>森林治理优先情景也显著改善接受度</li>
+                </ul>
+              </div>
+              <div>
+                <p class="card-title">结果含义</p>
+                <ul>
+                  <li>高雄心政策本身并不足够</li>
+                  <li>融资、适应支持和 LULUCF 安排会显著影响共识</li>
+                  <li>系统已能比较哪类政策组合更可能跨过谈判门槛</li>
+                </ul>
+              </div>
+            </div>
+            <div class="panel">
+              <p class="card-title">展示价值</p>
+              <p>输出不再只是“谁支持谁反对”的聊天记录，而是能沉淀为研究发现、情景比较和可视化结果图。</p>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="source">来源：`prototype_v1` 当前样例运行结果；用于说明原型能力，不代表现实政策预测。</div>
+            <div class="page">10 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">10. 展示系统：前端界面与交互功能</div>
+            <div class="header-meta">Demo Interface</div>
+          </div>
+          <div class="content">
+            <div class="grid-2">
+              <div>
+                <p class="card-title">当前前端已支持</p>
+                <ul>
+                  <li>单次推演 / 情景实验切换</li>
+                  <li>抽象角色 / 真实国家样本切换</li>
+                  <li>政策维度自动识别图</li>
+                  <li>情景对比图、热力图、立场轨迹图</li>
+                </ul>
+              </div>
+              <div>
+                <p class="card-title">面向答辩的展示逻辑</p>
+                <ul>
+                  <li>先给输入政策</li>
+                  <li>再展示主体、结果和关键阻力</li>
+                  <li>最后展示数据来源、方法边界与完整结果</li>
+                  <li>避免界面过度像调试后台</li>
+                </ul>
+              </div>
+            </div>
+            <div class="panel">
+              <ul>
+                <li><strong>技术实现：</strong> Streamlit + Vega-Lite 图表 + 自定义 CSS。</li>
+                <li><strong>工程目标：</strong> 既要支持课堂现场演示，也要能继续作为后续开发原型。</li>
+              </ul>
+            </div>
+            <div class="quote"><strong>工程贡献：</strong> 项目最终交付的不只是 PPT，还包括一个可以直接运行的网页演示原型。</div>
+          </div>
+          <div class="footer">
+            <div class="source">来源：`prototype_v1/streamlit_app_final_demo.py` 与当前 Final Showcase 页面。</div>
+            <div class="page">11 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">11. 技术栈与 AI 使用方式</div>
+            <div class="header-meta">Tech Stack</div>
+          </div>
+          <div class="content">
+            <div class="grid-3">
+              <div>
+                <p class="card-title">开发语言</p>
+                <p>Python</p>
+                <p class="mini">负责规则引擎、数据处理、实验运行。</p>
+              </div>
+              <div>
+                <p class="card-title">展示层</p>
+                <p>Streamlit + Vega-Lite</p>
+                <p class="mini">负责网页界面、图表和交互展示。</p>
+              </div>
+              <div>
+                <p class="card-title">AI 接口</p>
+                <p>OpenAI-compatible API</p>
+                <p class="mini">支持模板模式与真实模型模式切换。</p>
+              </div>
+            </div>
+            <div class="panel">
+              <ul>
+                <li><strong>AI 的作用 1：</strong> 帮助前期方案发散、原型开发与代码实现。</li>
+                <li><strong>AI 的作用 2：</strong> 在系统内部承担叙事生成与解释增强，而不是完全替代结构化判断。</li>
+                <li><strong>AI 的作用 3：</strong> 提升展示表达效率，包括图表、界面与 PPT 材料制作。</li>
+              </ul>
+            </div>
+            <div class="quote"><strong>方法态度：</strong> 全流程使用 AI，但所有事实性内容、数据来源和模型边界都要求显式核查。</div>
+          </div>
+          <div class="footer">
+            <div class="source">来源：本组实际开发流程；`llm_adapter.py`；Streamlit Docs；OpenAI-compatible 接口实践。</div>
+            <div class="page">12 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">12. 项目贡献、边界与局限</div>
+            <div class="header-meta">Contributions & Limits</div>
+          </div>
+          <div class="content">
+            <div class="grid-2">
+              <div>
+                <p class="card-title">当前贡献</p>
+                <ul>
+                  <li>完成可运行原型，而非停留在概念设计</li>
+                  <li>引入真实国家样本、公开来源和可靠性说明</li>
+                  <li>形成规则引擎 + LLM 的混合架构</li>
+                  <li>支持多情景实验与结果可视化</li>
+                </ul>
+              </div>
+              <div>
+                <p class="card-title">当前局限</p>
+                <ul>
+                  <li>不是 IAM、CGE 或能源系统模型</li>
+                  <li>权重映射仍有经验型成分，尚未完全计量标定</li>
+                  <li>文本解析仍以轻量规则为主，未引入更强语义解析</li>
+                  <li>样本国家数量仍有限，尚未覆盖完整谈判格局</li>
+                </ul>
+              </div>
+            </div>
+            <div class="quote"><strong>边界声明：</strong> 本项目适合做课堂研究展示、政策比较与协商结构分析，不适合被解释为真实政策效果预测器。</div>
+          </div>
+          <div class="footer">
+            <div class="source">来源：`prototype_v1/README.md`、`research_mode_notes.md`、`real_world_data_notes.md`。</div>
+            <div class="page">13 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">13. 结论与下一步工作</div>
+            <div class="header-meta">Conclusion</div>
+          </div>
+          <div class="content">
+            <div class="panel">
+              <ul>
+                <li>本项目已经形成“研究问题 - 数据 - 方法 - 原型 - 实验 - 局限”相对完整的大作业闭环。</li>
+                <li>技术上，核心创新不在于单独使用 LLM，而在于将规则引擎、真实国家样本与叙事生成组合成可解释系统。</li>
+                <li>研究上，系统已经能比较不同政策组合的谈判接受度，而不是只展示一次性对话。</li>
+              </ul>
+            </div>
+            <div class="grid-3">
+              <div>
+                <p class="card-title">下一步 1</p>
+                <p>继续扩展真实国家与文献校准，提高权重科学性。</p>
+              </div>
+              <div>
+                <p class="card-title">下一步 2</p>
+                <p>增强联盟网络图、情景雷达图与更细的文本解析能力。</p>
+              </div>
+              <div>
+                <p class="card-title">下一步 3</p>
+                <p>整理为正式报告、图表包与可复现实验材料。</p>
+              </div>
+            </div>
+            <div class="quote"><strong>结论：</strong> 这个项目的价值不只在于“做了一个 demo”，而在于已经构成一个可展示、可复盘、可继续研究的气候政策推演原型。</div>
+          </div>
+          <div class="footer">
+            <div class="source">本页为项目总结与后续工作规划。</div>
+            <div class="page">14 / 15</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="header">
+            <div class="header-title">14. 参考来源</div>
+            <div class="header-meta">References</div>
+          </div>
+          <div class="content">
+            <div class="panel">
+              <ol class="reference-list">
+                <li>United Nations. <em>Paris Agreement</em>. 2015.</li>
+                <li>IPCC. <em>Climate Change 2023: Synthesis Report</em>. 2023.</li>
+                <li>UNFCCC. <em>NDC Registry</em>.</li>
+                <li>UNFCCC. <em>COP28 Agreement Signals "Beginning of the End" of the Fossil Fuel Era</em>. 2023.</li>
+                <li>World Bank Open Data. Climate and development related indicators.</li>
+                <li>ND-GAIN. <em>Country Index</em>.</li>
+                <li>Climate Watch. Country climate policy and emissions resources.</li>
+                <li>Castro et al. <em>A review of agent-based modeling of climate-energy policy</em>. WIREs Climate Change, 2020.</li>
+                <li>Zhang et al. <em>AI for Global Climate Cooperation</em>. arXiv:2208.07004, 2022.</li>
+                <li>Wu et al. <em>AutoGen</em>. arXiv:2308.08155, 2023.</li>
+                <li>Streamlit Documentation.</li>
+                <li>本组 `prototype_v1` 当前代码、数据目录与实验结果文件。</li>
+              </ol>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="source">本页汇总本次答辩涉及的主要公开来源与项目内部实现依据。</div>
+            <div class="page">15 / 15</div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="controls" aria-label="翻页控制">
+    <button id="printBtn" class="secondary" title="导出 PDF">导出 PDF</button>
+    <button id="prevBtn" title="上一页">←</button>
+    <button id="nextBtn" title="下一页">→</button>
+  </div>
+
+  <div class="print-tip">支持本地翻页展示与 PDF 导出，比例为 1600 × 900（16:9）</div>
+  <div class="progress" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+  <div id="exportHost" class="export-host" aria-hidden="true"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const progressBar = document.getElementById('progressBar');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const printBtn = document.getElementById('printBtn');
+    const stageShell = document.getElementById('stageShell');
+    const stage = document.getElementById('stage');
+    const exportHost = document.getElementById('exportHost');
+    let current = 0;
+
+    function updatePageNumbers() {
+      slides.forEach((slide, index) => {
+        const pageNode = slide.querySelector('.page');
+        if (pageNode) pageNode.textContent = `${index + 1} / ${slides.length}`;
+      });
+    }
+
+    function fitStage() {
+      const baseWidth = 1600;
+      const baseHeight = 900;
+      const viewportWidth = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+      const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      const safePaddingX = 48;
+      const safePaddingY = 48;
+      const scale = Math.min(
+        1,
+        (viewportWidth - safePaddingX * 2) / baseWidth,
+        (viewportHeight - safePaddingY * 2) / baseHeight
+      );
+      const appliedScale = Math.max(scale, 0.1);
+      stage.style.transform = `scale(${appliedScale})`;
+      stageShell.style.width = `${baseWidth * appliedScale}px`;
+      stageShell.style.height = `${baseHeight * appliedScale}px`;
+    }
+
+    function render(index) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+      progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
+    }
+
+    function waitForFonts() {
+      if (document.fonts && document.fonts.ready) return document.fonts.ready.catch(() => undefined);
+      return Promise.resolve();
+    }
+
+    function buildExportSlide(sourceSlide) {
+      const clone = sourceSlide.cloneNode(true);
+      clone.classList.add('active');
+      clone.style.position = 'relative';
+      clone.style.inset = 'auto';
+      clone.style.opacity = '1';
+      clone.style.transform = 'none';
+      clone.style.transition = 'none';
+      clone.style.pointerEvents = 'auto';
+      clone.style.width = '1600px';
+      clone.style.height = '900px';
+      clone.style.margin = '0';
+      clone.style.borderRadius = '18px';
+      clone.style.boxShadow = 'var(--shadow)';
+      clone.querySelectorAll('*').forEach((node) => {
+        node.style.animation = 'none';
+        node.style.transition = 'none';
+      });
+      return clone;
+    }
+
+    async function exportPdf() {
+      if (!window.html2canvas || !window.jspdf || !window.jspdf.jsPDF) {
+        window.alert('当前浏览器未成功加载 PDF 导出依赖，请联网后重试。');
+        return;
+      }
+      const originalLabel = printBtn.textContent;
+      printBtn.disabled = true;
+      printBtn.textContent = '导出中...';
+      exportHost.innerHTML = '';
+      try {
+        await waitForFonts();
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [1600, 900], compress: true, hotfixes: ['px_scaling'] });
+        for (let i = 0; i < slides.length; i += 1) {
+          const exportSlide = buildExportSlide(slides[i]);
+          exportHost.appendChild(exportSlide);
+          await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+          const canvas = await window.html2canvas(exportSlide, {
+            backgroundColor: null,
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            width: 1600,
+            height: 900,
+            windowWidth: 1600,
+            windowHeight: 900
+          });
+          const imageData = canvas.toDataURL('image/png');
+          if (i > 0) pdf.addPage([1600, 900], 'landscape');
+          pdf.addImage(imageData, 'PNG', 0, 0, 1600, 900, undefined, 'FAST');
+          exportHost.innerHTML = '';
+        }
+        pdf.save('climate_policy_sandbox_final_defense.pdf');
+      } catch (error) {
+        console.error(error);
+        window.alert('导出 PDF 失败，请稍后重试。');
+      } finally {
+        exportHost.innerHTML = '';
+        printBtn.disabled = false;
+        printBtn.textContent = originalLabel;
+      }
+    }
+
+    nextBtn.addEventListener('click', () => render(current + 1));
+    prevBtn.addEventListener('click', () => render(current - 1));
+    printBtn.addEventListener('click', exportPdf);
+
+    document.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        render(current + 1);
+      }
+      if (['ArrowLeft', 'PageUp'].includes(event.key)) {
+        event.preventDefault();
+        render(current - 1);
+      }
+      if (event.key === 'Home') {
+        event.preventDefault();
+        render(0);
+      }
+      if (event.key === 'End') {
+        event.preventDefault();
+        render(slides.length - 1);
+      }
+      if (event.key.toLowerCase() === 'p') {
+        event.preventDefault();
+        exportPdf();
+      }
+    });
+
+    window.addEventListener('resize', fitStage);
+    fitStage();
+    updatePageNumbers();
+    render(0);
+  </script>
+</body>
+</html>

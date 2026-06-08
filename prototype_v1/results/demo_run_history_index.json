@@ -1,0 +1,47 @@
+[
+  {
+    "id": "20260608_013224",
+    "timestamp": "2026-06-08 01:32:24",
+    "experiment_mode": "单次推演",
+    "agent_mode": "抽象角色模式",
+    "narrator_mode": "openai-compatible:deepseek-v4-pro",
+    "policy_text": "2035年前在加强森林保护、碳汇和土地利用治理的同时，逐步停止新建无减排措施煤电，并为高脆弱国家提供适应融资与技术转移支持。",
+    "summary": {
+      "共识水平": "较强共识",
+      "可行性": 90.5,
+      "公平性": 33.3,
+      "阻力强度": 9.5
+    },
+    "snapshot_path": "/data/hanzhang/homework/AI4GC/prototype_v1/results/demo_history/20260608_013224_single.json"
+  },
+  {
+    "id": "20260607_164129",
+    "timestamp": "2026-06-07 16:41:29",
+    "experiment_mode": "单次推演",
+    "agent_mode": "抽象角色模式",
+    "narrator_mode": "template-local",
+    "policy_text": "2035年前在加强森林保护、碳汇和土地利用治理的同时，逐步停止新建无减排措施煤电，并为高脆弱国家提供适应融资与技术转移支持。",
+    "summary": {
+      "共识水平": "较强共识",
+      "可行性": 90.5,
+      "公平性": 33.3,
+      "阻力强度": 9.5
+    },
+    "snapshot_path": "/data/hanzhang/homework/AI4GC/prototype_v1/results/demo_history/20260607_164129_single.json"
+  },
+  {
+    "id": "20260602_030652",
+    "timestamp": "2026-06-02 03:06:52",
+    "experiment_mode": "单次推演",
+    "agent_mode": "真实国家样本模式",
+    "narrator_mode": "openai-compatible:deepseek-v4-pro",
+    "policy_text": "2035年前在加强森林保护、碳汇和土地利用治理的同时，逐步停止新建无减排措施煤电，并为高脆弱国家提供适应融资与技术转移支持。",
+    "summary": {
+      "共识水平": "脆弱共识",
+      "可行性": 70.4,
+      "公平性": 40.0,
+      "阻力强度": 29.6
+    },
+    "snapshot_path": "/data/hanzhang/homework/AI4GC/prototype_v1/results/demo_history/20260602_030652_single.json"
+  }
+]

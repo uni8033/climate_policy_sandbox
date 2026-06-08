@@ -1,0 +1,108 @@
+{
+  "id": "ablation_real_high_ambition_no_constraints",
+  "label": "真实国家-高雄心去约束",
+  "agent_mode": "real_countries",
+  "narrator": "openai-compatible:deepseek-v4-pro",
+  "variant": {
+    "disable_constraints": true,
+    "disable_revision": false,
+    "text_only": false
+  },
+  "initial_attributes": {
+    "fossil_phaseout": 3,
+    "carbon_tariff": 2,
+    "climate_finance": 2,
+    "tech_transfer": 2,
+    "transition_flexibility": 1,
+    "ccs_support": 0,
+    "adaptation_fund": 2,
+    "lulucf_support": 1
+  },
+  "revised_attributes": {
+    "fossil_phaseout": 3,
+    "carbon_tariff": 2,
+    "climate_finance": 2,
+    "tech_transfer": 2,
+    "transition_flexibility": 2,
+    "ccs_support": 1,
+    "adaptation_fund": 2,
+    "lulucf_support": 2
+  },
+  "adjustments": {
+    "fossil_phaseout": 0,
+    "carbon_tariff": 0,
+    "climate_finance": 0,
+    "tech_transfer": 0,
+    "transition_flexibility": 1,
+    "ccs_support": 1,
+    "adaptation_fund": 0,
+    "lulucf_support": 1
+  },
+  "tradeoffs": [
+    "用过渡期和技术路线缓冲高冲击退出要求",
+    "用森林保护、碳汇和土地利用治理安排增强新兴经济体与森林国家接受度"
+  ],
+  "consensus_label": "较强共识",
+  "final_scores": {
+    "feasibility": 85.2,
+    "fairness": 66.7,
+    "resistance": 20.8
+  },
+  "constraint_violation_count": 0,
+  "final_statuses": [
+    {
+      "role": "德国",
+      "status": "支持",
+      "score": 5.3,
+      "raw_score": 5.3
+    },
+    {
+      "role": "美国",
+      "status": "有保留地支持",
+      "score": 2.9,
+      "raw_score": 2.9
+    },
+    {
+      "role": "中国",
+      "status": "有保留地支持",
+      "score": 3.0,
+      "raw_score": 3.0
+    },
+    {
+      "role": "巴西",
+      "status": "支持",
+      "score": 5.25,
+      "raw_score": 5.25
+    },
+    {
+      "role": "印度",
+      "status": "支持",
+      "score": 10.85,
+      "raw_score": 10.85
+    },
+    {
+      "role": "印度尼西亚",
+      "status": "支持",
+      "score": 10.35,
+      "raw_score": 10.35
+    },
+    {
+      "role": "沙特阿拉伯",
+      "status": "有保留地反对",
+      "score": -0.85,
+      "raw_score": -0.85
+    },
+    {
+      "role": "斐济",
+      "status": "支持",
+      "score": 10.85,
+      "raw_score": 10.85
+    },
+    {
+      "role": "孟加拉国",
+      "status": "支持",
+      "score": 10.85,
+      "raw_score": 10.85
+    }
+  ]
+}

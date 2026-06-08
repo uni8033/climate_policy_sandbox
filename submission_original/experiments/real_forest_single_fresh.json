@@ -1,0 +1,1946 @@
+{
+  "run_name": "real_forest_single_fresh",
+  "agent_mode": "real_countries",
+  "narrator": "openai-compatible:deepseek-v4-pro",
+  "report": {
+    "project": "气候政策多利益相关方博弈沙盘 Prototype 2.0 beta",
+    "agent_mode": {
+      "id": "real_countries",
+      "label": "真实国家样本模式"
+    },
+    "input_policy": {
+      "title": "森林治理与公平融资样例",
+      "policy_text": "推动森林保护、碳汇和土地利用治理，并设立适应融资、损失损害支持和技术转移机制，同时对发展中经济体保留更长过渡期。",
+      "attributes": {
+        "fossil_phaseout": 1,
+        "carbon_tariff": 0,
+        "climate_finance": 3,
+        "tech_transfer": 2,
+        "transition_flexibility": 2,
+        "ccs_support": 0,
+        "adaptation_fund": 3,
+        "lulucf_support": 3
+      }
+    },
+    "pipeline_stages": [
+      {
+        "stage_id": "position_statement",
+        "label": "立场陈述"
+      },
+      {
+        "stage_id": "conflict_id",
+        "label": "冲突识别"
+      },
+      {
+        "stage_id": "alliance_mapping",
+        "label": "联盟与分裂"
+      },
+      {
+        "stage_id": "bargaining",
+        "label": "条件交换"
+      },
+      {
+        "stage_id": "secretariat_revision",
+        "label": "秘书处修订"
+      },
+      {
+        "stage_id": "final_vote",
+        "label": "最终表决"
+      }
+    ],
+    "stage_results": [
+      {
+        "stage_id": "position_statement",
+        "label": "立场陈述",
+        "policy_attributes": {
+          "fossil_phaseout": 1,
+          "carbon_tariff": 0,
+          "climate_finance": 3,
+          "tech_transfer": 2,
+          "transition_flexibility": 2,
+          "ccs_support": 0,
+          "adaptation_fund": 3,
+          "lulucf_support": 3
+        },
+        "agent_results": [
+          {
+            "agent_id": "deu",
+            "role": "德国",
+            "bloc": "发达经济体样本",
+            "description": "德国作为发达经济体样本进入推演。 当前承诺摘要：到 2040 年实现经济全范围净排放相对 1990 年下降，并对应到 2035 年实现约 66.25% 至 72.5% 的温室气体净减排。",
+            "design_rationale": "以德国的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Updated First NDC / EU-linked entry for Germany。",
+            "evidence_basis": [
+              "燃料出口占比 2.07%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 17.6%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.301、准备度 0.682（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2040，类型 base_year_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：以欧盟整体承诺框架为主，不宜将其直接等同为德国单一国家独立承诺。",
+              "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。"
+            ],
+            "raw_score": 1.9,
+            "raw_status": "conditional_support",
+            "raw_status_label": "有保留地支持",
+            "score": 0.7,
+            "status": "conditional_oppose",
+            "status_label": "有保留地反对",
+            "contributions": {
+              "fossil_phaseout": 0.85,
+              "carbon_tariff": 0.0,
+              "climate_finance": -1.35,
+              "tech_transfer": -0.4,
+              "transition_flexibility": -0.7,
+              "ccs_support": 0.0,
+              "adaptation_fund": 0.15,
+              "lulucf_support": 2.55
+            },
+            "positive_points": [
+              "强化森林保护、碳汇和土地利用治理安排",
+              "更明确地限制高排放能源扩张"
+            ],
+            "concern_points": [
+              "当前方案对“气候资金支持”的处理让我们难以接受",
+              "当前方案对“过渡期灵活性”的处理让我们难以接受",
+              "根据其公开承诺与现实约束，德国至少需要“化石能源退出强度”达到 2"
+            ],
+            "asks": [
+              "增加更清晰的化石能源退出时间表",
+              "保留一定强度的国际规则约束"
+            ],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "lulucf_support": 1,
+                "fossil_phaseout": 2
+              },
+              "max_tolerances": {
+                "transition_flexibility": 2
+              },
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+                "高收入且准备度较高的样本更可能坚持较明确的减排方向。",
+                "高准备度样本通常不希望过长过渡期弱化承诺可信度。"
+              ]
+            },
+            "constraint_violations": [
+              {
+                "type": "min_requirement",
+                "feature": "化石能源退出强度",
+                "required": 2,
+                "actual": 1,
+                "message": "根据其公开承诺与现实约束，德国至少需要“化石能源退出强度”达到 2"
+              }
+            ],
+            "statement": "我们认可强化森林碳汇和限制高排放能源的方向，但当前方案对气候资金和过渡期灵活性的处理，难以匹配德国所要求的化石能源退出强度。我们呼吁补充更清晰的化石能源退出时间表，并保留有约束力的国际规则。"
+          },
+          {
+            "agent_id": "usa",
+            "role": "美国",
+            "bloc": "发达大国样本",
+            "description": "美国作为发达大国样本进入推演。 当前承诺摘要：到 2035 年将净温室气体排放相对 2005 年降低 61% 至 66%，并沿着通往 2050 年净零的直线或更陡路径推进。",
+            "design_rationale": "以美国的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+            "evidence_basis": [
+              "燃料出口占比 18.31%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 10.9%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.312、准备度 0.647（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 base_year_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：该 NDC 已提交但美国自 2025 年 1 月起不再拥有活跃 NDC；在模拟中只能视为“最新已提交承诺参考”，不能等同于当前稳定有效的国际承诺。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。"
+            ],
+            "raw_score": 0.35,
+            "raw_status": "conditional_oppose",
+            "raw_status_label": "有保留地反对",
+            "score": -0.85,
+            "status": "conditional_oppose",
+            "status_label": "有保留地反对",
+            "contributions": {
+              "fossil_phaseout": 0.15,
+              "carbon_tariff": 0.0,
+              "climate_finance": -1.35,
+              "tech_transfer": 0.0,
+              "transition_flexibility": 0.0,
+              "ccs_support": 0.0,
+              "adaptation_fund": 0.9,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "补充适应与损失补偿机制"
+            ],
+            "concern_points": [
+              "当前方案对“气候资金支持”的处理让我们难以接受",
+              "根据其公开承诺与现实约束，美国至少需要“化石能源退出强度”达到 2"
+            ],
+            "asks": [
+              "保留一定强度的国际规则约束",
+              "增加更清晰的化石能源退出时间表"
+            ],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "fossil_phaseout": 2
+              },
+              "max_tolerances": {
+                "fossil_phaseout": 2,
+                "carbon_tariff": 1
+              },
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。",
+                "高收入且准备度较高的样本更可能坚持较明确的减排方向。"
+              ]
+            },
+            "constraint_violations": [
+              {
+                "type": "min_requirement",
+                "feature": "化石能源退出强度",
+                "required": 2,
+                "actual": 1,
+                "message": "根据其公开承诺与现实约束，美国至少需要“化石能源退出强度”达到 2"
+              }
+            ],
+            "statement": "我们支持补充适应与损失补偿机制，但当前方案在气候资金支持方面的安排让我们无法接受，也远未达到我们所要求的化石能源退出强度。我们坚持必须有更清晰的化石能源退出时间表，并保留一定强度的国际规则约束，才能迈出下一步。"
+          },
+          {
+            "agent_id": "chn",
+            "role": "中国",
+            "bloc": "大型新兴经济体样本",
+            "description": "中国作为大型新兴经济体样本进入推演。 当前承诺摘要：到 2035 年，全国经济全范围净温室气体排放较峰值水平下降 7% 至 10%，并争取取得更好结果。",
+            "design_rationale": "以中国的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Third NDC。",
+            "evidence_basis": [
+              "燃料出口占比 1.5%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 15.2%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.382、准备度 0.556（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 trajectory_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：当前摘要来自 WRI 对中文原文的结构化整理；正式引用时应优先回到官方中文 PDF。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。"
+            ],
+            "raw_score": 3.75,
+            "raw_status": "conditional_support",
+            "raw_status_label": "有保留地支持",
+            "score": 3.75,
+            "status": "conditional_support",
+            "status_label": "有保留地支持",
+            "contributions": {
+              "fossil_phaseout": 0.25,
+              "carbon_tariff": -0.0,
+              "climate_finance": 0.0,
+              "tech_transfer": 1.5,
+              "transition_flexibility": 0.0,
+              "ccs_support": 0.0,
+              "adaptation_fund": 0.9,
+              "lulucf_support": 0.75
+            },
+            "positive_points": [
+              "提供更可落地的技术转移与能力建设",
+              "补充适应与损失补偿机制"
+            ],
+            "concern_points": [],
+            "asks": [],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1
+              },
+              "max_tolerances": {},
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。"
+              ]
+            },
+            "constraint_violations": [],
+            "statement": "我们对此总体持建设性态度。技术转移与能力建设安排如果能更具体、可落地，对发展中经济体的绿色转型将十分关键；同时，适应融资与损失损害补偿机制的补充也体现了平衡。中方愿在符合自身发展阶段和能力的基础上，与各方共同推动这些领域的务实合作。"
+          },
+          {
+            "agent_id": "bra",
+            "role": "巴西",
+            "bloc": "森林型新兴经济体样本",
+            "description": "巴西作为森林型新兴经济体样本进入推演。 当前承诺摘要：到 2035 年将净温室气体排放相对 2005 年降低 59% 至 67%，对应绝对排放水平约 1.05 至 0.85 GtCO2e。",
+            "design_rationale": "以巴西的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+            "evidence_basis": [
+              "燃料出口占比 16.96%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 46.5%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.369、准备度 0.35（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 base_year_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：当前摘要未像部分高脆弱国家那样明确写出融资条件性，但其目标落地高度依赖森林与土地利用治理。",
+              "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。"
+            ],
+            "raw_score": 8.0,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 8.0,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": -0.1,
+              "carbon_tariff": -0.0,
+              "climate_finance": 2.1,
+              "tech_transfer": 2.2,
+              "transition_flexibility": 0.0,
+              "ccs_support": 0.0,
+              "adaptation_fund": 0.9,
+              "lulucf_support": 2.85
+            },
+            "positive_points": [
+              "强化森林保护、碳汇和土地利用治理安排",
+              "提供更可落地的技术转移与能力建设"
+            ],
+            "concern_points": [],
+            "asks": [],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "lulucf_support": 1,
+                "fossil_phaseout": 1
+              },
+              "max_tolerances": {
+                "fossil_phaseout": 2,
+                "carbon_tariff": 1
+              },
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+                "资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。",
+                "绝对量或基准年目标通常要求至少保留一定减排雄心。"
+              ]
+            },
+            "constraint_violations": [],
+            "statement": "我们欢迎文本对森林保护、碳汇和土地利用治理的重视，这与巴西的国情和承诺高度契合。作为拥有广袤雨林的新兴经济体，我们希望看到更可落地的技术转移与能力建设机制，帮助我们进一步降低毁林排放并提升碳汇贡献。巴西将继续在自身NDC框架下推进减排，同时期待国际社会在此类机制下提供切实支持。"
+          },
+          {
+            "agent_id": "ind",
+            "role": "印度",
+            "bloc": "高脆弱发展中大国样本",
+            "description": "印度作为高脆弱发展中大国样本进入推演。 当前承诺摘要：到 2035 年将 GDP 排放强度相对 2005 年降低 47%；到 2035 年实现约 60% 的累计电力装机容量来自非化石能源；到 2035 年通过森林和树木覆盖额外形成 35-40 亿吨 CO2 当量碳汇。",
+            "design_rationale": "以印度的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+            "evidence_basis": [
+              "燃料出口占比 17.09%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 34.9%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.485、准备度 0.394（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 intensity_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：非化石能源装机目标明确提到需要技术转移和低成本国际融资支持，属于现实谈判中很重要的条件性线索。",
+              "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：低收入或中低收入样本通常更依赖外部融资支持。"
+            ],
+            "raw_score": 18.2,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 18.2,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": -0.9,
+              "carbon_tariff": -0.0,
+              "climate_finance": 5.4,
+              "tech_transfer": 3.1,
+              "transition_flexibility": 2.7,
+              "ccs_support": 0.0,
+              "adaptation_fund": 4.95,
+              "lulucf_support": 3.45
+            },
+            "positive_points": [
+              "增加气候资金与转型补偿安排",
+              "补充适应与损失补偿机制"
+            ],
+            "concern_points": [
+              "当前方案对“化石能源退出强度”的处理让我们难以接受"
+            ],
+            "asks": [
+              "请针对争议点给出更可执行的妥协版本"
+            ],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "climate_finance": 2,
+                "tech_transfer": 1,
+                "transition_flexibility": 1,
+                "lulucf_support": 1
+              },
+              "max_tolerances": {
+                "fossil_phaseout": 2,
+                "carbon_tariff": 1
+              },
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "低收入或中低收入样本通常更依赖外部融资支持。",
+                "NDC 摘要明确写出融资/支持条件，应视为谈判硬约束。",
+                "承诺文本涉及技术转移或能力建设需求。",
+                "目标类型依赖情景或强度路径，通常要求一定过渡弹性。",
+                "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+                "资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。"
+              ]
+            },
+            "constraint_violations": [],
+            "statement": "我们支持文本中加强气候资金、适应补偿和碳汇建设的方向，但对“化石能源退出强度”的处理没有合理顾及印度等发展中国家的能源安全与转型成本。我们需要一个更可执行的妥协版本，明确资金和技术支持的具体安排，否则这一争议点将难以接受。"
+          },
+          {
+            "agent_id": "idn",
+            "role": "印度尼西亚",
+            "bloc": "煤电转型与群岛国家样本",
+            "description": "印度尼西亚作为煤电转型与群岛国家样本进入推演。 当前承诺摘要：在低碳兼容发展路径下，印尼预计 2030 年达峰并在 2035 年继续下降，相较 ENDC CM2 情景在 2030 年低 8% 至 17.5%。",
+            "design_rationale": "以印度尼西亚的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+            "evidence_basis": [
+              "燃料出口占比 20.85%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 20.2%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.43、准备度 0.398（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 fixed_level_trajectory_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：双路径与多部门覆盖意味着其更依赖过渡期安排和情景弹性，同时森林与土地利用治理也是关键组成。",
+              "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：低收入或中低收入样本通常更依赖外部融资支持。"
+            ],
+            "raw_score": 17.05,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 17.05,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": -0.9,
+              "carbon_tariff": -0.0,
+              "climate_finance": 4.05,
+              "tech_transfer": 2.2,
+              "transition_flexibility": 3.6,
+              "ccs_support": 0.0,
+              "adaptation_fund": 4.95,
+              "lulucf_support": 3.45
+            },
+            "positive_points": [
+              "补充适应与损失补偿机制",
+              "增加气候资金与转型补偿安排"
+            ],
+            "concern_points": [
+              "当前方案对“化石能源退出强度”的处理让我们难以接受"
+            ],
+            "asks": [
+              "请针对争议点给出更可执行的妥协版本"
+            ],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "climate_finance": 1,
+                "transition_flexibility": 1,
+                "lulucf_support": 1
+              },
+              "max_tolerances": {
+                "fossil_phaseout": 2,
+                "carbon_tariff": 1
+              },
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "低收入或中低收入样本通常更依赖外部融资支持。",
+                "目标类型依赖情景或强度路径，通常要求一定过渡弹性。",
+                "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+                "资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。"
+              ]
+            },
+            "constraint_violations": [],
+            "statement": "我们支持森林保护与碳汇治理等方向，也欢迎适应融资和损害补偿条款，这符合群岛国家的需求。但当前方案对化石能源退出强度的要求，与印尼作为发展中产煤国的转型现实存在较大落差，我们难以全盘接受。希望各方能拿出一套更可执行的妥协版本，给予足够长的过渡安排与技术资金支持，让我们能走稳低碳兼容发展道路。"
+          },
+          {
+            "agent_id": "sau",
+            "role": "沙特阿拉伯",
+            "bloc": "化石能源出口国样本",
+            "description": "沙特阿拉伯作为化石能源出口国样本进入推演。 当前承诺摘要：以动态基线方式，在 2040 年前实现每年 3.35 亿吨 CO2 当量的减排、避免和移除。",
+            "design_rationale": "以沙特阿拉伯的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+            "evidence_basis": [
+              "燃料出口占比 79.4%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 0.1%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.408、准备度 0.573（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2040，类型 base_year_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：动态基线和资源型经济背景意味着其承诺解读需要结合出口结构与能源依赖度，不能只看表面减排数字。",
+              "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。"
+            ],
+            "raw_score": 4.35,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 3.15,
+            "status": "conditional_support",
+            "status_label": "有保留地支持",
+            "contributions": {
+              "fossil_phaseout": -1.6,
+              "carbon_tariff": -0.0,
+              "climate_finance": 1.95,
+              "tech_transfer": 0.0,
+              "transition_flexibility": 1.5,
+              "ccs_support": 0.0,
+              "adaptation_fund": 0.9,
+              "lulucf_support": 2.1
+            },
+            "positive_points": [
+              "强化森林保护、碳汇和土地利用治理安排",
+              "增加气候资金与转型补偿安排"
+            ],
+            "concern_points": [
+              "当前方案对“化石能源退出强度”的处理让我们难以接受",
+              "根据其公开承诺与现实约束，沙特阿拉伯至少需要“CCS 过渡技术支持”达到 1"
+            ],
+            "asks": [
+              "保留 CCS 等过渡技术路线"
+            ],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "lulucf_support": 1,
+                "ccs_support": 1
+              },
+              "max_tolerances": {
+                "fossil_phaseout": 1,
+                "carbon_tariff": 1
+              },
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+                "高燃料出口依赖意味着难以接受过强的化石退出或碳边境约束。"
+              ]
+            },
+            "constraint_violations": [
+              {
+                "type": "min_requirement",
+                "feature": "CCS 过渡技术支持",
+                "required": 1,
+                "actual": 0,
+                "message": "根据其公开承诺与现实约束，沙特阿拉伯至少需要“CCS 过渡技术支持”达到 1"
+              }
+            ],
+            "statement": "我们认可在森林保护、碳汇和土地利用治理方面的努力，也欢迎增加气候资金与转型补偿的安排。但任何要求急速削减化石能源的强度，不符合我们当前的经济现实；若要我们更积极参与，必须明确保留碳捕集与封存等过渡技术路线，并提供相应的技术支持。"
+          },
+          {
+            "agent_id": "fji",
+            "role": "斐济",
+            "bloc": "小岛屿高脆弱国家样本",
+            "description": "斐济作为小岛屿高脆弱国家样本进入推演。 当前承诺摘要：到 2035 年将能源部门 BAU CO2 当量排放降低 36%，其中 12% 为无条件减排，其余部分依赖更多支持。",
+            "design_rationale": "以斐济的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Third NDC。",
+            "evidence_basis": [
+              "燃料出口占比当前缺失可比值（来源 World Bank Open Data API）",
+              "可再生能源占最终能源消费 28.4%（2022，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.453、准备度 0.477（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 baseline_scenario_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：无条件与条件性减排比例被明确区分，非常适合用来模拟小岛屿国家在融资与支持谈判中的真实立场。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：NDC 摘要明确写出融资/支持条件，应视为谈判硬约束。"
+            ],
+            "raw_score": 16.05,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 16.05,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": -0.2,
+              "carbon_tariff": -0.0,
+              "climate_finance": 5.4,
+              "tech_transfer": 2.2,
+              "transition_flexibility": 2.7,
+              "ccs_support": -0.0,
+              "adaptation_fund": 4.95,
+              "lulucf_support": 1.35
+            },
+            "positive_points": [
+              "增加气候资金与转型补偿安排",
+              "补充适应与损失补偿机制"
+            ],
+            "concern_points": [],
+            "asks": [],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "climate_finance": 2,
+                "transition_flexibility": 1
+              },
+              "max_tolerances": {},
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "NDC 摘要明确写出融资/支持条件，应视为谈判硬约束。",
+                "目标类型依赖情景或强度路径，通常要求一定过渡弹性。"
+              ]
+            },
+            "constraint_violations": [],
+            "statement": "斐济强烈支持这一政策方向。作为小岛屿发展中国家，我们亟需适应融资、损失损害补偿与技术转移机制来应对日益加剧的气候威胁，森林和碳汇保护对增强气候韧性同样关键。我们希望这些承诺能尽快转化为可预测、可获取的支持，帮助我们实现更有雄心的减排目标。"
+          },
+          {
+            "agent_id": "bgd",
+            "role": "孟加拉国",
+            "bloc": "高脆弱低收入国家样本",
+            "description": "孟加拉国作为高脆弱低收入国家样本进入推演。 当前承诺摘要：2026 至 2035 年累计减排约 84.97 MtCO2eq；2035 年无条件减排为 BAU 之下 6.39%，条件性部分再额外减排 13.92%，前提是获得充足、可预测、额外且新的国际气候融资。",
+            "design_rationale": "以孟加拉国的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Third NDC。",
+            "evidence_basis": [
+              "燃料出口占比 1.1%（2018，World Bank Open Data API）",
+              "可再生能源占最终能源消费 25.0%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.568、准备度 0.279（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 baseline_scenario_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：该 NDC 对国际气候融资依赖写得非常明确，因此融资与适应支持应视为其谈判硬约束，而非普通偏好。",
+              "约束依据：高脆弱国家需要更明确的适应与损失损害安排。",
+              "约束依据：低收入或中低收入样本通常更依赖外部融资支持。"
+            ],
+            "raw_score": 16.05,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 16.05,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": -0.2,
+              "carbon_tariff": -0.0,
+              "climate_finance": 5.4,
+              "tech_transfer": 2.2,
+              "transition_flexibility": 2.7,
+              "ccs_support": -0.0,
+              "adaptation_fund": 4.95,
+              "lulucf_support": 1.35
+            },
+            "positive_points": [
+              "增加气候资金与转型补偿安排",
+              "补充适应与损失补偿机制"
+            ],
+            "concern_points": [],
+            "asks": [],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 2,
+                "climate_finance": 2,
+                "transition_flexibility": 1
+              },
+              "max_tolerances": {},
+              "rationale": [
+                "高脆弱国家需要更明确的适应与损失损害安排。",
+                "低收入或中低收入样本通常更依赖外部融资支持。",
+                "NDC 摘要明确写出融资/支持条件，应视为谈判硬约束。",
+                "目标类型依赖情景或强度路径，通常要求一定过渡弹性。"
+              ]
+            },
+            "constraint_violations": [],
+            "statement": "作为气候脆弱国家，我们支持推动森林保护与碳汇治理的方向，并欢迎设立适应融资和损失损害补偿机制。这些安排正是孟加拉国实现更高减排雄心的前提，我们呼吁确保资金充足、可预测且额外，以支撑我们脆弱社区的气候韧性与公正转型。"
+          }
+        ],
+        "summary_text": "各角色先依据自身约束条件给出初始表态。"
+      },
+      {
+        "stage_id": "conflict_id",
+        "label": "冲突识别",
+        "summary_text": "初始表态阶段判断：主要冲突集中在化石能源退出强度、气候资金支持、过渡期灵活性；建议优先处理：提高碳边境约束强度。",
+        "top_concerns": [
+          "化石能源退出强度",
+          "气候资金支持",
+          "过渡期灵活性"
+        ],
+        "status_counter": {
+          "support": 5,
+          "conditional_support": 2,
+          "conditional_oppose": 2,
+          "oppose": 0
+        }
+      },
+      {
+        "stage_id": "alliance_mapping",
+        "label": "联盟与分裂",
+        "alliances": [
+          {
+            "name": "高雄心联盟",
+            "members": [
+              "德国",
+              "美国",
+              "中国",
+              "巴西",
+              "印度",
+              "印度尼西亚",
+              "沙特阿拉伯",
+              "斐济",
+              "孟加拉国"
+            ],
+            "basis": "共同支持更强减排或更明确的脆弱国家补偿安排。"
+          },
+          {
+            "name": "公平融资联盟",
+            "members": [
+              "德国",
+              "美国"
+            ],
+            "basis": "希望把资金、适应和能力建设写进最终方案。"
+          },
+          {
+            "name": "过渡缓冲联盟",
+            "members": [
+              "印度",
+              "印度尼西亚",
+              "沙特阿拉伯",
+              "斐济",
+              "孟加拉国"
+            ],
+            "basis": "强调更长过渡期、CCS 或避免过快退出造成的冲击。"
+          },
+          {
+            "name": "森林与碳汇联盟",
+            "members": [
+              "德国",
+              "中国",
+              "巴西",
+              "印度",
+              "印度尼西亚",
+              "沙特阿拉伯",
+              "斐济",
+              "孟加拉国"
+            ],
+            "basis": "强调森林保护、土地利用治理和碳汇贡献在整体减排中的作用。"
+          }
+        ],
+        "splinters": [
+          {
+            "role": "德国",
+            "status": "有保留地反对",
+            "note": "立场处在中间地带，可能成为交换条件中的关键摇摆方。"
+          },
+          {
+            "role": "美国",
+            "status": "有保留地反对",
+            "note": "立场处在中间地带，可能成为交换条件中的关键摇摆方。"
+          },
+          {
+            "role": "中国",
+            "status": "有保留地支持",
+            "note": "立场处在中间地带，可能成为交换条件中的关键摇摆方。"
+          },
+          {
+            "role": "沙特阿拉伯",
+            "status": "有保留地支持",
+            "note": "立场处在中间地带，可能成为交换条件中的关键摇摆方。"
+          }
+        ],
+        "summary_text": "根据共同诉求识别潜在联盟与关键摇摆方。"
+      },
+      {
+        "stage_id": "bargaining",
+        "label": "条件交换",
+        "adjustments": {
+          "fossil_phaseout": 0,
+          "carbon_tariff": 1,
+          "climate_finance": 0,
+          "tech_transfer": 0,
+          "transition_flexibility": 0,
+          "ccs_support": 0,
+          "adaptation_fund": 0,
+          "lulucf_support": 0
+        },
+        "tradeoffs": [],
+        "summary_text": "条件交换阶段围绕 提高碳边境约束强度 展开；主要需要在 高雄心联盟、公平融资联盟、过渡缓冲联盟、森林与碳汇联盟 之间达成最小可接受交换。"
+      },
+      {
+        "stage_id": "secretariat_revision",
+        "label": "秘书处修订",
+        "policy_attributes": {
+          "fossil_phaseout": 1,
+          "carbon_tariff": 1,
+          "climate_finance": 3,
+          "tech_transfer": 2,
+          "transition_flexibility": 2,
+          "ccs_support": 0,
+          "adaptation_fund": 3,
+          "lulucf_support": 3
+        },
+        "feature_deltas": [
+          {
+            "feature": "化石能源退出强度",
+            "before": 1,
+            "after": 1,
+            "delta": 0
+          },
+          {
+            "feature": "碳边境约束强度",
+            "before": 0,
+            "after": 1,
+            "delta": 1
+          },
+          {
+            "feature": "气候资金支持",
+            "before": 3,
+            "after": 3,
+            "delta": 0
+          },
+          {
+            "feature": "技术转移支持",
+            "before": 2,
+            "after": 2,
+            "delta": 0
+          },
+          {
+            "feature": "过渡期灵活性",
+            "before": 2,
+            "after": 2,
+            "delta": 0
+          },
+          {
+            "feature": "CCS 过渡技术支持",
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          {
+            "feature": "适应/损失补偿支持",
+            "before": 3,
+            "after": 3,
+            "delta": 0
+          },
+          {
+            "feature": "森林/LULUCF 支持",
+            "before": 3,
+            "after": 3,
+            "delta": 0
+          }
+        ],
+        "summary_text": "秘书处据此形成修订文本：提高碳边境约束强度。"
+      },
+      {
+        "stage_id": "final_vote",
+        "label": "最终表决",
+        "policy_attributes": {
+          "fossil_phaseout": 1,
+          "carbon_tariff": 1,
+          "climate_finance": 3,
+          "tech_transfer": 2,
+          "transition_flexibility": 2,
+          "ccs_support": 0,
+          "adaptation_fund": 3,
+          "lulucf_support": 3
+        },
+        "agent_results": [
+          {
+            "agent_id": "deu",
+            "role": "德国",
+            "bloc": "发达经济体样本",
+            "description": "德国作为发达经济体样本进入推演。 当前承诺摘要：到 2040 年实现经济全范围净排放相对 1990 年下降，并对应到 2035 年实现约 66.25% 至 72.5% 的温室气体净减排。",
+            "design_rationale": "以德国的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Updated First NDC / EU-linked entry for Germany。",
+            "evidence_basis": [
+              "燃料出口占比 2.07%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 17.6%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.301、准备度 0.682（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2040，类型 base_year_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：以欧盟整体承诺框架为主，不宜将其直接等同为德国单一国家独立承诺。",
+              "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。"
+            ],
+            "raw_score": 2.9,
+            "raw_status": "conditional_support",
+            "raw_status_label": "有保留地支持",
+            "score": 1.7,
+            "status": "conditional_support",
+            "status_label": "有保留地支持",
+            "contributions": {
+              "fossil_phaseout": 0.85,
+              "carbon_tariff": 1.0,
+              "climate_finance": -1.35,
+              "tech_transfer": -0.4,
+              "transition_flexibility": -0.7,
+              "ccs_support": 0.0,
+              "adaptation_fund": 0.15,
+              "lulucf_support": 2.55
+            },
+            "positive_points": [
+              "强化森林保护、碳汇和土地利用治理安排",
+              "以更强的边境约束推动减排责任传导"
+            ],
+            "concern_points": [
+              "当前方案对“气候资金支持”的处理让我们难以接受",
+              "当前方案对“过渡期灵活性”的处理让我们难以接受",
+              "根据其公开承诺与现实约束，德国至少需要“化石能源退出强度”达到 2"
+            ],
+            "asks": [
+              "增加更清晰的化石能源退出时间表",
+              "保留一定强度的国际规则约束"
+            ],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "lulucf_support": 1,
+                "fossil_phaseout": 2
+              },
+              "max_tolerances": {
+                "transition_flexibility": 2
+              },
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+                "高收入且准备度较高的样本更可能坚持较明确的减排方向。",
+                "高准备度样本通常不希望过长过渡期弱化承诺可信度。"
+              ]
+            },
+            "constraint_violations": [
+              {
+                "type": "min_requirement",
+                "feature": "化石能源退出强度",
+                "required": 2,
+                "actual": 1,
+                "message": "根据其公开承诺与现实约束，德国至少需要“化石能源退出强度”达到 2"
+              }
+            ],
+            "statement": "我们支持强化森林保护、碳汇和土地利用治理，并认可通过更强的边境约束推动减排责任传导。但当前文本在气候资金安排和过渡期灵活性上缺乏足够雄心，难以匹配发达经济体的历史责任与现实能力；我们需要看到更清晰的化石能源退出时间表，并保留具有约束力的国际规则框架，以确保全球减排努力不会倒退。"
+          },
+          {
+            "agent_id": "usa",
+            "role": "美国",
+            "bloc": "发达大国样本",
+            "description": "美国作为发达大国样本进入推演。 当前承诺摘要：到 2035 年将净温室气体排放相对 2005 年降低 61% 至 66%，并沿着通往 2050 年净零的直线或更陡路径推进。",
+            "design_rationale": "以美国的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+            "evidence_basis": [
+              "燃料出口占比 18.31%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 10.9%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.312、准备度 0.647（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 base_year_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：该 NDC 已提交但美国自 2025 年 1 月起不再拥有活跃 NDC；在模拟中只能视为“最新已提交承诺参考”，不能等同于当前稳定有效的国际承诺。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。"
+            ],
+            "raw_score": 1.15,
+            "raw_status": "conditional_oppose",
+            "raw_status_label": "有保留地反对",
+            "score": -0.05,
+            "status": "conditional_oppose",
+            "status_label": "有保留地反对",
+            "contributions": {
+              "fossil_phaseout": 0.15,
+              "carbon_tariff": 0.8,
+              "climate_finance": -1.35,
+              "tech_transfer": 0.0,
+              "transition_flexibility": 0.0,
+              "ccs_support": 0.0,
+              "adaptation_fund": 0.9,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "补充适应与损失补偿机制",
+              "以更强的边境约束推动减排责任传导"
+            ],
+            "concern_points": [
+              "当前方案对“气候资金支持”的处理让我们难以接受",
+              "根据其公开承诺与现实约束，美国至少需要“化石能源退出强度”达到 2"
+            ],
+            "asks": [
+              "保留一定强度的国际规则约束",
+              "增加更清晰的化石能源退出时间表"
+            ],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "fossil_phaseout": 2
+              },
+              "max_tolerances": {
+                "fossil_phaseout": 2,
+                "carbon_tariff": 1
+              },
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。",
+                "高收入且准备度较高的样本更可能坚持较明确的减排方向。"
+              ]
+            },
+            "constraint_violations": [
+              {
+                "type": "min_requirement",
+                "feature": "化石能源退出强度",
+                "required": 2,
+                "actual": 1,
+                "message": "根据其公开承诺与现实约束，美国至少需要“化石能源退出强度”达到 2"
+              }
+            ],
+            "statement": "我们认可补充适应融资与损失损害机制的重要性，也支持通过边境约束传导减排责任。但当前方案的气候资金安排欠缺公平性，且没有给出清晰的化石能源退出时间表，这让我们难以完全接受。若要争取我方支持，需要纳入更有力的国际规则约束和明确的退出路径。"
+          },
+          {
+            "agent_id": "chn",
+            "role": "中国",
+            "bloc": "大型新兴经济体样本",
+            "description": "中国作为大型新兴经济体样本进入推演。 当前承诺摘要：到 2035 年，全国经济全范围净温室气体排放较峰值水平下降 7% 至 10%，并争取取得更好结果。",
+            "design_rationale": "以中国的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Third NDC。",
+            "evidence_basis": [
+              "燃料出口占比 1.5%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 15.2%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.382、准备度 0.556（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 trajectory_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：当前摘要来自 WRI 对中文原文的结构化整理；正式引用时应优先回到官方中文 PDF。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。"
+            ],
+            "raw_score": 3.4,
+            "raw_status": "conditional_support",
+            "raw_status_label": "有保留地支持",
+            "score": 3.4,
+            "status": "conditional_support",
+            "status_label": "有保留地支持",
+            "contributions": {
+              "fossil_phaseout": 0.25,
+              "carbon_tariff": -0.35,
+              "climate_finance": 0.0,
+              "tech_transfer": 1.5,
+              "transition_flexibility": 0.0,
+              "ccs_support": 0.0,
+              "adaptation_fund": 0.9,
+              "lulucf_support": 0.75
+            },
+            "positive_points": [
+              "提供更可落地的技术转移与能力建设",
+              "补充适应与损失补偿机制"
+            ],
+            "concern_points": [],
+            "asks": [],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1
+              },
+              "max_tolerances": {},
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。"
+              ]
+            },
+            "constraint_violations": [],
+            "statement": "中国注意到案文在森林碳汇、适应融资以及技术转移等方面作出了积极安排，这与我们强调的可落地技术转移与能力建设、补充适应和损失补偿机制的方向是一致的。我们将继续按照自身国情推进2035年净排放较峰值下降7-10%的目标，同时期待这些机制能够尽快具体化和可操作化，为发展中国家提供切实支持。"
+          },
+          {
+            "agent_id": "bra",
+            "role": "巴西",
+            "bloc": "森林型新兴经济体样本",
+            "description": "巴西作为森林型新兴经济体样本进入推演。 当前承诺摘要：到 2035 年将净温室气体排放相对 2005 年降低 59% 至 67%，对应绝对排放水平约 1.05 至 0.85 GtCO2e。",
+            "design_rationale": "以巴西的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+            "evidence_basis": [
+              "燃料出口占比 16.96%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 46.5%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.369、准备度 0.35（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 base_year_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：当前摘要未像部分高脆弱国家那样明确写出融资条件性，但其目标落地高度依赖森林与土地利用治理。",
+              "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。"
+            ],
+            "raw_score": 7.45,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 7.45,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": -0.1,
+              "carbon_tariff": -0.55,
+              "climate_finance": 2.1,
+              "tech_transfer": 2.2,
+              "transition_flexibility": 0.0,
+              "ccs_support": 0.0,
+              "adaptation_fund": 0.9,
+              "lulucf_support": 2.85
+            },
+            "positive_points": [
+              "强化森林保护、碳汇和土地利用治理安排",
+              "提供更可落地的技术转移与能力建设"
+            ],
+            "concern_points": [
+              "当前方案对“碳边境约束强度”的处理让我们难以接受"
+            ],
+            "asks": [
+              "请针对争议点给出更可执行的妥协版本"
+            ],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "lulucf_support": 1,
+                "fossil_phaseout": 1
+              },
+              "max_tolerances": {
+                "fossil_phaseout": 2,
+                "carbon_tariff": 1
+              },
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+                "资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。",
+                "绝对量或基准年目标通常要求至少保留一定减排雄心。"
+              ]
+            },
+            "constraint_violations": [],
+            "statement": "我们整体支持政策文本中对森林保护、碳汇和土地利用治理的强化安排，这与巴西的国家优先事项高度契合。但在碳边境约束强度问题上，当前设计对我们这样依赖大宗商品出口的发展中经济体冲击过大，我们希望各方能拿出更可执行的妥协方案。同时，我们再次呼吁技术转移与能力建设机制必须具体化、可落地，而不仅是口头承诺。"
+          },
+          {
+            "agent_id": "ind",
+            "role": "印度",
+            "bloc": "高脆弱发展中大国样本",
+            "description": "印度作为高脆弱发展中大国样本进入推演。 当前承诺摘要：到 2035 年将 GDP 排放强度相对 2005 年降低 47%；到 2035 年实现约 60% 的累计电力装机容量来自非化石能源；到 2035 年通过森林和树木覆盖额外形成 35-40 亿吨 CO2 当量碳汇。",
+            "design_rationale": "以印度的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+            "evidence_basis": [
+              "燃料出口占比 17.09%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 34.9%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.485、准备度 0.394（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 intensity_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：非化石能源装机目标明确提到需要技术转移和低成本国际融资支持，属于现实谈判中很重要的条件性线索。",
+              "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：低收入或中低收入样本通常更依赖外部融资支持。"
+            ],
+            "raw_score": 17.65,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 17.65,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": -0.9,
+              "carbon_tariff": -0.55,
+              "climate_finance": 5.4,
+              "tech_transfer": 3.1,
+              "transition_flexibility": 2.7,
+              "ccs_support": 0.0,
+              "adaptation_fund": 4.95,
+              "lulucf_support": 3.45
+            },
+            "positive_points": [
+              "增加气候资金与转型补偿安排",
+              "补充适应与损失补偿机制"
+            ],
+            "concern_points": [
+              "当前方案对“化石能源退出强度”的处理让我们难以接受",
+              "当前方案对“碳边境约束强度”的处理让我们难以接受"
+            ],
+            "asks": [
+              "请针对争议点给出更可执行的妥协版本"
+            ],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "climate_finance": 2,
+                "tech_transfer": 1,
+                "transition_flexibility": 1,
+                "lulucf_support": 1
+              },
+              "max_tolerances": {
+                "fossil_phaseout": 2,
+                "carbon_tariff": 1
+              },
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "低收入或中低收入样本通常更依赖外部融资支持。",
+                "NDC 摘要明确写出融资/支持条件，应视为谈判硬约束。",
+                "承诺文本涉及技术转移或能力建设需求。",
+                "目标类型依赖情景或强度路径，通常要求一定过渡弹性。",
+                "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+                "资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。"
+              ]
+            },
+            "constraint_violations": [],
+            "statement": "我们欢迎加强气候资金、适应融资和损失损害补偿机制的方向，这与“共同但有区别的责任”原则一致。但必须坦率指出，当前文本对发展中经济体化石能源退出强度和碳边境约束的安排仍不公平，可能严重限制我们的发展空间。我们要求在这些争议点上拿出更具体、可执行的妥协版本，否则很难接受整体方案。"
+          },
+          {
+            "agent_id": "idn",
+            "role": "印度尼西亚",
+            "bloc": "煤电转型与群岛国家样本",
+            "description": "印度尼西亚作为煤电转型与群岛国家样本进入推演。 当前承诺摘要：在低碳兼容发展路径下，印尼预计 2030 年达峰并在 2035 年继续下降，相较 ENDC CM2 情景在 2030 年低 8% 至 17.5%。",
+            "design_rationale": "以印度尼西亚的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+            "evidence_basis": [
+              "燃料出口占比 20.85%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 20.2%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.43、准备度 0.398（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 fixed_level_trajectory_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：双路径与多部门覆盖意味着其更依赖过渡期安排和情景弹性，同时森林与土地利用治理也是关键组成。",
+              "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：低收入或中低收入样本通常更依赖外部融资支持。"
+            ],
+            "raw_score": 16.5,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 16.5,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": -0.9,
+              "carbon_tariff": -0.55,
+              "climate_finance": 4.05,
+              "tech_transfer": 2.2,
+              "transition_flexibility": 3.6,
+              "ccs_support": 0.0,
+              "adaptation_fund": 4.95,
+              "lulucf_support": 3.45
+            },
+            "positive_points": [
+              "补充适应与损失补偿机制",
+              "增加气候资金与转型补偿安排"
+            ],
+            "concern_points": [
+              "当前方案对“化石能源退出强度”的处理让我们难以接受",
+              "当前方案对“碳边境约束强度”的处理让我们难以接受"
+            ],
+            "asks": [
+              "请针对争议点给出更可执行的妥协版本"
+            ],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "climate_finance": 1,
+                "transition_flexibility": 1,
+                "lulucf_support": 1
+              },
+              "max_tolerances": {
+                "fossil_phaseout": 2,
+                "carbon_tariff": 1
+              },
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "低收入或中低收入样本通常更依赖外部融资支持。",
+                "目标类型依赖情景或强度路径，通常要求一定过渡弹性。",
+                "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+                "资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。"
+              ]
+            },
+            "constraint_violations": [],
+            "statement": "我们支持森林保护、碳汇以及适应融资等机制的整体方向，但当前方案对“化石能源退出强度”和“碳边境约束强度”的设计对印尼这类煤电依赖的群岛国家并不公平，实施压力过大。请针对这两点提出更具弹性的妥协方案，例如设定与各国转型准备度挂钩的退出基准、对出口导向型发展中经济体明确豁免或延迟碳边境约束，并配以可量化的资金与技术支持，我们才能在此基础上进一步协商。"
+          },
+          {
+            "agent_id": "sau",
+            "role": "沙特阿拉伯",
+            "bloc": "化石能源出口国样本",
+            "description": "沙特阿拉伯作为化石能源出口国样本进入推演。 当前承诺摘要：以动态基线方式，在 2040 年前实现每年 3.35 亿吨 CO2 当量的减排、避免和移除。",
+            "design_rationale": "以沙特阿拉伯的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+            "evidence_basis": [
+              "燃料出口占比 79.4%（2024，World Bank Open Data API）",
+              "可再生能源占最终能源消费 0.1%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.408、准备度 0.573（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2040，类型 base_year_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：动态基线和资源型经济背景意味着其承诺解读需要结合出口结构与能源依赖度，不能只看表面减排数字。",
+              "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。"
+            ],
+            "raw_score": 3.6,
+            "raw_status": "conditional_support",
+            "raw_status_label": "有保留地支持",
+            "score": 2.4,
+            "status": "conditional_support",
+            "status_label": "有保留地支持",
+            "contributions": {
+              "fossil_phaseout": -1.6,
+              "carbon_tariff": -0.75,
+              "climate_finance": 1.95,
+              "tech_transfer": 0.0,
+              "transition_flexibility": 1.5,
+              "ccs_support": 0.0,
+              "adaptation_fund": 0.9,
+              "lulucf_support": 2.1
+            },
+            "positive_points": [
+              "强化森林保护、碳汇和土地利用治理安排",
+              "增加气候资金与转型补偿安排"
+            ],
+            "concern_points": [
+              "当前方案对“化石能源退出强度”的处理让我们难以接受",
+              "当前方案对“碳边境约束强度”的处理让我们难以接受",
+              "根据其公开承诺与现实约束，沙特阿拉伯至少需要“CCS 过渡技术支持”达到 1"
+            ],
+            "asks": [
+              "保留 CCS 等过渡技术路线"
+            ],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "lulucf_support": 1,
+                "ccs_support": 1
+              },
+              "max_tolerances": {
+                "fossil_phaseout": 1,
+                "carbon_tariff": 1
+              },
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+                "高燃料出口依赖意味着难以接受过强的化石退出或碳边境约束。"
+              ]
+            },
+            "constraint_violations": [
+              {
+                "type": "min_requirement",
+                "feature": "CCS 过渡技术支持",
+                "required": 1,
+                "actual": 0,
+                "message": "根据其公开承诺与现实约束，沙特阿拉伯至少需要“CCS 过渡技术支持”达到 1"
+              }
+            ],
+            "statement": "我们肯定文本对森林保护、碳汇及气候融资的强化，也注意到对发展中经济体保留了更长过渡期。但当前对化石能源退出强度和碳边境约束的安排仍让我们难以接受，必须明确为碳捕集与封存（CCS）等过渡技术提供支持机制，这样才有可能实现公正、务实的转型。"
+          },
+          {
+            "agent_id": "fji",
+            "role": "斐济",
+            "bloc": "小岛屿高脆弱国家样本",
+            "description": "斐济作为小岛屿高脆弱国家样本进入推演。 当前承诺摘要：到 2035 年将能源部门 BAU CO2 当量排放降低 36%，其中 12% 为无条件减排，其余部分依赖更多支持。",
+            "design_rationale": "以斐济的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Third NDC。",
+            "evidence_basis": [
+              "燃料出口占比当前缺失可比值（来源 World Bank Open Data API）",
+              "可再生能源占最终能源消费 28.4%（2022，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.453、准备度 0.477（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 baseline_scenario_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：无条件与条件性减排比例被明确区分，非常适合用来模拟小岛屿国家在融资与支持谈判中的真实立场。",
+              "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+              "约束依据：NDC 摘要明确写出融资/支持条件，应视为谈判硬约束。"
+            ],
+            "raw_score": 15.7,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 15.7,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": -0.2,
+              "carbon_tariff": -0.35,
+              "climate_finance": 5.4,
+              "tech_transfer": 2.2,
+              "transition_flexibility": 2.7,
+              "ccs_support": -0.0,
+              "adaptation_fund": 4.95,
+              "lulucf_support": 1.35
+            },
+            "positive_points": [
+              "增加气候资金与转型补偿安排",
+              "补充适应与损失补偿机制"
+            ],
+            "concern_points": [],
+            "asks": [],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 1,
+                "climate_finance": 2,
+                "transition_flexibility": 1
+              },
+              "max_tolerances": {},
+              "rationale": [
+                "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+                "NDC 摘要明确写出融资/支持条件，应视为谈判硬约束。",
+                "目标类型依赖情景或强度路径，通常要求一定过渡弹性。"
+              ]
+            },
+            "constraint_violations": [],
+            "statement": "斐济欢迎这一政策方向。对我们这样的小岛屿国家，强化适应融资、损失损害支持与技术转移机制，并给予发展中经济体更长过渡期，是生存与发展的关键保障。我们期待这些承诺能通过具体、可及的资金安排得到切实落实。"
+          },
+          {
+            "agent_id": "bgd",
+            "role": "孟加拉国",
+            "bloc": "高脆弱低收入国家样本",
+            "description": "孟加拉国作为高脆弱低收入国家样本进入推演。 当前承诺摘要：2026 至 2035 年累计减排约 84.97 MtCO2eq；2035 年无条件减排为 BAU 之下 6.39%，条件性部分再额外减排 13.92%，前提是获得充足、可预测、额外且新的国际气候融资。",
+            "design_rationale": "以孟加拉国的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Third NDC。",
+            "evidence_basis": [
+              "燃料出口占比 1.1%（2018，World Bank Open Data API）",
+              "可再生能源占最终能源消费 25.0%（2021，World Bank Open Data API）",
+              "ND-GAIN 脆弱性 0.568、准备度 0.279（2023，ND-GAIN Country Index）",
+              "NDC 摘要：目标年份 2035，类型 baseline_scenario_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+              "承诺解释提示：该 NDC 对国际气候融资依赖写得非常明确，因此融资与适应支持应视为其谈判硬约束，而非普通偏好。",
+              "约束依据：高脆弱国家需要更明确的适应与损失损害安排。",
+              "约束依据：低收入或中低收入样本通常更依赖外部融资支持。"
+            ],
+            "raw_score": 15.7,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 15.7,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": -0.2,
+              "carbon_tariff": -0.35,
+              "climate_finance": 5.4,
+              "tech_transfer": 2.2,
+              "transition_flexibility": 2.7,
+              "ccs_support": -0.0,
+              "adaptation_fund": 4.95,
+              "lulucf_support": 1.35
+            },
+            "positive_points": [
+              "增加气候资金与转型补偿安排",
+              "补充适应与损失补偿机制"
+            ],
+            "concern_points": [],
+            "asks": [],
+            "constraint_profile": {
+              "min_requirements": {
+                "adaptation_fund": 2,
+                "climate_finance": 2,
+                "transition_flexibility": 1
+              },
+              "max_tolerances": {},
+              "rationale": [
+                "高脆弱国家需要更明确的适应与损失损害安排。",
+                "低收入或中低收入样本通常更依赖外部融资支持。",
+                "NDC 摘要明确写出融资/支持条件，应视为谈判硬约束。",
+                "目标类型依赖情景或强度路径，通常要求一定过渡弹性。"
+              ]
+            },
+            "constraint_violations": [],
+            "statement": "孟加拉国欢迎将适应融资、损失损害支持和技术转移机制纳入政策文本，这对高度脆弱国家至关重要。我们强调，只有获得充足、可预测且额外的国际气候资金，才能落实我们的有条件减排承诺，并为森林保护等行动提供保障。支持为发展中经济体保留更长过渡期，这体现了公平与共同但有区别的责任原则。"
+          }
+        ],
+        "summary_text": "最终表决阶段判断：主要冲突集中在化石能源退出强度、碳边境约束强度、气候资金支持；建议优先处理：保持现有政策框架。",
+        "status_counter": {
+          "support": 5,
+          "conditional_support": 3,
+          "conditional_oppose": 1,
+          "oppose": 0
+        }
+      }
+    ],
+    "alliance_map": {
+      "alliances": [
+        {
+          "name": "高雄心联盟",
+          "members": [
+            "德国",
+            "美国",
+            "中国",
+            "巴西",
+            "印度",
+            "印度尼西亚",
+            "沙特阿拉伯",
+            "斐济",
+            "孟加拉国"
+          ],
+          "basis": "共同支持更强减排或更明确的脆弱国家补偿安排。"
+        },
+        {
+          "name": "公平融资联盟",
+          "members": [
+            "德国",
+            "美国"
+          ],
+          "basis": "希望把资金、适应和能力建设写进最终方案。"
+        },
+        {
+          "name": "过渡缓冲联盟",
+          "members": [
+            "印度",
+            "印度尼西亚",
+            "沙特阿拉伯",
+            "斐济",
+            "孟加拉国"
+          ],
+          "basis": "强调更长过渡期、CCS 或避免过快退出造成的冲击。"
+        },
+        {
+          "name": "森林与碳汇联盟",
+          "members": [
+            "德国",
+            "中国",
+            "巴西",
+            "印度",
+            "印度尼西亚",
+            "沙特阿拉伯",
+            "斐济",
+            "孟加拉国"
+          ],
+          "basis": "强调森林保护、土地利用治理和碳汇贡献在整体减排中的作用。"
+        }
+      ],
+      "splinters": [
+        {
+          "role": "德国",
+          "status": "有保留地反对",
+          "note": "立场处在中间地带，可能成为交换条件中的关键摇摆方。"
+        },
+        {
+          "role": "美国",
+          "status": "有保留地反对",
+          "note": "立场处在中间地带，可能成为交换条件中的关键摇摆方。"
+        },
+        {
+          "role": "中国",
+          "status": "有保留地支持",
+          "note": "立场处在中间地带，可能成为交换条件中的关键摇摆方。"
+        },
+        {
+          "role": "沙特阿拉伯",
+          "status": "有保留地支持",
+          "note": "立场处在中间地带，可能成为交换条件中的关键摇摆方。"
+        }
+      ]
+    },
+    "feature_deltas": [
+      {
+        "feature": "化石能源退出强度",
+        "before": 1,
+        "after": 1,
+        "delta": 0
+      },
+      {
+        "feature": "碳边境约束强度",
+        "before": 0,
+        "after": 1,
+        "delta": 1
+      },
+      {
+        "feature": "气候资金支持",
+        "before": 3,
+        "after": 3,
+        "delta": 0
+      },
+      {
+        "feature": "技术转移支持",
+        "before": 2,
+        "after": 2,
+        "delta": 0
+      },
+      {
+        "feature": "过渡期灵活性",
+        "before": 2,
+        "after": 2,
+        "delta": 0
+      },
+      {
+        "feature": "CCS 过渡技术支持",
+        "before": 0,
+        "after": 0,
+        "delta": 0
+      },
+      {
+        "feature": "适应/损失补偿支持",
+        "before": 3,
+        "after": 3,
+        "delta": 0
+      },
+      {
+        "feature": "森林/LULUCF 支持",
+        "before": 3,
+        "after": 3,
+        "delta": 0
+      }
+    ],
+    "vote_shift": [
+      {
+        "role": "德国",
+        "bloc": "发达经济体样本",
+        "initial_status": "有保留地反对",
+        "final_status": "有保留地支持",
+        "score_change": 1.0
+      },
+      {
+        "role": "美国",
+        "bloc": "发达大国样本",
+        "initial_status": "有保留地反对",
+        "final_status": "有保留地反对",
+        "score_change": 0.8
+      },
+      {
+        "role": "中国",
+        "bloc": "大型新兴经济体样本",
+        "initial_status": "有保留地支持",
+        "final_status": "有保留地支持",
+        "score_change": -0.35
+      },
+      {
+        "role": "巴西",
+        "bloc": "森林型新兴经济体样本",
+        "initial_status": "支持",
+        "final_status": "支持",
+        "score_change": -0.55
+      },
+      {
+        "role": "印度",
+        "bloc": "高脆弱发展中大国样本",
+        "initial_status": "支持",
+        "final_status": "支持",
+        "score_change": -0.55
+      },
+      {
+        "role": "印度尼西亚",
+        "bloc": "煤电转型与群岛国家样本",
+        "initial_status": "支持",
+        "final_status": "支持",
+        "score_change": -0.55
+      },
+      {
+        "role": "沙特阿拉伯",
+        "bloc": "化石能源出口国样本",
+        "initial_status": "有保留地支持",
+        "final_status": "有保留地支持",
+        "score_change": -0.75
+      },
+      {
+        "role": "斐济",
+        "bloc": "小岛屿高脆弱国家样本",
+        "initial_status": "支持",
+        "final_status": "支持",
+        "score_change": -0.35
+      },
+      {
+        "role": "孟加拉国",
+        "bloc": "高脆弱低收入国家样本",
+        "initial_status": "支持",
+        "final_status": "支持",
+        "score_change": -0.35
+      }
+    ],
+    "agent_catalog": [
+      {
+        "role": "德国",
+        "bloc": "发达经济体样本",
+        "description": "德国作为发达经济体样本进入推演。 当前承诺摘要：到 2040 年实现经济全范围净排放相对 1990 年下降，并对应到 2035 年实现约 66.25% 至 72.5% 的温室气体净减排。",
+        "design_rationale": "以德国的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Updated First NDC / EU-linked entry for Germany。",
+        "evidence_basis": [
+          "燃料出口占比 2.07%（2024，World Bank Open Data API）",
+          "可再生能源占最终能源消费 17.6%（2021，World Bank Open Data API）",
+          "ND-GAIN 脆弱性 0.301、准备度 0.682（2023，ND-GAIN Country Index）",
+          "NDC 摘要：目标年份 2040，类型 base_year_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+          "承诺解释提示：以欧盟整体承诺框架为主，不宜将其直接等同为德国单一国家独立承诺。",
+          "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+          "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+          "约束依据：其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。"
+        ],
+        "constraint_profile": {
+          "min_requirements": {
+            "adaptation_fund": 1,
+            "lulucf_support": 1,
+            "fossil_phaseout": 2
+          },
+          "max_tolerances": {
+            "transition_flexibility": 2
+          },
+          "rationale": [
+            "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+            "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+            "高收入且准备度较高的样本更可能坚持较明确的减排方向。",
+            "高准备度样本通常不希望过长过渡期弱化承诺可信度。"
+          ]
+        }
+      },
+      {
+        "role": "美国",
+        "bloc": "发达大国样本",
+        "description": "美国作为发达大国样本进入推演。 当前承诺摘要：到 2035 年将净温室气体排放相对 2005 年降低 61% 至 66%，并沿着通往 2050 年净零的直线或更陡路径推进。",
+        "design_rationale": "以美国的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+        "evidence_basis": [
+          "燃料出口占比 18.31%（2024，World Bank Open Data API）",
+          "可再生能源占最终能源消费 10.9%（2021，World Bank Open Data API）",
+          "ND-GAIN 脆弱性 0.312、准备度 0.647（2023，ND-GAIN Country Index）",
+          "NDC 摘要：目标年份 2035，类型 base_year_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+          "承诺解释提示：该 NDC 已提交但美国自 2025 年 1 月起不再拥有活跃 NDC；在模拟中只能视为“最新已提交承诺参考”，不能等同于当前稳定有效的国际承诺。",
+          "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+          "约束依据：资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。"
+        ],
+        "constraint_profile": {
+          "min_requirements": {
+            "adaptation_fund": 1,
+            "fossil_phaseout": 2
+          },
+          "max_tolerances": {
+            "fossil_phaseout": 2,
+            "carbon_tariff": 1
+          },
+          "rationale": [
+            "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+            "资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。",
+            "高收入且准备度较高的样本更可能坚持较明确的减排方向。"
+          ]
+        }
+      },
+      {
+        "role": "中国",
+        "bloc": "大型新兴经济体样本",
+        "description": "中国作为大型新兴经济体样本进入推演。 当前承诺摘要：到 2035 年，全国经济全范围净温室气体排放较峰值水平下降 7% 至 10%，并争取取得更好结果。",
+        "design_rationale": "以中国的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Third NDC。",
+        "evidence_basis": [
+          "燃料出口占比 1.5%（2024，World Bank Open Data API）",
+          "可再生能源占最终能源消费 15.2%（2021，World Bank Open Data API）",
+          "ND-GAIN 脆弱性 0.382、准备度 0.556（2023，ND-GAIN Country Index）",
+          "NDC 摘要：目标年份 2035，类型 trajectory_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+          "承诺解释提示：当前摘要来自 WRI 对中文原文的结构化整理；正式引用时应优先回到官方中文 PDF。",
+          "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。"
+        ],
+        "constraint_profile": {
+          "min_requirements": {
+            "adaptation_fund": 1
+          },
+          "max_tolerances": {},
+          "rationale": [
+            "已公开承诺包含适应内容，因此不能完全忽略适应议题。"
+          ]
+        }
+      },
+      {
+        "role": "巴西",
+        "bloc": "森林型新兴经济体样本",
+        "description": "巴西作为森林型新兴经济体样本进入推演。 当前承诺摘要：到 2035 年将净温室气体排放相对 2005 年降低 59% 至 67%，对应绝对排放水平约 1.05 至 0.85 GtCO2e。",
+        "design_rationale": "以巴西的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+        "evidence_basis": [
+          "燃料出口占比 16.96%（2024，World Bank Open Data API）",
+          "可再生能源占最终能源消费 46.5%（2021，World Bank Open Data API）",
+          "ND-GAIN 脆弱性 0.369、准备度 0.35（2023，ND-GAIN Country Index）",
+          "NDC 摘要：目标年份 2035，类型 base_year_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+          "承诺解释提示：当前摘要未像部分高脆弱国家那样明确写出融资条件性，但其目标落地高度依赖森林与土地利用治理。",
+          "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+          "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+          "约束依据：其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。"
+        ],
+        "constraint_profile": {
+          "min_requirements": {
+            "adaptation_fund": 1,
+            "lulucf_support": 1,
+            "fossil_phaseout": 1
+          },
+          "max_tolerances": {
+            "fossil_phaseout": 2,
+            "carbon_tariff": 1
+          },
+          "rationale": [
+            "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+            "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+            "资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。",
+            "绝对量或基准年目标通常要求至少保留一定减排雄心。"
+          ]
+        }
+      },
+      {
+        "role": "印度",
+        "bloc": "高脆弱发展中大国样本",
+        "description": "印度作为高脆弱发展中大国样本进入推演。 当前承诺摘要：到 2035 年将 GDP 排放强度相对 2005 年降低 47%；到 2035 年实现约 60% 的累计电力装机容量来自非化石能源；到 2035 年通过森林和树木覆盖额外形成 35-40 亿吨 CO2 当量碳汇。",
+        "design_rationale": "以印度的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+        "evidence_basis": [
+          "燃料出口占比 17.09%（2024，World Bank Open Data API）",
+          "可再生能源占最终能源消费 34.9%（2021，World Bank Open Data API）",
+          "ND-GAIN 脆弱性 0.485、准备度 0.394（2023，ND-GAIN Country Index）",
+          "NDC 摘要：目标年份 2035，类型 intensity_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+          "承诺解释提示：非化石能源装机目标明确提到需要技术转移和低成本国际融资支持，属于现实谈判中很重要的条件性线索。",
+          "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+          "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+          "约束依据：低收入或中低收入样本通常更依赖外部融资支持。"
+        ],
+        "constraint_profile": {
+          "min_requirements": {
+            "adaptation_fund": 1,
+            "climate_finance": 2,
+            "tech_transfer": 1,
+            "transition_flexibility": 1,
+            "lulucf_support": 1
+          },
+          "max_tolerances": {
+            "fossil_phaseout": 2,
+            "carbon_tariff": 1
+          },
+          "rationale": [
+            "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+            "低收入或中低收入样本通常更依赖外部融资支持。",
+            "NDC 摘要明确写出融资/支持条件，应视为谈判硬约束。",
+            "承诺文本涉及技术转移或能力建设需求。",
+            "目标类型依赖情景或强度路径，通常要求一定过渡弹性。",
+            "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+            "资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。"
+          ]
+        }
+      },
+      {
+        "role": "印度尼西亚",
+        "bloc": "煤电转型与群岛国家样本",
+        "description": "印度尼西亚作为煤电转型与群岛国家样本进入推演。 当前承诺摘要：在低碳兼容发展路径下，印尼预计 2030 年达峰并在 2035 年继续下降，相较 ENDC CM2 情景在 2030 年低 8% 至 17.5%。",
+        "design_rationale": "以印度尼西亚的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+        "evidence_basis": [
+          "燃料出口占比 20.85%（2024，World Bank Open Data API）",
+          "可再生能源占最终能源消费 20.2%（2021，World Bank Open Data API）",
+          "ND-GAIN 脆弱性 0.43、准备度 0.398（2023，ND-GAIN Country Index）",
+          "NDC 摘要：目标年份 2035，类型 fixed_level_trajectory_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+          "承诺解释提示：双路径与多部门覆盖意味着其更依赖过渡期安排和情景弹性，同时森林与土地利用治理也是关键组成。",
+          "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+          "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+          "约束依据：低收入或中低收入样本通常更依赖外部融资支持。"
+        ],
+        "constraint_profile": {
+          "min_requirements": {
+            "adaptation_fund": 1,
+            "climate_finance": 1,
+            "transition_flexibility": 1,
+            "lulucf_support": 1
+          },
+          "max_tolerances": {
+            "fossil_phaseout": 2,
+            "carbon_tariff": 1
+          },
+          "rationale": [
+            "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+            "低收入或中低收入样本通常更依赖外部融资支持。",
+            "目标类型依赖情景或强度路径，通常要求一定过渡弹性。",
+            "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+            "资源与贸易暴露较高，会压低对快速退出和边境约束的容忍度。"
+          ]
+        }
+      },
+      {
+        "role": "沙特阿拉伯",
+        "bloc": "化石能源出口国样本",
+        "description": "沙特阿拉伯作为化石能源出口国样本进入推演。 当前承诺摘要：以动态基线方式，在 2040 年前实现每年 3.35 亿吨 CO2 当量的减排、避免和移除。",
+        "design_rationale": "以沙特阿拉伯的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Second NDC。",
+        "evidence_basis": [
+          "燃料出口占比 79.4%（2024，World Bank Open Data API）",
+          "可再生能源占最终能源消费 0.1%（2021，World Bank Open Data API）",
+          "ND-GAIN 脆弱性 0.408、准备度 0.573（2023，ND-GAIN Country Index）",
+          "NDC 摘要：目标年份 2040，类型 base_year_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+          "承诺解释提示：动态基线和资源型经济背景意味着其承诺解读需要结合出口结构与能源依赖度，不能只看表面减排数字。",
+          "结构化提示：其公开承诺明确涉及森林、碳汇或土地利用治理议题。",
+          "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+          "约束依据：其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。"
+        ],
+        "constraint_profile": {
+          "min_requirements": {
+            "adaptation_fund": 1,
+            "lulucf_support": 1,
+            "ccs_support": 1
+          },
+          "max_tolerances": {
+            "fossil_phaseout": 1,
+            "carbon_tariff": 1
+          },
+          "rationale": [
+            "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+            "其公开承诺涉及森林/土地利用治理，谈判中不能完全忽略 LULUCF 议题。",
+            "高燃料出口依赖意味着难以接受过强的化石退出或碳边境约束。"
+          ]
+        }
+      },
+      {
+        "role": "斐济",
+        "bloc": "小岛屿高脆弱国家样本",
+        "description": "斐济作为小岛屿高脆弱国家样本进入推演。 当前承诺摘要：到 2035 年将能源部门 BAU CO2 当量排放降低 36%，其中 12% 为无条件减排，其余部分依赖更多支持。",
+        "design_rationale": "以斐济的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Third NDC。",
+        "evidence_basis": [
+          "燃料出口占比当前缺失可比值（来源 World Bank Open Data API）",
+          "可再生能源占最终能源消费 28.4%（2022，World Bank Open Data API）",
+          "ND-GAIN 脆弱性 0.453、准备度 0.477（2023，ND-GAIN Country Index）",
+          "NDC 摘要：目标年份 2035，类型 baseline_scenario_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+          "承诺解释提示：无条件与条件性减排比例被明确区分，非常适合用来模拟小岛屿国家在融资与支持谈判中的真实立场。",
+          "约束依据：已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+          "约束依据：NDC 摘要明确写出融资/支持条件，应视为谈判硬约束。"
+        ],
+        "constraint_profile": {
+          "min_requirements": {
+            "adaptation_fund": 1,
+            "climate_finance": 2,
+            "transition_flexibility": 1
+          },
+          "max_tolerances": {},
+          "rationale": [
+            "已公开承诺包含适应内容，因此不能完全忽略适应议题。",
+            "NDC 摘要明确写出融资/支持条件，应视为谈判硬约束。",
+            "目标类型依赖情景或强度路径，通常要求一定过渡弹性。"
+          ]
+        }
+      },
+      {
+        "role": "孟加拉国",
+        "bloc": "高脆弱低收入国家样本",
+        "description": "孟加拉国作为高脆弱低收入国家样本进入推演。 当前承诺摘要：2026 至 2035 年累计减排约 84.97 MtCO2eq；2035 年无条件减排为 BAU 之下 6.39%，条件性部分再额外减排 13.92%，前提是获得充足、可预测、额外且新的国际气候融资。",
+        "design_rationale": "以孟加拉国的国家背景指标、脆弱性/准备度，以及已公开 NDC 承诺结构化摘要共同生成偏好权重； 承诺入口为Third NDC。",
+        "evidence_basis": [
+          "燃料出口占比 1.1%（2018，World Bank Open Data API）",
+          "可再生能源占最终能源消费 25.0%（2021，World Bank Open Data API）",
+          "ND-GAIN 脆弱性 0.568、准备度 0.279（2023，ND-GAIN Country Index）",
+          "NDC 摘要：目标年份 2035，类型 baseline_scenario_target（主来源 UNFCCC NDC Registry，辅助来源 Climate Watch NDC Tracker / Country Pages）",
+          "承诺解释提示：该 NDC 对国际气候融资依赖写得非常明确，因此融资与适应支持应视为其谈判硬约束，而非普通偏好。",
+          "约束依据：高脆弱国家需要更明确的适应与损失损害安排。",
+          "约束依据：低收入或中低收入样本通常更依赖外部融资支持。"
+        ],
+        "constraint_profile": {
+          "min_requirements": {
+            "adaptation_fund": 2,
+            "climate_finance": 2,
+            "transition_flexibility": 1
+          },
+          "max_tolerances": {},
+          "rationale": [
+            "高脆弱国家需要更明确的适应与损失损害安排。",
+            "低收入或中低收入样本通常更依赖外部融资支持。",
+            "NDC 摘要明确写出融资/支持条件，应视为谈判硬约束。",
+            "目标类型依赖情景或强度路径，通常要求一定过渡弹性。"
+          ]
+        }
+      }
+    ],
+    "final_scores": {
+      "feasibility": 81.5,
+      "fairness": 86.7,
+      "resistance": 21.5
+    },
+    "consensus_label": "较强共识",
+    "dominant_resistance_sources": [
+      "化石能源退出强度",
+      "气候资金支持",
+      "过渡期灵活性"
+    ],
+    "compromise_path": "增加气候资金支持、增加技术转移安排、加入分阶段过渡期、补充适应与损失补偿机制、补充森林保护与碳汇治理安排、弱化单边碳边境约束",
+    "final_positions": [
+      {
+        "role": "德国",
+        "bloc": "发达经济体样本",
+        "status": "有保留地支持",
+        "score": 1.7,
+        "asks": [
+          "增加更清晰的化石能源退出时间表",
+          "保留一定强度的国际规则约束"
+        ]
+      },
+      {
+        "role": "美国",
+        "bloc": "发达大国样本",
+        "status": "有保留地反对",
+        "score": -0.05,
+        "asks": [
+          "保留一定强度的国际规则约束",
+          "增加更清晰的化石能源退出时间表"
+        ]
+      },
+      {
+        "role": "中国",
+        "bloc": "大型新兴经济体样本",
+        "status": "有保留地支持",
+        "score": 3.4,
+        "asks": []
+      },
+      {
+        "role": "巴西",
+        "bloc": "森林型新兴经济体样本",
+        "status": "支持",
+        "score": 7.45,
+        "asks": [
+          "请针对争议点给出更可执行的妥协版本"
+        ]
+      },
+      {
+        "role": "印度",
+        "bloc": "高脆弱发展中大国样本",
+        "status": "支持",
+        "score": 17.65,
+        "asks": [
+          "请针对争议点给出更可执行的妥协版本"
+        ]
+      },
+      {
+        "role": "印度尼西亚",
+        "bloc": "煤电转型与群岛国家样本",
+        "status": "支持",
+        "score": 16.5,
+        "asks": [
+          "请针对争议点给出更可执行的妥协版本"
+        ]
+      },
+      {
+        "role": "沙特阿拉伯",
+        "bloc": "化石能源出口国样本",
+        "status": "有保留地支持",
+        "score": 2.4,
+        "asks": [
+          "保留 CCS 等过渡技术路线"
+        ]
+      },
+      {
+        "role": "斐济",
+        "bloc": "小岛屿高脆弱国家样本",
+        "status": "支持",
+        "score": 15.7,
+        "asks": []
+      },
+      {
+        "role": "孟加拉国",
+        "bloc": "高脆弱低收入国家样本",
+        "status": "支持",
+        "score": 15.7,
+        "asks": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,1075 @@
+{
+  "run_name": "abstract_balanced_single_fresh",
+  "agent_mode": "abstract",
+  "narrator": "openai-compatible:deepseek-v4-pro",
+  "report": {
+    "project": "气候政策多利益相关方博弈沙盘 Prototype 2.0 beta",
+    "agent_mode": {
+      "id": "abstract",
+      "label": "抽象角色模式"
+    },
+    "input_policy": {
+      "title": "平衡型综合政策样例",
+      "policy_text": "2035年前在加强森林保护、碳汇和土地利用治理的同时，逐步停止新建无减排措施煤电，并为高脆弱国家提供适应融资、技术转移支持，同时允许部分发展中经济体采取更灵活的分阶段过渡安排。",
+      "attributes": {
+        "fossil_phaseout": 2,
+        "carbon_tariff": 0,
+        "climate_finance": 2,
+        "tech_transfer": 2,
+        "transition_flexibility": 2,
+        "ccs_support": 0,
+        "adaptation_fund": 2,
+        "lulucf_support": 2
+      }
+    },
+    "pipeline_stages": [
+      {
+        "stage_id": "position_statement",
+        "label": "立场陈述"
+      },
+      {
+        "stage_id": "conflict_id",
+        "label": "冲突识别"
+      },
+      {
+        "stage_id": "alliance_mapping",
+        "label": "联盟与分裂"
+      },
+      {
+        "stage_id": "bargaining",
+        "label": "条件交换"
+      },
+      {
+        "stage_id": "secretariat_revision",
+        "label": "秘书处修订"
+      },
+      {
+        "stage_id": "final_vote",
+        "label": "最终表决"
+      }
+    ],
+    "stage_results": [
+      {
+        "stage_id": "position_statement",
+        "label": "立场陈述",
+        "policy_attributes": {
+          "fossil_phaseout": 2,
+          "carbon_tariff": 0,
+          "climate_finance": 2,
+          "tech_transfer": 2,
+          "transition_flexibility": 2,
+          "ccs_support": 0,
+          "adaptation_fund": 2,
+          "lulucf_support": 2
+        },
+        "agent_results": [
+          {
+            "agent_id": "developed_alliance",
+            "role": "发达国家联盟",
+            "bloc": "高雄心减排方",
+            "description": "强调更快减排、透明核查和国际规则，希望用更高标准推动全球转型。",
+            "design_rationale": "对应高收入经济体在 NDC、净零承诺和全球盘点中的高雄心立场，同时在谈判中仍强调规则和可核查性。",
+            "evidence_basis": [
+              "NDC 更新中的净零与中期减排承诺",
+              "高收入国家更强的制度执行能力",
+              "国际谈判中对透明度和规则约束的偏好"
+            ],
+            "raw_score": 6.7,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 6.7,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": 3.6,
+              "carbon_tariff": 0.0,
+              "climate_finance": 1.2,
+              "tech_transfer": 1.4,
+              "transition_flexibility": -1.0,
+              "ccs_support": 0.0,
+              "adaptation_fund": 1.0,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "更明确地限制高排放能源扩张",
+              "提供更可落地的技术转移与能力建设"
+            ],
+            "concern_points": [
+              "当前方案对“过渡期灵活性”的处理让我们难以接受"
+            ],
+            "asks": [
+              "保留一定强度的国际规则约束"
+            ],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "我们支持更明确地限制高排放能源扩张，并推动技术转移与能力建设，但对“过渡期灵活性”若无强有力的国际规则约束感到担忧。我们要求保留可核查的减排标准和透明度机制，确保灵活性不被滥用而削弱全球转型雄心。"
+          },
+          {
+            "agent_id": "large_emerging_economy",
+            "role": "大型新兴经济体",
+            "bloc": "发展与转型平衡方",
+            "description": "强调发展权、能源安全和产业升级，希望在减排与增长之间保留政策空间。",
+            "design_rationale": "对应大型新兴排放国在谈判中的典型立场：接受转型方向，但要求资金、技术和更长过渡期，反对外部单边约束。",
+            "evidence_basis": [
+              "NDC 中常见的条件性承诺安排",
+              "World Bank 中等收入经济体的工业化与能源安全压力",
+              "对碳边境措施和一刀切时间表的审慎态度"
+            ],
+            "raw_score": 8.2,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 8.2,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": -2.2,
+              "carbon_tariff": -0.0,
+              "climate_finance": 2.8,
+              "tech_transfer": 3.0,
+              "transition_flexibility": 3.2,
+              "ccs_support": 0.0,
+              "adaptation_fund": 1.6,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "允许分阶段过渡并保留政策弹性",
+              "提供更可落地的技术转移与能力建设"
+            ],
+            "concern_points": [
+              "当前方案对“化石能源退出强度”的处理让我们难以接受"
+            ],
+            "asks": [
+              "请针对争议点给出更可执行的妥协版本"
+            ],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "我们欢迎文本中关于分阶段过渡、保留政策弹性以及技术转移和能力建设的内容，这体现了对发展中经济体现实压力的理解。但当前方案对化石能源退出强度的设定，与我们保障能源安全和产业升级的刚性需求仍有较大落差。我们希望各方能围绕这一争议点，尽快拿出一个更可执行、更平衡的妥协版本。"
+          },
+          {
+            "agent_id": "least_developed_countries",
+            "role": "最不发达国家集团",
+            "bloc": "能力不足但高脆弱方",
+            "description": "排放责任较低，但财政和技术能力有限，更关注资金可得性、适应支持和公平转型。",
+            "design_rationale": "对应排放贡献较低、财政能力较弱的发展中经济体，它们通常支持减排行动方向，但非常依赖外部资金和技术支持。",
+            "evidence_basis": [
+              "World Bank 低收入国家的融资与基础设施约束",
+              "ND-GAIN 中较弱的适应能力表现",
+              "谈判中对资金、技术和能力建设的持续诉求"
+            ],
+            "raw_score": 14.3,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 14.3,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": 0.8,
+              "carbon_tariff": -0.0,
+              "climate_finance": 4.0,
+              "tech_transfer": 3.0,
+              "transition_flexibility": 2.4,
+              "ccs_support": 0.0,
+              "adaptation_fund": 4.0,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "增加气候资金与转型补偿安排",
+              "补充适应与损失补偿机制"
+            ],
+            "concern_points": [],
+            "asks": [],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "我们欢迎这一政策方向，特别是为高脆弱国家提供适应融资和技术转移支持，这正是我们长期呼吁的。灵活的分阶段过渡安排也考虑了我们的发展需求与能力限制，有助于实现公平转型。我们支持这一文本并在未来落实中期待资金与技术承诺的兑现。"
+          },
+          {
+            "agent_id": "small_island_states",
+            "role": "小岛屿与高脆弱国家联盟",
+            "bloc": "高脆弱高雄心方",
+            "description": "强调气候风险的紧迫性、损失与损害和 1.5C 目标，主张更强减排和适应补偿。",
+            "design_rationale": "对应 AOSIS 一类的高脆弱国家，它们通常要求更高减排雄心，同时要求适应和损失损害机制更可执行。",
+            "evidence_basis": [
+              "ND-GAIN 中的高脆弱性与较低适应能力",
+              "全球盘点与 1.5C 讨论中的高雄心表述",
+              "损失与损害资金机制的现实谈判诉求"
+            ],
+            "raw_score": 12.4,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 12.4,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": 4.0,
+              "carbon_tariff": 0.0,
+              "climate_finance": 3.2,
+              "tech_transfer": 1.6,
+              "transition_flexibility": -1.4,
+              "ccs_support": -0.0,
+              "adaptation_fund": 4.4,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "补充适应与损失补偿机制",
+              "更明确地限制高排放能源扩张"
+            ],
+            "concern_points": [
+              "当前方案对“过渡期灵活性”的处理让我们难以接受"
+            ],
+            "asks": [
+              "请针对争议点给出更可执行的妥协版本"
+            ],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "我们支持在加强森林碳汇的同时逐步退出无减排煤电，但“更灵活的分阶段过渡安排”若缺乏明确时限和约束条件，可能被滥用并危及1.5°C目标的实现。请针对争议点提出更具约束力的执行方案，为过渡期设定可核查的减排路径，并确保适应融资与技术转移机制真正优先覆盖高脆弱群体。"
+          },
+          {
+            "agent_id": "fossil_fuel_exporters",
+            "role": "化石能源出口国集团",
+            "bloc": "资源与收入维护方",
+            "description": "关注出口收入、财政稳定和资产搁浅风险，偏好渐进退出、过渡技术和更弱的贸易约束。",
+            "design_rationale": "对应依赖油气煤出口的经济体，它们在谈判中通常反对激进退出时程，但会支持 CCS、过渡技术和更长缓冲期。",
+            "evidence_basis": [
+              "资源型经济体对化石能源收入和就业的依赖",
+              "对碳边境措施和快速退出路径的敏感性",
+              "对 CCS 和过渡性技术路线的持续支持"
+            ],
+            "raw_score": -0.7,
+            "raw_status": "conditional_oppose",
+            "raw_status_label": "有保留地反对",
+            "score": -0.7,
+            "status": "conditional_oppose",
+            "status_label": "有保留地反对",
+            "contributions": {
+              "fossil_phaseout": -4.0,
+              "carbon_tariff": -0.0,
+              "climate_finance": 0.4,
+              "tech_transfer": 0.4,
+              "transition_flexibility": 3.4,
+              "ccs_support": 0.0,
+              "adaptation_fund": -0.4,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "允许分阶段过渡并保留政策弹性"
+            ],
+            "concern_points": [
+              "当前方案对“化石能源退出强度”的处理让我们难以接受"
+            ],
+            "asks": [
+              "保留 CCS 等过渡技术路线",
+              "细化退出路径，避免一刀切冲击"
+            ],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "我们理解并支持政策中允许分阶段过渡的安排，这在一定程度上反映了各国的差异化现实。然而，当前文本对新建煤电的“无减排措施”限定仍可能被解读为过快退出信号，我们要求明确将碳捕集、利用与封存（CCUS）等过渡技术纳入合规路径，并制定更具体的渐进退出时间表，以避免对依赖化石能源的经济体造成严重财政和就业冲击。"
+          },
+          {
+            "agent_id": "clean_tech_industry",
+            "role": "清洁技术与低碳产业联盟",
+            "bloc": "产业升级推动方",
+            "description": "支持明确的转型信号和技术扩散，希望政策兼顾市场激励、技术合作和新产业投资。",
+            "design_rationale": "对应新能源、储能、电气化和低碳制造业利益相关方，其立场通常支持更强减排和技术投资，但也关注政策稳定性与规模化实施。",
+            "evidence_basis": [
+              "绿色产业投资对明确政策信号的依赖",
+              "技术转移和产业扩散对全球减排的重要性",
+              "低碳产业更倾向支持中高强度转型政策"
+            ],
+            "raw_score": 7.3,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 7.3,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": 2.2,
+              "carbon_tariff": 0.0,
+              "climate_finance": 0.8,
+              "tech_transfer": 3.2,
+              "transition_flexibility": 0.2,
+              "ccs_support": 0.0,
+              "adaptation_fund": 0.6,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "提供更可落地的技术转移与能力建设",
+              "更明确地限制高排放能源扩张"
+            ],
+            "concern_points": [],
+            "asks": [
+              "保留一定强度的国际规则约束"
+            ],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "我们欢迎这一明确的转型信号，特别是逐步停止新建无减排措施煤电与强化技术转移的安排，这将为清洁能源和低碳制造业提供更清晰的市场预期。为确保技术合作和产业投资的规模化落地，我们主张在国际规则中保留适度的约束机制，以保障政策执行的稳定性和全球产业扩散的实效。"
+          },
+          {
+            "agent_id": "multilateral_bank",
+            "role": "多边开发金融机构",
+            "bloc": "执行与融资协调方",
+            "description": "重视政策可实施性、融资撬动和项目落地，希望把雄心目标转成可融资的过渡方案。",
+            "design_rationale": "对应多边开发银行和国际金融机制的角色，它们通常不追求最强政治表态，而是推动资金、技术和实施安排的可操作性。",
+            "evidence_basis": [
+              "气候融资项目需要政策稳定、资金安排和技术路线",
+              "多边金融机构常作为谈判后实施阶段的关键执行者",
+              "现实中更关注可融资性、协同和风险分担机制"
+            ],
+            "raw_score": 12.6,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 12.6,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": 1.2,
+              "carbon_tariff": 0.0,
+              "climate_finance": 3.6,
+              "tech_transfer": 3.0,
+              "transition_flexibility": 1.6,
+              "ccs_support": 0.0,
+              "adaptation_fund": 2.8,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "增加气候资金与转型补偿安排",
+              "提供更可落地的技术转移与能力建设"
+            ],
+            "concern_points": [],
+            "asks": [],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "作为多边开发金融机构，我们欢迎将雄心目标转化为可融资的过渡安排。我们愿在气候资金、转型补偿和技术转移方面加大投入，协助各方设计切实可行的分阶段实施方案，确保项目落地并撬动更多私人资本参与。"
+          }
+        ],
+        "summary_text": "各角色先依据自身约束条件给出初始表态。"
+      },
+      {
+        "stage_id": "conflict_id",
+        "label": "冲突识别",
+        "summary_text": "初始表态阶段判断：主要冲突集中在化石能源退出强度、过渡期灵活性、适应/损失补偿支持；建议优先处理：保持现有政策框架。",
+        "top_concerns": [
+          "化石能源退出强度",
+          "过渡期灵活性",
+          "适应/损失补偿支持"
+        ],
+        "status_counter": {
+          "support": 6,
+          "conditional_support": 0,
+          "conditional_oppose": 1,
+          "oppose": 0
+        }
+      },
+      {
+        "stage_id": "alliance_mapping",
+        "label": "联盟与分裂",
+        "alliances": [
+          {
+            "name": "高雄心联盟",
+            "members": [
+              "发达国家联盟",
+              "大型新兴经济体",
+              "最不发达国家集团",
+              "小岛屿与高脆弱国家联盟",
+              "清洁技术与低碳产业联盟",
+              "多边开发金融机构"
+            ],
+            "basis": "共同支持更强减排或更明确的脆弱国家补偿安排。"
+          },
+          {
+            "name": "过渡缓冲联盟",
+            "members": [
+              "大型新兴经济体",
+              "最不发达国家集团",
+              "化石能源出口国集团",
+              "多边开发金融机构"
+            ],
+            "basis": "强调更长过渡期、CCS 或避免过快退出造成的冲击。"
+          }
+        ],
+        "splinters": [
+          {
+            "role": "化石能源出口国集团",
+            "status": "有保留地反对",
+            "note": "立场处在中间地带，可能成为交换条件中的关键摇摆方。"
+          }
+        ],
+        "summary_text": "根据共同诉求识别潜在联盟与关键摇摆方。"
+      },
+      {
+        "stage_id": "bargaining",
+        "label": "条件交换",
+        "adjustments": {
+          "fossil_phaseout": 0,
+          "carbon_tariff": 0,
+          "climate_finance": 0,
+          "tech_transfer": 0,
+          "transition_flexibility": 0,
+          "ccs_support": 0,
+          "adaptation_fund": 0,
+          "lulucf_support": 0
+        },
+        "tradeoffs": [],
+        "summary_text": "条件交换阶段围绕 保持现有政策框架 展开；主要需要在 高雄心联盟、过渡缓冲联盟 之间达成最小可接受交换。"
+      },
+      {
+        "stage_id": "secretariat_revision",
+        "label": "秘书处修订",
+        "policy_attributes": {
+          "fossil_phaseout": 2,
+          "carbon_tariff": 0,
+          "climate_finance": 2,
+          "tech_transfer": 2,
+          "transition_flexibility": 2,
+          "ccs_support": 0,
+          "adaptation_fund": 2,
+          "lulucf_support": 2
+        },
+        "feature_deltas": [
+          {
+            "feature": "化石能源退出强度",
+            "before": 2,
+            "after": 2,
+            "delta": 0
+          },
+          {
+            "feature": "碳边境约束强度",
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          {
+            "feature": "气候资金支持",
+            "before": 2,
+            "after": 2,
+            "delta": 0
+          },
+          {
+            "feature": "技术转移支持",
+            "before": 2,
+            "after": 2,
+            "delta": 0
+          },
+          {
+            "feature": "过渡期灵活性",
+            "before": 2,
+            "after": 2,
+            "delta": 0
+          },
+          {
+            "feature": "CCS 过渡技术支持",
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          {
+            "feature": "适应/损失补偿支持",
+            "before": 2,
+            "after": 2,
+            "delta": 0
+          },
+          {
+            "feature": "森林/LULUCF 支持",
+            "before": 2,
+            "after": 2,
+            "delta": 0
+          }
+        ],
+        "summary_text": "秘书处据此形成修订文本：保持现有政策框架。"
+      },
+      {
+        "stage_id": "final_vote",
+        "label": "最终表决",
+        "policy_attributes": {
+          "fossil_phaseout": 2,
+          "carbon_tariff": 0,
+          "climate_finance": 2,
+          "tech_transfer": 2,
+          "transition_flexibility": 2,
+          "ccs_support": 0,
+          "adaptation_fund": 2,
+          "lulucf_support": 2
+        },
+        "agent_results": [
+          {
+            "agent_id": "developed_alliance",
+            "role": "发达国家联盟",
+            "bloc": "高雄心减排方",
+            "description": "强调更快减排、透明核查和国际规则，希望用更高标准推动全球转型。",
+            "design_rationale": "对应高收入经济体在 NDC、净零承诺和全球盘点中的高雄心立场，同时在谈判中仍强调规则和可核查性。",
+            "evidence_basis": [
+              "NDC 更新中的净零与中期减排承诺",
+              "高收入国家更强的制度执行能力",
+              "国际谈判中对透明度和规则约束的偏好"
+            ],
+            "raw_score": 6.7,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 6.7,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": 3.6,
+              "carbon_tariff": 0.0,
+              "climate_finance": 1.2,
+              "tech_transfer": 1.4,
+              "transition_flexibility": -1.0,
+              "ccs_support": 0.0,
+              "adaptation_fund": 1.0,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "更明确地限制高排放能源扩张",
+              "提供更可落地的技术转移与能力建设"
+            ],
+            "concern_points": [
+              "当前方案对“过渡期灵活性”的处理让我们难以接受"
+            ],
+            "asks": [
+              "保留一定强度的国际规则约束"
+            ],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "我们支持2035年前停止新建无减排措施煤电，并认可对高脆弱国家的适应融资与技术转移安排。但我们强调，任何“分阶段过渡”的灵活性都必须在统一、可核查的国际规则框架下执行，不能成为无限期推迟高排放转型的借口。我们希望文本进一步明确技术转移和能力建设的具体标准与透明度机制，以保持各方承诺的可比性与可信度。"
+          },
+          {
+            "agent_id": "large_emerging_economy",
+            "role": "大型新兴经济体",
+            "bloc": "发展与转型平衡方",
+            "description": "强调发展权、能源安全和产业升级，希望在减排与增长之间保留政策空间。",
+            "design_rationale": "对应大型新兴排放国在谈判中的典型立场：接受转型方向，但要求资金、技术和更长过渡期，反对外部单边约束。",
+            "evidence_basis": [
+              "NDC 中常见的条件性承诺安排",
+              "World Bank 中等收入经济体的工业化与能源安全压力",
+              "对碳边境措施和一刀切时间表的审慎态度"
+            ],
+            "raw_score": 8.2,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 8.2,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": -2.2,
+              "carbon_tariff": -0.0,
+              "climate_finance": 2.8,
+              "tech_transfer": 3.0,
+              "transition_flexibility": 3.2,
+              "ccs_support": 0.0,
+              "adaptation_fund": 1.6,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "允许分阶段过渡并保留政策弹性",
+              "提供更可落地的技术转移与能力建设"
+            ],
+            "concern_points": [
+              "当前方案对“化石能源退出强度”的处理让我们难以接受"
+            ],
+            "asks": [
+              "请针对争议点给出更可执行的妥协版本"
+            ],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "我们支持文本中允许分阶段过渡并提供技术转移、能力建设的灵活安排，这符合“共同但有区别的责任”原则和发展中国家的现实。但对“逐步停止新建无减排措施煤电”的强度要求，缺乏明确补偿机制和能源安全替代保障，我们难以接受。希望在这一争议点上给出更可操作的妥协方案，例如以“有条件减缓”替代“硬性停止”，并配套充足资金与技术支持，否则我们无法做出承诺。"
+          },
+          {
+            "agent_id": "least_developed_countries",
+            "role": "最不发达国家集团",
+            "bloc": "能力不足但高脆弱方",
+            "description": "排放责任较低，但财政和技术能力有限，更关注资金可得性、适应支持和公平转型。",
+            "design_rationale": "对应排放贡献较低、财政能力较弱的发展中经济体，它们通常支持减排行动方向，但非常依赖外部资金和技术支持。",
+            "evidence_basis": [
+              "World Bank 低收入国家的融资与基础设施约束",
+              "ND-GAIN 中较弱的适应能力表现",
+              "谈判中对资金、技术和能力建设的持续诉求"
+            ],
+            "raw_score": 14.3,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 14.3,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": 0.8,
+              "carbon_tariff": -0.0,
+              "climate_finance": 4.0,
+              "tech_transfer": 3.0,
+              "transition_flexibility": 2.4,
+              "ccs_support": 0.0,
+              "adaptation_fund": 4.0,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "增加气候资金与转型补偿安排",
+              "补充适应与损失补偿机制"
+            ],
+            "concern_points": [],
+            "asks": [],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "我们欢迎这一文本，它正面回应了最不发达国家长期呼吁的资金、技术与适应支持。期待“灵活的分阶段过渡安排”能切实考虑我们的特殊情况，并确保适应融资与损失损害补偿机制得到有效落实。"
+          },
+          {
+            "agent_id": "small_island_states",
+            "role": "小岛屿与高脆弱国家联盟",
+            "bloc": "高脆弱高雄心方",
+            "description": "强调气候风险的紧迫性、损失与损害和 1.5C 目标，主张更强减排和适应补偿。",
+            "design_rationale": "对应 AOSIS 一类的高脆弱国家，它们通常要求更高减排雄心，同时要求适应和损失损害机制更可执行。",
+            "evidence_basis": [
+              "ND-GAIN 中的高脆弱性与较低适应能力",
+              "全球盘点与 1.5C 讨论中的高雄心表述",
+              "损失与损害资金机制的现实谈判诉求"
+            ],
+            "raw_score": 12.4,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 12.4,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": 4.0,
+              "carbon_tariff": 0.0,
+              "climate_finance": 3.2,
+              "tech_transfer": 1.6,
+              "transition_flexibility": -1.4,
+              "ccs_support": -0.0,
+              "adaptation_fund": 4.4,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "补充适应与损失补偿机制",
+              "更明确地限制高排放能源扩张"
+            ],
+            "concern_points": [
+              "当前方案对“过渡期灵活性”的处理让我们难以接受"
+            ],
+            "asks": [
+              "请针对争议点给出更可执行的妥协版本"
+            ],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "我们欢迎文本中加强森林保护、限制无减排煤电以及为高脆弱国家提供适应融资等内容，但对“更灵活的分阶段过渡安排”深表担忧。这种灵活性绝不能成为部分经济体继续扩张高排放能源的借口，我们要求明确其时间上限、减排替代方案和严格问责机制。只有在保证不偏离1.5℃路径并充分补偿脆弱国家损失与损害的前提下，我们才能接受此类过渡安排。"
+          },
+          {
+            "agent_id": "fossil_fuel_exporters",
+            "role": "化石能源出口国集团",
+            "bloc": "资源与收入维护方",
+            "description": "关注出口收入、财政稳定和资产搁浅风险，偏好渐进退出、过渡技术和更弱的贸易约束。",
+            "design_rationale": "对应依赖油气煤出口的经济体，它们在谈判中通常反对激进退出时程，但会支持 CCS、过渡技术和更长缓冲期。",
+            "evidence_basis": [
+              "资源型经济体对化石能源收入和就业的依赖",
+              "对碳边境措施和快速退出路径的敏感性",
+              "对 CCS 和过渡性技术路线的持续支持"
+            ],
+            "raw_score": -0.7,
+            "raw_status": "conditional_oppose",
+            "raw_status_label": "有保留地反对",
+            "score": -0.7,
+            "status": "conditional_oppose",
+            "status_label": "有保留地反对",
+            "contributions": {
+              "fossil_phaseout": -4.0,
+              "carbon_tariff": -0.0,
+              "climate_finance": 0.4,
+              "tech_transfer": 0.4,
+              "transition_flexibility": 3.4,
+              "ccs_support": 0.0,
+              "adaptation_fund": -0.4,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "允许分阶段过渡并保留政策弹性"
+            ],
+            "concern_points": [
+              "当前方案对“化石能源退出强度”的处理让我们难以接受"
+            ],
+            "asks": [
+              "保留 CCS 等过渡技术路线",
+              "细化退出路径，避免一刀切冲击"
+            ],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "我们认可分阶段过渡、保留政策弹性的大方向，但当前方案对化石能源退出的强度设定仍让我们难以接受。我们要求明确将碳捕集与封存（CCS）等过渡技术纳入合规路径，并进一步细化退出时间表，避免“一刀切”给依赖化石能源出口的经济体带来资产搁浅、财政收入骤降和就业冲击。"
+          },
+          {
+            "agent_id": "clean_tech_industry",
+            "role": "清洁技术与低碳产业联盟",
+            "bloc": "产业升级推动方",
+            "description": "支持明确的转型信号和技术扩散，希望政策兼顾市场激励、技术合作和新产业投资。",
+            "design_rationale": "对应新能源、储能、电气化和低碳制造业利益相关方，其立场通常支持更强减排和技术投资，但也关注政策稳定性与规模化实施。",
+            "evidence_basis": [
+              "绿色产业投资对明确政策信号的依赖",
+              "技术转移和产业扩散对全球减排的重要性",
+              "低碳产业更倾向支持中高强度转型政策"
+            ],
+            "raw_score": 7.3,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 7.3,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": 2.2,
+              "carbon_tariff": 0.0,
+              "climate_finance": 0.8,
+              "tech_transfer": 3.2,
+              "transition_flexibility": 0.2,
+              "ccs_support": 0.0,
+              "adaptation_fund": 0.6,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "提供更可落地的技术转移与能力建设",
+              "更明确地限制高排放能源扩张"
+            ],
+            "concern_points": [],
+            "asks": [
+              "保留一定强度的国际规则约束"
+            ],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "我们支持这一政策方向，特别是其中强化技术转移和能力建设的内容，这对低碳产业的规模化部署至关重要。同时我们认为，要确保政策信号的持久可信，仍需保留一定强度的国际规则约束，避免高排放能源投资的惯性倒退。"
+          },
+          {
+            "agent_id": "multilateral_bank",
+            "role": "多边开发金融机构",
+            "bloc": "执行与融资协调方",
+            "description": "重视政策可实施性、融资撬动和项目落地，希望把雄心目标转成可融资的过渡方案。",
+            "design_rationale": "对应多边开发银行和国际金融机制的角色，它们通常不追求最强政治表态，而是推动资金、技术和实施安排的可操作性。",
+            "evidence_basis": [
+              "气候融资项目需要政策稳定、资金安排和技术路线",
+              "多边金融机构常作为谈判后实施阶段的关键执行者",
+              "现实中更关注可融资性、协同和风险分担机制"
+            ],
+            "raw_score": 12.6,
+            "raw_status": "support",
+            "raw_status_label": "支持",
+            "score": 12.6,
+            "status": "support",
+            "status_label": "支持",
+            "contributions": {
+              "fossil_phaseout": 1.2,
+              "carbon_tariff": 0.0,
+              "climate_finance": 3.6,
+              "tech_transfer": 3.0,
+              "transition_flexibility": 1.6,
+              "ccs_support": 0.0,
+              "adaptation_fund": 2.8,
+              "lulucf_support": 0.0
+            },
+            "positive_points": [
+              "增加气候资金与转型补偿安排",
+              "提供更可落地的技术转移与能力建设"
+            ],
+            "concern_points": [],
+            "asks": [],
+            "constraint_profile": {},
+            "constraint_violations": [],
+            "statement": "我们欢迎这一注重实施导向的政策文本。增加气候资金与转型补偿安排，配合更可落地的技术转移与能力建设，能够将雄心目标转化为可融资、可落地的过渡方案。这也为我们撬动私营资本、设计具体项目提供了所需的政策稳定性和清晰路线图。"
+          }
+        ],
+        "summary_text": "最终表决阶段判断：主要冲突集中在化石能源退出强度、过渡期灵活性、适应/损失补偿支持；建议优先处理：保持现有政策框架。",
+        "status_counter": {
+          "support": 6,
+          "conditional_support": 0,
+          "conditional_oppose": 1,
+          "oppose": 0
+        }
+      }
+    ],
+    "alliance_map": {
+      "alliances": [
+        {
+          "name": "高雄心联盟",
+          "members": [
+            "发达国家联盟",
+            "大型新兴经济体",
+            "最不发达国家集团",
+            "小岛屿与高脆弱国家联盟",
+            "清洁技术与低碳产业联盟",
+            "多边开发金融机构"
+          ],
+          "basis": "共同支持更强减排或更明确的脆弱国家补偿安排。"
+        },
+        {
+          "name": "过渡缓冲联盟",
+          "members": [
+            "大型新兴经济体",
+            "最不发达国家集团",
+            "化石能源出口国集团",
+            "多边开发金融机构"
+          ],
+          "basis": "强调更长过渡期、CCS 或避免过快退出造成的冲击。"
+        }
+      ],
+      "splinters": [
+        {
+          "role": "化石能源出口国集团",
+          "status": "有保留地反对",
+          "note": "立场处在中间地带，可能成为交换条件中的关键摇摆方。"
+        }
+      ]
+    },
+    "feature_deltas": [
+      {
+        "feature": "化石能源退出强度",
+        "before": 2,
+        "after": 2,
+        "delta": 0
+      },
+      {
+        "feature": "碳边境约束强度",
+        "before": 0,
+        "after": 0,
+        "delta": 0
+      },
+      {
+        "feature": "气候资金支持",
+        "before": 2,
+        "after": 2,
+        "delta": 0
+      },
+      {
+        "feature": "技术转移支持",
+        "before": 2,
+        "after": 2,
+        "delta": 0
+      },
+      {
+        "feature": "过渡期灵活性",
+        "before": 2,
+        "after": 2,
+        "delta": 0
+      },
+      {
+        "feature": "CCS 过渡技术支持",
+        "before": 0,
+        "after": 0,
+        "delta": 0
+      },
+      {
+        "feature": "适应/损失补偿支持",
+        "before": 2,
+        "after": 2,
+        "delta": 0
+      },
+      {
+        "feature": "森林/LULUCF 支持",
+        "before": 2,
+        "after": 2,
+        "delta": 0
+      }
+    ],
+    "vote_shift": [
+      {
+        "role": "发达国家联盟",
+        "bloc": "高雄心减排方",
+        "initial_status": "支持",
+        "final_status": "支持",
+        "score_change": 0.0
+      },
+      {
+        "role": "大型新兴经济体",
+        "bloc": "发展与转型平衡方",
+        "initial_status": "支持",
+        "final_status": "支持",
+        "score_change": 0.0
+      },
+      {
+        "role": "最不发达国家集团",
+        "bloc": "能力不足但高脆弱方",
+        "initial_status": "支持",
+        "final_status": "支持",
+        "score_change": 0.0
+      },
+      {
+        "role": "小岛屿与高脆弱国家联盟",
+        "bloc": "高脆弱高雄心方",
+        "initial_status": "支持",
+        "final_status": "支持",
+        "score_change": 0.0
+      },
+      {
+        "role": "化石能源出口国集团",
+        "bloc": "资源与收入维护方",
+        "initial_status": "有保留地反对",
+        "final_status": "有保留地反对",
+        "score_change": 0.0
+      },
+      {
+        "role": "清洁技术与低碳产业联盟",
+        "bloc": "产业升级推动方",
+        "initial_status": "支持",
+        "final_status": "支持",
+        "score_change": 0.0
+      },
+      {
+        "role": "多边开发金融机构",
+        "bloc": "执行与融资协调方",
+        "initial_status": "支持",
+        "final_status": "支持",
+        "score_change": 0.0
+      }
+    ],
+    "agent_catalog": [
+      {
+        "role": "发达国家联盟",
+        "bloc": "高雄心减排方",
+        "description": "强调更快减排、透明核查和国际规则，希望用更高标准推动全球转型。",
+        "design_rationale": "对应高收入经济体在 NDC、净零承诺和全球盘点中的高雄心立场，同时在谈判中仍强调规则和可核查性。",
+        "evidence_basis": [
+          "NDC 更新中的净零与中期减排承诺",
+          "高收入国家更强的制度执行能力",
+          "国际谈判中对透明度和规则约束的偏好"
+        ],
+        "constraint_profile": {}
+      },
+      {
+        "role": "大型新兴经济体",
+        "bloc": "发展与转型平衡方",
+        "description": "强调发展权、能源安全和产业升级，希望在减排与增长之间保留政策空间。",
+        "design_rationale": "对应大型新兴排放国在谈判中的典型立场：接受转型方向，但要求资金、技术和更长过渡期，反对外部单边约束。",
+        "evidence_basis": [
+          "NDC 中常见的条件性承诺安排",
+          "World Bank 中等收入经济体的工业化与能源安全压力",
+          "对碳边境措施和一刀切时间表的审慎态度"
+        ],
+        "constraint_profile": {}
+      },
+      {
+        "role": "最不发达国家集团",
+        "bloc": "能力不足但高脆弱方",
+        "description": "排放责任较低，但财政和技术能力有限，更关注资金可得性、适应支持和公平转型。",
+        "design_rationale": "对应排放贡献较低、财政能力较弱的发展中经济体，它们通常支持减排行动方向，但非常依赖外部资金和技术支持。",
+        "evidence_basis": [
+          "World Bank 低收入国家的融资与基础设施约束",
+          "ND-GAIN 中较弱的适应能力表现",
+          "谈判中对资金、技术和能力建设的持续诉求"
+        ],
+        "constraint_profile": {}
+      },
+      {
+        "role": "小岛屿与高脆弱国家联盟",
+        "bloc": "高脆弱高雄心方",
+        "description": "强调气候风险的紧迫性、损失与损害和 1.5C 目标，主张更强减排和适应补偿。",
+        "design_rationale": "对应 AOSIS 一类的高脆弱国家，它们通常要求更高减排雄心，同时要求适应和损失损害机制更可执行。",
+        "evidence_basis": [
+          "ND-GAIN 中的高脆弱性与较低适应能力",
+          "全球盘点与 1.5C 讨论中的高雄心表述",
+          "损失与损害资金机制的现实谈判诉求"
+        ],
+        "constraint_profile": {}
+      },
+      {
+        "role": "化石能源出口国集团",
+        "bloc": "资源与收入维护方",
+        "description": "关注出口收入、财政稳定和资产搁浅风险，偏好渐进退出、过渡技术和更弱的贸易约束。",
+        "design_rationale": "对应依赖油气煤出口的经济体，它们在谈判中通常反对激进退出时程，但会支持 CCS、过渡技术和更长缓冲期。",
+        "evidence_basis": [
+          "资源型经济体对化石能源收入和就业的依赖",
+          "对碳边境措施和快速退出路径的敏感性",
+          "对 CCS 和过渡性技术路线的持续支持"
+        ],
+        "constraint_profile": {}
+      },
+      {
+        "role": "清洁技术与低碳产业联盟",
+        "bloc": "产业升级推动方",
+        "description": "支持明确的转型信号和技术扩散，希望政策兼顾市场激励、技术合作和新产业投资。",
+        "design_rationale": "对应新能源、储能、电气化和低碳制造业利益相关方，其立场通常支持更强减排和技术投资，但也关注政策稳定性与规模化实施。",
+        "evidence_basis": [
+          "绿色产业投资对明确政策信号的依赖",
+          "技术转移和产业扩散对全球减排的重要性",
+          "低碳产业更倾向支持中高强度转型政策"
+        ],
+        "constraint_profile": {}
+      },
+      {
+        "role": "多边开发金融机构",
+        "bloc": "执行与融资协调方",
+        "description": "重视政策可实施性、融资撬动和项目落地，希望把雄心目标转成可融资的过渡方案。",
+        "design_rationale": "对应多边开发银行和国际金融机制的角色，它们通常不追求最强政治表态，而是推动资金、技术和实施安排的可操作性。",
+        "evidence_basis": [
+          "气候融资项目需要政策稳定、资金安排和技术路线",
+          "多边金融机构常作为谈判后实施阶段的关键执行者",
+          "现实中更关注可融资性、协同和风险分担机制"
+        ],
+        "constraint_profile": {}
+      }
+    ],
+    "final_scores": {
+      "feasibility": 90.5,
+      "fairness": 66.7,
+      "resistance": 9.5
+    },
+    "consensus_label": "较强共识",
+    "dominant_resistance_sources": [
+      "化石能源退出强度",
+      "过渡期灵活性",
+      "适应/损失补偿支持"
+    ],
+    "compromise_path": "增加气候资金支持、增加技术转移安排、加入分阶段过渡期、补充适应与损失补偿机制、补充森林保护与碳汇治理安排、弱化单边碳边境约束、维持较明确的减排方向",
+    "final_positions": [
+      {
+        "role": "发达国家联盟",
+        "bloc": "高雄心减排方",
+        "status": "支持",
+        "score": 6.7,
+        "asks": [
+          "保留一定强度的国际规则约束"
+        ]
+      },
+      {
+        "role": "大型新兴经济体",
+        "bloc": "发展与转型平衡方",
+        "status": "支持",
+        "score": 8.2,
+        "asks": [
+          "请针对争议点给出更可执行的妥协版本"
+        ]
+      },
+      {
+        "role": "最不发达国家集团",
+        "bloc": "能力不足但高脆弱方",
+        "status": "支持",
+        "score": 14.3,
+        "asks": []
+      },
+      {
+        "role": "小岛屿与高脆弱国家联盟",
+        "bloc": "高脆弱高雄心方",
+        "status": "支持",
+        "score": 12.4,
+        "asks": [
+          "请针对争议点给出更可执行的妥协版本"
+        ]
+      },
+      {
+        "role": "化石能源出口国集团",
+        "bloc": "资源与收入维护方",
+        "status": "有保留地反对",
+        "score": -0.7,
+        "asks": [
+          "保留 CCS 等过渡技术路线",
+          "细化退出路径，避免一刀切冲击"
+        ]
+      },
+      {
+        "role": "清洁技术与低碳产业联盟",
+        "bloc": "产业升级推动方",
+        "status": "支持",
+        "score": 7.3,
+        "asks": [
+          "保留一定强度的国际规则约束"
+        ]
+      },
+      {
+        "role": "多边开发金融机构",
+        "bloc": "执行与融资协调方",
+        "status": "支持",
+        "score": 12.6,
+        "asks": []
+      }
+    ]
+  }
+}
